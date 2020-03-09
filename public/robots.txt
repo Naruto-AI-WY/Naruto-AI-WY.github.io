@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://Naruto-AI-WY/github.io/sitemap.xml
