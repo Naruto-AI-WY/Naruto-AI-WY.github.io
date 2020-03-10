@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>My First Post - Naruto&#39;s AI blog</title>
+  <title>Mac下使用Hugo&#43;Github托管搭建个人博客 - Naruto&#39;s AI blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -38,22 +38,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="My First Post" />
+<meta property="og:title" content="Mac下使用Hugo&#43;Github托管搭建个人博客" />
 <meta property="og:description" content="第一篇文章" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://Naruto-AI-WY.github.io/post/my-first-post/" />
 <meta property="article:published_time" content="2020-03-10T10:00:00+08:00" />
 <meta property="article:modified_time" content="2020-03-10T10:00:00+08:00" />
-<meta itemprop="name" content="My First Post">
+<meta itemprop="name" content="Mac下使用Hugo&#43;Github托管搭建个人博客">
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="559">
+<meta itemprop="wordCount" content="622">
 
 
 
 <meta itemprop="keywords" content="hugo,pages," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My First Post"/>
+<meta name="twitter:title" content="Mac下使用Hugo&#43;Github托管搭建个人博客"/>
 <meta name="twitter:description" content="第一篇文章"/>
 
 <!--[if lte IE 9]>
@@ -121,7 +121,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">My First Post</h1>
+      <h1 class="post-title">Mac下使用Hugo&#43;Github托管搭建个人博客</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-03-10 </span>
@@ -207,7 +207,16 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
 </div>
 </div>
-<p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好 fork 主题再做改动。</p>
+<p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好fork主题再做改动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even </code></pre></td></tr></table>
+</div>
+</div>
+<p>注：<font color=red>如果git clone速度过慢的话，可以考虑搜索一下更改hosts文件的方法或者使用代理服务器，可自行百度</font></p>
 
     </div>
 
