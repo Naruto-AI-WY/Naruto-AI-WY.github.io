@@ -1,4 +1,0 @@
-[submodule "public"]
-	path = public
-	url = git@github.com:Naruto-AI-WY/Naruto-AI-WY.github.io.git
-	branch = master
