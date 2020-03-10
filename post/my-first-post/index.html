@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="559">
 
 
 
@@ -139,7 +139,76 @@
   </div>
 </div>
     <div class="post-content">
-      
+      <h1 id="mac下使用hugogithub托管搭建个人博客">Mac下使用Hugo+Github托管搭建个人博客</h1>
+
+<p>疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭建纪实了。</p>
+
+<h2 id="安装hugo">安装Hugo：</h2>
+
+<p>Hugo号称世界上最快的建站框架，由go语言开发。
+   Mac下直接使用 <strong><font color=blue>Homebrew</font></strong> 安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">brew install hugo
+# 检查安装成功  
+hugo version 
+
+Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</code></pre></td></tr></table>
+</div>
+</div>
+<p>注意：如果发现使用brew命令，却总是提示：<font color=red>-bash: brew: command not found</font>，则是你的mac上homebrew没有安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/usr/bin/ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="建立个人博客目录">建立个人博客目录：</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new site your_blog_name  # 此处your_blog_name会生成一个同名的文件夹，里面是此次的project site文件
+cd your_blog_name  
+git init  #初始化本地数字仓库
+
+# 目录结构，tree命令 
+tree blog  </code></pre></td></tr></table>
+</div>
+</div>
+<p><font color=orange>config.toml</font> 是配置文件，在里面可以定义博客地址、构建配置、标题、导航栏等等。<br>
+<font color=orange>themes</font> 为放置主题的文件夹，可以在<a href="https://themes.gohugo.io/">themes.gohugo.io</a> 查看喜欢的主题。<br>
+<font color=orange>content</font> 是你的博客文章的文件夹。</p>
+
+<h2 id="下载主题">下载主题</h2>
+
+<p>这里我选择了even主题，可以根据喜好选择。<a href="https://themes.gohugo.io/hugo-theme-even/">even主题</a><br>
+把github上的主题直接clone到你的博客文件夹的themes目录下，这样对主题的改动也可以同时提交到git控制中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
+</div>
+</div>
+<p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好 fork 主题再做改动。</p>
+
     </div>
 
     <div class="post-copyright">
