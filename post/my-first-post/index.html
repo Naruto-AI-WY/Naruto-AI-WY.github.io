@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="2193">
+<meta itemprop="wordCount" content="2205">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/pages/"> pages </a>
             </div>
-          <span class="more-meta"> 约 2193 字 </span>
+          <span class="more-meta"> 约 2205 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -149,20 +149,50 @@
 
 <p>Hugo号称世界上最快的建站框架，由go语言开发。
    Mac下直接使用 <strong><font color=blue>Homebrew</font></strong> 安装：</p>
-<pre><code>brew install hugo
-# 检查安装成功  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">brew install hugo
+<span class="c1"># 检查安装成功</span>  
 hugo version 
 
-Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</code></pre>
+Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</code></pre></td></tr></table>
+</div>
+</div>
 <p>注意：如果发现使用brew命令，却总是提示：<font color=red>-bash: brew: command not found</font>，则是你的mac上homebrew没有安装</p>
-<pre><code>/usr/bin/ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="sr">/usr/</span><span class="n">bin</span><span class="o">/</span><span class="n">ruby</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="建立个人博客目录">建立个人博客目录：</h2>
-<pre><code>hugo new site your_blog_name  # 此处your_blog_name会生成一个同名的文件夹，里面是此次的project site文件
-cd your_blog_name  
-git init  #初始化本地数字仓库
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">hugo new site your_blog_name  <span class="c1"># 此处your_blog_name会生成一个同名的文件夹，里面是此次的project site文件</span>
+<span class="nb">cd</span> your_blog_name  
+git init  <span class="c1">#初始化本地数字仓库</span>
 
-# 目录结构，tree命令 
-tree blog  </code></pre>
+<span class="c1"># 目录结构，tree命令</span> 
+tree blog  </code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li><font color=orange>config.toml</font> 是配置文件，在里面可以定义博客地址、构建配置、标题、导航栏等等。<br></li>
 <li><font color=orange>themes</font> 为放置主题的文件夹，可以在<a href="https://themes.gohugo.io/">themes.gohugo.io</a> 查看喜欢的主题。另外如果更改了已应用的主题的src文件夹下的内容，需要重新build主题<br></li>
