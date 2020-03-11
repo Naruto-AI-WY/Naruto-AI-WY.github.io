@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="2294">
+<meta itemprop="wordCount" content="2301">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/pages/"> pages </a>
             </div>
-          <span class="more-meta"> 约 2294 字 </span>
+          <span class="more-meta"> 约 2301 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -136,7 +136,9 @@
 
     
     <div class="post-content">
-      <p>疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭建纪实了。</p>
+      <h1 id="hugo养成记">Hugo养成记</h1>
+
+<p>疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭建纪实了。</p>
 
 <h2 id="安装hugo">安装Hugo：</h2>
 
@@ -151,11 +153,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">brew install hugo
-# 检查安装成功  
-hugo version 
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">brew</span> <span class="nx">install</span> <span class="nx">hugo</span>
+<span class="err">#</span> <span class="nx">检查安装成功</span>  
+<span class="nx">hugo</span> <span class="nx">version</span> 
 
-Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</code></pre></td></tr></table>
+<span class="nx">Hugo</span> <span class="nx">Static</span> <span class="nx">Site</span> <span class="nx">Generator</span> <span class="nx">v0</span><span class="mf">.66.0</span><span class="o">/</span><span class="nx">extended</span> <span class="nx">darwin</span><span class="o">/</span><span class="nx">amd64</span> <span class="nx">BuildDate</span><span class="p">:</span> <span class="nx">unknown</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>注意：如果发现使用brew命令，却总是提示：<font color=red>-bash: brew: command not found</font>，则是你的mac上homebrew没有安装</p>
@@ -164,7 +166,7 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">/usr/bin/ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">ruby</span> <span class="o">-</span><span class="nx">e</span> <span class="s">&#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="建立个人博客目录">建立个人博客目录：</h2>
@@ -240,7 +242,7 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="o">//</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">olOwOlo</span><span class="o">/</span><span class="nx">hugo</span><span class="o">-</span><span class="nx">theme</span><span class="o">-</span><span class="nx">even</span> <span class="nx">themes</span><span class="o">/</span><span class="nx">even</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好fork主题再做改动。</p>
@@ -249,7 +251,7 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">git</span> <span class="nx">submodule</span> <span class="nx">add</span> <span class="nx">https</span><span class="p">:</span><span class="o">//</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">olOwOlo</span><span class="o">/</span><span class="nx">hugo</span><span class="o">-</span><span class="nx">theme</span><span class="o">-</span><span class="nx">even</span><span class="p">.</span><span class="nx">git</span> <span class="nx">themes</span><span class="o">/</span><span class="nx">even</span> </code></pre></td></tr></table>
 </div>
 </div>
 <p>注：<font color=red>如果git clone不成功或者速度过慢的话，可以考虑搜索一下更改hosts文件的方法或者使用代理服务器，可自行搜索</font></p>
@@ -262,7 +264,7 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd themes/even &amp;&amp; npm i &amp;&amp; npm start </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">cd</span> <span class="nx">themes</span><span class="o">/</span><span class="nx">even</span> <span class="o">&amp;&amp;</span> <span class="nx">npm</span> <span class="nx">i</span> <span class="o">&amp;&amp;</span> <span class="nx">npm</span> <span class="nx">start</span> </code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="开始写文章">开始写文章</h2>
@@ -271,7 +273,7 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new post/my-first-post.md</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">hugo</span> <span class="nx">new</span> <span class="nx">post</span><span class="o">/</span><span class="nx">my</span><span class="o">-</span><span class="nx">first</span><span class="o">-</span><span class="nx">post</span><span class="p">.</span><span class="nx">md</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，可以使用编辑器更改你的博客文件目录下的archetypes文件夹里面的default.md的文件</p>
@@ -304,27 +306,27 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">logoTitle = &#34;你的首页标题名&#34;  
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">logoTitle</span> <span class="p">=</span> <span class="s">&#34;你的首页标题名&#34;</span>  
 
-# 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值  
-archivePaginate = 5  
+<span class="err">#</span> <span class="nx">归档</span><span class="err">、</span><span class="nx">标签</span><span class="err">、</span><span class="nx">分类每页显示的文章数目</span><span class="err">，</span><span class="nx">建议修改为一个较大的值</span>  
+<span class="nx">archivePaginate</span> <span class="p">=</span> <span class="mi">5</span>  
 
-# 是否在归档页显示文章的总数  
-showArchiveCount = true  
+<span class="err">#</span> <span class="nx">是否在归档页显示文章的总数</span>  
+<span class="nx">showArchiveCount</span> <span class="p">=</span> <span class="kc">true</span>  
 
-# 是否使用mathjax（数学公式）  
-mathjax = true      # see https://www.mathjax.org/   
-mathjaxEnableSingleDollar = true   # 是否使用 $...$ 即可進行inline latex渲染  
-mathjaxEnableAutoNumber = false   # 是否使用公式自动编号  
+<span class="err">#</span> <span class="nx">是否使用mathjax</span><span class="err">（</span><span class="nx">数学公式</span><span class="err">）</span>  
+<span class="nx">mathjax</span> <span class="p">=</span> <span class="kc">true</span>      <span class="err">#</span> <span class="nx">see</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//www.mathjax.org/   
+</span><span class="c1"></span><span class="nx">mathjaxEnableSingleDollar</span> <span class="p">=</span> <span class="kc">true</span>   <span class="err">#</span> <span class="nx">是否使用</span> <span class="err">$</span><span class="o">...</span><span class="err">$</span> <span class="nx">即可進行inline</span> <span class="nx">latex渲染</span>  
+<span class="nx">mathjaxEnableAutoNumber</span> <span class="p">=</span> <span class="kc">false</span>   <span class="err">#</span> <span class="nx">是否使用公式自动编号</span>  
 
-# 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）  
-linkToMarkDown = false    # Only effective when hugo will output .md files.  
+<span class="err">#</span> <span class="nx">链接到markdown原始文件</span><span class="err">（</span><span class="nx">仅当允许hugo生成markdown文件时有效</span><span class="err">）</span>  
+<span class="nx">linkToMarkDown</span> <span class="p">=</span> <span class="kc">false</span>    <span class="err">#</span> <span class="nx">Only</span> <span class="nx">effective</span> <span class="nx">when</span> <span class="nx">hugo</span> <span class="nx">will</span> <span class="nx">output</span> <span class="p">.</span><span class="nx">md</span> <span class="nx">files</span><span class="p">.</span>  
 
-# 启用公共CDN，需自行定义  
-[params.publicCDN]        # load these files from public cdn          
+<span class="err">#</span> <span class="nx">启用公共CDN</span><span class="err">，</span><span class="nx">需自行定义</span>  
+<span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">publicCDN</span><span class="p">]</span>        <span class="err">#</span> <span class="nx">load</span> <span class="nx">these</span> <span class="nx">files</span> <span class="nx">from</span> <span class="nx">public</span> <span class="nx">cdn</span>          
 
-# 社交链接                
-[params.social]  </code></pre></td></tr></table>
+<span class="err">#</span> <span class="nx">社交链接</span>                
+<span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]</span>  </code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="启动博客的本地预览">启动博客的本地预览</h2>
@@ -335,7 +337,7 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server -D</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">hugo</span> <span class="nx">server</span> <span class="o">-</span><span class="nx">D</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>执行成功的话，就可以在浏览器中输入<a href="http://localhost:1313/">http://localhost:1313/</a> 在本地预览博客。</p>
@@ -351,8 +353,8 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --global user.name &#34;Your username&#34;  
-git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">global</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="s">&#34;Your username&#34;</span>  
+<span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">global</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="s">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
 <h3 id="生成密钥">生成密钥</h3>
@@ -361,7 +363,7 @@ git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">ssh</span><span class="o">-</span><span class="nx">keygen</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">rsa</span> <span class="o">-</span><span class="nx">f</span> <span class="err">~</span><span class="o">/</span><span class="p">.</span><span class="nx">ssh</span><span class="o">/</span><span class="nx">id_rsa_blog</span>  <span class="o">-</span><span class="nx">C</span> <span class="s">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
 <h3 id="将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</h3>
@@ -373,10 +375,10 @@ git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cat ~/.ssh/id_rsa_blog.pub  
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">cat</span> <span class="err">~</span><span class="o">/</span><span class="p">.</span><span class="nx">ssh</span><span class="o">/</span><span class="nx">id_rsa_blog</span><span class="p">.</span><span class="nx">pub</span>  
 
-Your identification has been saved in id_rsa_blog.  
-Your public key has been saved in id_rsa_blog.pub.                           </code></pre></td></tr></table>
+<span class="nx">Your</span> <span class="nx">identification</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">saved</span> <span class="nx">in</span> <span class="nx">id_rsa_blog</span><span class="p">.</span>  
+<span class="nx">Your</span> <span class="nx">public</span> <span class="nx">key</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">saved</span> <span class="nx">in</span> <span class="nx">id_rsa_blog</span><span class="p">.</span><span class="nx">pub</span><span class="p">.</span>                           </code></pre></td></tr></table>
 </div>
 </div>
 <p>或者编辑器打开~/.ssh/id_rsa_blog.pub文件，copy其中的内容（RSA公钥），然后网页打开你的github repo，然后进入Setting-&gt;Deploy keys，将刚才copy的内容添加进去。添加成功后，如下图所示
@@ -392,9 +394,9 @@ Your public key has been saved in id_rsa_blog.pub.                           </c
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd &lt;YOUR lOCAL BLOG&gt; 
-git remote add origin git@github.com:username/username.github.io.git  
-#将本地Local Blog仓库关联到github远程仓库</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">cd</span> <span class="p">&lt;</span><span class="nx">YOUR</span> <span class="nx">lOCAL</span> <span class="nx">BLOG</span><span class="p">&gt;</span> 
+<span class="nx">git</span> <span class="nx">remote</span> <span class="nx">add</span> <span class="nx">origin</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="p">:</span><span class="nx">username</span><span class="o">/</span><span class="nx">username</span><span class="p">.</span><span class="nx">github</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">git</span>  
+<span class="err">#</span><span class="nx">将本地Local</span> <span class="nx">Blog仓库关联到github远程仓库</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>然后删除本地网站目录下的public文件夹</p>
@@ -403,7 +405,7 @@ git remote add origin git@github.com:username/username.github.io.git
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">rm -rf ./public</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">rm</span> <span class="o">-</span><span class="nx">rf</span> <span class="p">.</span><span class="o">/</span><span class="nx">public</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>创建public子模块</p>
@@ -412,7 +414,7 @@ git remote add origin git@github.com:username/username.github.io.git
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">git</span> <span class="nx">submodule</span> <span class="nx">add</span> <span class="o">-</span><span class="nx">b</span> <span class="nx">master</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="p">:&lt;</span><span class="nx">USERNAME</span><span class="p">&gt;</span><span class="o">/</span><span class="p">&lt;</span><span class="nx">USERNAME</span><span class="p">&gt;.</span><span class="nx">github</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">git</span> <span class="nx">public</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>最后执行hugo命令，生成网站静态内容到public文件夹，然后push到远程github repo仓库。</p>
@@ -427,13 +429,13 @@ git remote add origin git@github.com:username/username.github.io.git
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo -t even  
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">hugo</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">even</span>  
 
-cd public  
-git status  
-git add .  #添加文件到缓冲
-git commit -m &#34;first commit&#34;  
-git push -u origin master </code></pre></td></tr></table>
+<span class="nx">cd</span> <span class="nx">public</span>  
+<span class="nx">git</span> <span class="nx">status</span>  
+<span class="nx">git</span> <span class="nx">add</span> <span class="p">.</span>  <span class="err">#</span><span class="nx">添加文件到缓冲</span>
+<span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="s">&#34;first commit&#34;</span>  
+<span class="nx">git</span> <span class="nx">push</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">origin</span> <span class="nx">master</span> </code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="自动部署脚本">自动部署脚本</h2>
@@ -467,30 +469,30 @@ git push -u origin master </code></pre></td></tr></table>
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash  
-</span><span class="cp"></span>
-<span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>  
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="err">#</span><span class="p">!</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>  
 
-<span class="c1"># Build the project.</span>  
-hugo -t even <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>  
+<span class="nx">echo</span> <span class="o">-</span><span class="nx">e</span> <span class="s">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>  
 
-<span class="c1"># Go To Public folder</span>  
-<span class="nb">cd</span> public  
-<span class="c1"># Add changes to git.</span>  
-git add .  
+<span class="err">#</span> <span class="nx">Build</span> <span class="nx">the</span> <span class="nx">project</span><span class="p">.</span>  
+<span class="nx">hugo</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">even</span> <span class="err">#</span> <span class="k">if</span> <span class="nx">using</span> <span class="nx">a</span> <span class="nx">theme</span><span class="p">,</span> <span class="nx">replace</span> <span class="nx">with</span> <span class="s">`hugo -t &lt;YOURTHEME&gt;`</span>  
 
-<span class="c1"># Commit changes.</span>  
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>  
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>  
-  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>  
-<span class="k">fi</span>  
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>  
+<span class="err">#</span> <span class="nx">Go</span> <span class="nx">To</span> <span class="nx">Public</span> <span class="nx">folder</span>  
+<span class="nx">cd</span> <span class="nx">public</span>  
+<span class="err">#</span> <span class="nx">Add</span> <span class="nx">changes</span> <span class="nx">to</span> <span class="nx">git</span><span class="p">.</span>  
+<span class="nx">git</span> <span class="nx">add</span> <span class="p">.</span>  
 
-<span class="c1"># Push source and build repos.</span>  
-git push origin master  
+<span class="err">#</span> <span class="nx">Commit</span> <span class="nx">changes</span><span class="p">.</span>  
+<span class="nx">msg</span><span class="p">=</span><span class="s">&#34;rebuilding site `date`&#34;</span>  
+<span class="k">if</span> <span class="p">[</span> <span class="err">$#</span> <span class="o">-</span><span class="nx">eq</span> <span class="mi">1</span> <span class="p">]</span>  
+  <span class="nx">then</span> <span class="nx">msg</span><span class="p">=</span><span class="s">&#34;$1&#34;</span>  
+<span class="nx">fi</span>  
+<span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="s">&#34;$msg&#34;</span>  
 
-<span class="c1"># Come Back up to the blog local Project Root</span>  
-<span class="nb">cd</span> ..  </code></pre></td></tr></table>
+<span class="err">#</span> <span class="nx">Push</span> <span class="nx">source</span> <span class="nx">and</span> <span class="nx">build</span> <span class="nx">repos</span><span class="p">.</span>  
+<span class="nx">git</span> <span class="nx">push</span> <span class="nx">origin</span> <span class="nx">master</span>  
+
+<span class="err">#</span> <span class="nx">Come</span> <span class="nx">Back</span> <span class="nx">up</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">blog</span> <span class="nx">local</span> <span class="nx">Project</span> <span class="nx">Root</span>  
+<span class="nx">cd</span> <span class="p">..</span>  </code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="hugo的使用">Hugo的使用</h2>
