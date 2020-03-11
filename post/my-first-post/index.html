@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="2205">
+<meta itemprop="wordCount" content="2274">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/pages/"> pages </a>
             </div>
-          <span class="more-meta"> 约 2205 字 </span>
+          <span class="more-meta"> 约 2274 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -223,47 +223,109 @@ tree blog  </code></pre></td></tr></table>
 
 <p>这里我选择了even主题，可以根据喜好选择。<a href="https://themes.gohugo.io/hugo-theme-even/">even主题</a><br>
 把github上的主题直接clone到你的博客文件夹的themes目录下，这样对主题的改动也可以同时提交到git控制中。</p>
-<pre><code>git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
+</div>
+</div>
 <p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好fork主题再做改动。</p>
-<pre><code>git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even </code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even </code></pre></td></tr></table>
+</div>
+</div>
 <p>注：<font color=red>如果git clone不成功或者速度过慢的话，可以考虑搜索一下更改hosts文件的方法或者使用代理服务器，可自行搜索</font></p>
 
 <h3 id="重新build主题">重新build主题</h3>
 
 <p>更改了主题的话，需要切换到 themes/even 目录下重新 build。</p>
-<pre><code>cd themes/even &amp;&amp; npm i &amp;&amp; npm start </code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> themes/even <span class="o">&amp;&amp;</span> npm i <span class="o">&amp;&amp;</span> npm start </code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="开始写文章">开始写文章</h2>
-<pre><code>hugo new post/my-first-post.md</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">hugo new post/my-first-post.md</code></pre></td></tr></table>
+</div>
+</div>
 <p>文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，可以使用编辑器更改你的博客文件目录下的archetypes文件夹里面的default.md的文件</p>
 
 <h2 id="配置项目">配置项目</h2>
 
 <p>拷贝themes/even/exampleSite下的config.toml覆盖根目录下的config.toml，设置config.toml中的一些值。</p>
-<pre><code>logoTitle = &#34;你的首页标题名&#34;  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">logoTitle</span> <span class="o">=</span> <span class="s2">&#34;你的首页标题名&#34;</span>  
 
-# 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值  
-archivePaginate = 5  
+<span class="c1"># 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值</span>  
+<span class="nv">archivePaginate</span> <span class="o">=</span> <span class="m">5</span>  
 
-# 是否在归档页显示文章的总数  
-showArchiveCount = true  
+<span class="c1"># 是否在归档页显示文章的总数</span>  
+<span class="nv">showArchiveCount</span> <span class="o">=</span> <span class="nb">true</span>  
 
-# 是否使用mathjax（数学公式）  
-mathjax = true      # see https://www.mathjax.org/   
-mathjaxEnableSingleDollar = true   # 是否使用 $...$ 即可進行inline latex渲染  
-mathjaxEnableAutoNumber = false   # 是否使用公式自动编号  
+<span class="c1"># 是否使用mathjax（数学公式）</span>  
+<span class="nv">mathjax</span> <span class="o">=</span> <span class="nb">true</span>      <span class="c1"># see https://www.mathjax.org/</span>   
+<span class="nv">mathjaxEnableSingleDollar</span> <span class="o">=</span> <span class="nb">true</span>   <span class="c1"># 是否使用 $...$ 即可進行inline latex渲染</span>  
+<span class="nv">mathjaxEnableAutoNumber</span> <span class="o">=</span> <span class="nb">false</span>   <span class="c1"># 是否使用公式自动编号</span>  
 
-# 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）  
-linkToMarkDown = false    # Only effective when hugo will output .md files.  
+<span class="c1"># 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）</span>  
+<span class="nv">linkToMarkDown</span> <span class="o">=</span> <span class="nb">false</span>    <span class="c1"># Only effective when hugo will output .md files.</span>  
 
-# 启用公共CDN，需自行定义  
-[params.publicCDN]        # load these files from public cdn          
+<span class="c1"># 启用公共CDN，需自行定义</span>  
+<span class="o">[</span>params.publicCDN<span class="o">]</span>        <span class="c1"># load these files from public cdn</span>          
 
-# 社交链接                
-[params.social]  </code></pre>
+<span class="c1"># 社交链接</span>                
+<span class="o">[</span>params.social<span class="o">]</span>  </code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="启动博客的本地预览">启动博客的本地预览</h2>
 
 <p>在站点的根目录下使用命令进行本地启动，本地启动的命令如下：</p>
-<pre><code>hugo server -D</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">hugo server -D</code></pre></td></tr></table>
+</div>
+</div>
 <p>执行成功的话，就可以在浏览器中输入<a href="http://localhost:1313/">http://localhost:1313/</a> 在本地预览博客。</p>
 
 <h2 id="github-配置">GitHub 配置</h2>
@@ -271,63 +333,154 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 <p>在github上新建一个项目，注意项目的名称必须是（<font color=red>你的用户名</font>.github.io)</p>
 
 <h3 id="设置git的user-name和email">设置Git的user name和email</h3>
-<pre><code>git config --global user.name &#34;Your username&#34;  
-git config --global user.email &#34;your email@xx.com&#34;</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git config --global user.name <span class="s2">&#34;Your username&#34;</span>  
+git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="生成密钥">生成密钥</h3>
-<pre><code>ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C &#34;your email@xx.com&#34;</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C <span class="s2">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</h3>
-<pre><code>cat ~/.ssh/id_rsa_blog.pub  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat ~/.ssh/id_rsa_blog.pub  
 
 Your identification has been saved in id_rsa_blog.  
-Your public key has been saved in id_rsa_blog.pub.                           </code></pre>
+Your public key has been saved in id_rsa_blog.pub.                           </code></pre></td></tr></table>
+</div>
+</div>
 <p>或者编辑器打开~/.ssh/id_rsa_blog.pub文件，copy其中的内容（RSA公钥），然后网页打开你的github repo，然后进入Setting-&gt;Deploy keys，将刚才copy的内容添加进去。添加成功后，如下图所示
 <figure><img src="/img/setting_RSA.jpg" alt="repo setting"></figure></p>
 
 <h3 id="部署到github个人页面">部署到Github个人页面</h3>
 
 <p>在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件.  再创建一个名称为username.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容，进入本地网站目录</p>
-<pre><code>cd &lt;YOUR lOCAL BLOG&gt; 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> &lt;YOUR lOCAL BLOG&gt; 
 git remote add origin git@github.com:username/username.github.io.git  
-#将本地Local Blog仓库关联到github远程仓库</code></pre>
+<span class="c1">#将本地Local Blog仓库关联到github远程仓库</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>然后删除本地网站目录下的public文件夹</p>
-<pre><code>rm -rf ./public</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf ./public</code></pre></td></tr></table>
+</div>
+</div>
 <p>创建public子模块</p>
-<pre><code>git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public</code></pre></td></tr></table>
+</div>
+</div>
 <p>最后执行hugo命令，生成网站静态内容到public文件夹，然后push到远程github repo仓库。</p>
-<pre><code>hugo -t even  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">hugo -t even  
 
-cd public  
+<span class="nb">cd</span> public  
 git status  
-git add .  #添加文件到缓冲
-git commit -m &#34;first commit&#34;  
-git push -u origin master </code></pre>
+git add .  <span class="c1">#添加文件到缓冲</span>
+git commit -m <span class="s2">&#34;first commit&#34;</span>  
+git push -u origin master </code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="自动部署脚本">自动部署脚本</h2>
 
 <p>将以下命令添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布</p>
-<pre><code>#!/bin/bash  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash  
+</span><span class="cp"></span>
+<span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>  
 
-echo -e &#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;  
+<span class="c1"># Build the project.</span>  
+hugo -t even <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>  
 
-# Build the project.  
-hugo -t even # if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`  
-
-# Go To Public folder  
-cd public  
-# Add changes to git.  
+<span class="c1"># Go To Public folder</span>  
+<span class="nb">cd</span> public  
+<span class="c1"># Add changes to git.</span>  
 git add .  
 
-# Commit changes.  
-msg=&#34;rebuilding site `date`&#34;  
-if [ $# -eq 1 ]  
-  then msg=&#34;$1&#34;  
-fi  
-git commit -m &#34;$msg&#34;  
+<span class="c1"># Commit changes.</span>  
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>  
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>  
+  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>  
+<span class="k">fi</span>  
+git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>  
 
-# Push source and build repos.  
+<span class="c1"># Push source and build repos.</span>  
 git push origin master  
 
-# Come Back up to the blog local Project Root  
-cd ..  </code></pre>
+<span class="c1"># Come Back up to the blog local Project Root</span>  
+<span class="nb">cd</span> ..  </code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="hugo的使用">Hugo的使用</h2>
 
 <h3 id="在markdown文件中添加图片">在Markdown文件中添加图片</h3>
