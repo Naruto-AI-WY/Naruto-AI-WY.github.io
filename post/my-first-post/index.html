@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1493">
+<meta itemprop="wordCount" content="1653">
 
 
 
@@ -358,6 +358,36 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr></table>
 </div>
 </div>
+<h3 id="生成密钥">生成密钥</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cat ~/.ssh/id_rsa_blog.pub  
+
+Your identification has been saved in id_rsa_blog.  
+Your public key has been saved in id_rsa_blog.pub. </code></pre></td></tr></table>
+</div>
+</div>
+<p>或者编辑器打开~/.ssh/id_rsa_blog.pub文件，copy其中的内容（RSA公钥）</p>
+
+<h4 id="然后网页打开你的github-repo然后进入settingdeploy-keys将刚才copy的内容添加进去">然后网页打开你的github repo，然后进入Setting-&gt;Deploy keys，将刚才copy的内容添加进去。</h4>
+
+<p><figure><img src="/img/setting_RSA.png" alt="repo setting"></figure></p>
+
     </div>
 
     <div class="post-copyright">
