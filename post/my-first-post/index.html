@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="2092">
+<meta itemprop="wordCount" content="2227">
 
 
 
@@ -154,11 +154,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">brew install hugo
-# 检查安装成功  
-hugo version 
-
-Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">brew<span class="w"> </span>install<span class="w"> </span>hugo<span class="w">
+</span><span class="w"></span><span class="c"># 检查安装成功  </span><span class="w">
+</span><span class="w"></span>hugo<span class="w"> </span>version<span class="w"> 
+</span><span class="w">
+</span><span class="w"></span><span class="k">Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate</span><span class="p">:</span><span class="w"> </span>unknown</code></pre></td></tr></table>
 </div>
 </div>
 <p>注意：如果发现使用brew命令，却总是提示：<font color=red>-bash: brew: command not found</font>，则是你的mac上homebrew没有安装</p>
@@ -181,12 +181,12 @@ Hugo Static Site Generator v0.66.0/extended darwin/amd64 BuildDate: unknown</cod
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new site your_blog_name  # 此处your_blog_name会生成一个同名的文件夹，里面是此次的project site文件
-cd your_blog_name  
-git init  #初始化本地数字仓库
-
-# 目录结构，tree命令 
-tree blog  </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">hugo<span class="w"> </span>new<span class="w"> </span>site<span class="w"> </span>your_blog_name<span class="w">  </span><span class="c"># 此处your_blog_name会生成一个同名的文件夹，里面是此次的project site文件</span><span class="w">
+</span><span class="w"></span>cd<span class="w"> </span>your_blog_name<span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>init<span class="w">  </span><span class="c">#初始化本地数字仓库</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 目录结构，tree命令 </span><span class="w">
+</span><span class="w"></span>tree<span class="w"> </span>blog<span class="w">  </span></code></pre></td></tr></table>
 </div>
 </div>
 <ul>
@@ -243,7 +243,7 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">git<span class="w"> </span>clone<span class="w"> </span>https<span class="p">:</span>//github.com/olOwOlo/hugo-theme-even<span class="w"> </span>themes/even</code></pre></td></tr></table>
 </div>
 </div>
 <p>也可以添加到 git 的 submodule 中，优点是后面讲到用 travis 自动部署时比较方便。如果需要对主题做更改，最好fork主题再做改动。</p>
@@ -252,7 +252,7 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https<span class="p">:</span>//github.com/olOwOlo/hugo-theme-even.git<span class="w"> </span>themes/even<span class="w"> </span></code></pre></td></tr></table>
 </div>
 </div>
 <p>注：<font color=red>如果git clone不成功或者速度过慢的话，可以考虑搜索一下更改hosts文件的方法或者使用代理服务器，可自行搜索</font></p>
@@ -265,7 +265,7 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd themes/even &amp;&amp; npm i &amp;&amp; npm start </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">cd<span class="w"> </span>themes/even<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>i<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>start<span class="w"> </span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="开始写文章">开始写文章</h2>
@@ -274,7 +274,7 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new post/my-first-post.md</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">hugo<span class="w"> </span>new<span class="w"> </span>post/my-first-post.md</code></pre></td></tr></table>
 </div>
 </div>
 <p>文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，可以使用编辑器更改你的博客文件目录下的archetypes文件夹里面的default.md的文件</p>
@@ -307,27 +307,27 @@ tree blog  </code></pre></td></tr></table>
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">logoTitle = &#34;你的首页标题名&#34;  
-
-# 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值  
-archivePaginate = 5  
-
-# 是否在归档页显示文章的总数  
-showArchiveCount = true  
-
-# 是否使用mathjax（数学公式）  
-mathjax = true      # see https://www.mathjax.org/   
-mathjaxEnableSingleDollar = true   # 是否使用 $...$ 即可進行inline latex渲染  
-mathjaxEnableAutoNumber = false   # 是否使用公式自动编号  
-
-# 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）  
-linkToMarkDown = false    # Only effective when hugo will output .md files.  
-
-# 启用公共CDN，需自行定义  
-[params.publicCDN]        # load these files from public cdn          
-
-# 社交链接                
-[params.social]  </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">logoTitle<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;你的首页标题名&#34;</span><span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值  </span><span class="w">
+</span><span class="w"></span>archivePaginate<span class="w"> </span>=<span class="w"> </span><span class="m">5</span><span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 是否在归档页显示文章的总数  </span><span class="w">
+</span><span class="w"></span>showArchiveCount<span class="w"> </span>=<span class="w"> </span><span class="kc">true</span><span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 是否使用mathjax（数学公式）  </span><span class="w">
+</span><span class="w"></span>mathjax<span class="w"> </span>=<span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c"># see https://www.mathjax.org/   </span><span class="w">
+</span><span class="w"></span>mathjaxEnableSingleDollar<span class="w"> </span>=<span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c"># 是否使用 $...$ 即可進行inline latex渲染  </span><span class="w">
+</span><span class="w"></span>mathjaxEnableAutoNumber<span class="w"> </span>=<span class="w"> </span><span class="kc">false</span><span class="w">   </span><span class="c"># 是否使用公式自动编号  </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）  </span><span class="w">
+</span><span class="w"></span>linkToMarkDown<span class="w"> </span>=<span class="w"> </span><span class="kc">false</span><span class="w">    </span><span class="c"># Only effective when hugo will output .md files.  </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 启用公共CDN，需自行定义  </span><span class="w">
+</span><span class="w"></span><span class="p">[</span>params.publicCDN<span class="p">]</span><span class="w">        </span><span class="c"># load these files from public cdn          </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 社交链接                </span><span class="w">
+</span><span class="w"></span><span class="p">[</span>params.social<span class="p">]</span><span class="w">  </span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="启动博客的本地预览">启动博客的本地预览</h2>
@@ -338,7 +338,7 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server -D</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">hugo<span class="w"> </span>server<span class="w"> </span>-D</code></pre></td></tr></table>
 </div>
 </div>
 <p>执行成功的话，就可以在浏览器中输入<a href="http://localhost:1313/">http://localhost:1313/</a> 在本地预览博客。</p>
@@ -354,8 +354,8 @@ linkToMarkDown = false    # Only effective when hugo will output .md files.
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --global user.name &#34;Your username&#34;  
-git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&#34;Your username&#34;</span><span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
 <h3 id="生成密钥">生成密钥</h3>
@@ -364,7 +364,7 @@ git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_rsa_blog<span class="w">  </span>-C<span class="w"> </span><span class="s2">&#34;your email@xx.com&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
 <h3 id="将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</h3>
@@ -376,10 +376,10 @@ git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cat ~/.ssh/id_rsa_blog.pub  
-
-Your identification has been saved in id_rsa_blog.  
-Your public key has been saved in id_rsa_blog.pub.                           </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">cat<span class="w"> </span>~/.ssh/id_rsa_blog.pub<span class="w">  
+</span><span class="w">
+</span><span class="w"></span>Your<span class="w"> </span>identification<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>saved<span class="w"> </span>in<span class="w"> </span>id_rsa_blog.<span class="w">  
+</span><span class="w"></span>Your<span class="w"> </span>public<span class="w"> </span>key<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>saved<span class="w"> </span>in<span class="w"> </span>id_rsa_blog.pub.<span class="w">                           </span></code></pre></td></tr></table>
 </div>
 </div>
 <p>或者编辑器打开~/.ssh/id_rsa_blog.pub文件，copy其中的内容（RSA公钥），然后网页打开你的github repo，然后进入Setting-&gt;Deploy keys，将刚才copy的内容添加进去。添加成功后，如下图所示
@@ -395,9 +395,9 @@ Your public key has been saved in id_rsa_blog.pub.                           </c
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd &lt;YOUR lOCAL BLOG&gt; 
-git remote add origin git@github.com:username/username.github.io.git  
-#将本地Local Blog仓库关联到github远程仓库</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">cd<span class="w"> </span>&lt;YOUR<span class="w"> </span>lOCAL<span class="w"> </span>BLOG<span class="sd">&gt; 
+</span><span class="sd">git remote add origin git@github.com:username/username.github.io.git  </span><span class="w">
+</span><span class="w"></span><span class="c">#将本地Local Blog仓库关联到github远程仓库</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>然后删除本地网站目录下的public文件夹</p>
@@ -406,7 +406,7 @@ git remote add origin git@github.com:username/username.github.io.git
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">rm -rf ./public</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">rm<span class="w"> </span>-rf<span class="w"> </span>./public</code></pre></td></tr></table>
 </div>
 </div>
 <p>创建public子模块</p>
@@ -415,7 +415,7 @@ git remote add origin git@github.com:username/username.github.io.git
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>git@github.com<span class="p">:</span>&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git<span class="w"> </span>public</code></pre></td></tr></table>
 </div>
 </div>
 <p>最后执行hugo命令，生成网站静态内容到public文件夹，然后push到远程github repo仓库。</p>
@@ -430,13 +430,70 @@ git remote add origin git@github.com:username/username.github.io.git
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo -t even  
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">hugo<span class="w"> </span>-t<span class="w"> </span>even<span class="w">  
+</span><span class="w">
+</span><span class="w"></span>cd<span class="w"> </span>public<span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>status<span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w">  </span><span class="c">#添加文件到缓冲</span><span class="w">
+</span><span class="w"></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;first commit&#34;</span><span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>master<span class="w"> </span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="自动部署脚本">自动部署脚本</h2>
 
-cd public  
-git status  
-git add .  #添加文件到缓冲
-git commit -m &#34;first commit&#34;  
-git push -u origin master </code></pre></td></tr></table>
+<p>将以下命令添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#!/bin/bash  </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>echo<span class="w"> </span>-e<span class="w"> </span><span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span><span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Build the project.  </span><span class="w">
+</span><span class="w"></span>hugo<span class="w"> </span>-t<span class="w"> </span>even<span class="w"> </span><span class="c"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`  </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Go To Public folder  </span><span class="w">
+</span><span class="w"></span>cd<span class="w"> </span>public<span class="w">  
+</span><span class="w"></span><span class="c"># Add changes to git.  </span><span class="w">
+</span><span class="w"></span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Commit changes.  </span><span class="w">
+</span><span class="w"></span>msg=<span class="s2">&#34;rebuilding site `date`&#34;</span><span class="w">  
+</span><span class="w"></span>if<span class="w"> </span><span class="p">[</span><span class="w"> </span>$<span class="c"># -eq 1 ]  </span><span class="w">
+</span><span class="w">  </span>then<span class="w"> </span>msg=<span class="s2">&#34;$1&#34;</span><span class="w">  
+</span><span class="w"></span>fi<span class="w">  
+</span><span class="w"></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;$msg&#34;</span><span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Push source and build repos.  </span><span class="w">
+</span><span class="w"></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>master<span class="w">  
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Come Back up to the blog local Project Root  </span><span class="w">
+</span><span class="w"></span>cd<span class="w"> </span>..<span class="w">  </span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="hugo的使用">Hugo的使用</h2>
