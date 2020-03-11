@@ -204,7 +204,6 @@ tree blog  </code></pre></td></tr></table>
 <li><font color=orange>themes</font> 为放置主题的文件夹，可以在<a href="https://themes.gohugo.io/">themes.gohugo.io</a> 查看喜欢的主题。另外如果更改了已应用的主题的src文件夹下的内容，需要重新build主题<br></li>
 <li><font color=orange>content</font> 是存放博客内容的文件，支持任何级别的文件夹和文件的嵌套，最后的文件系统里 markdown 文件路径和站点 url 的对应关系一般如下：
 ```
-.
 └── content
 └── about
 |   └── _index.md  // &lt;- <a href="https://example.com/about/">https://example.com/about/</a>
@@ -276,8 +275,6 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，更改你的博客文件目录下的archetypes文件夹里面的default.md的文件，例如更改的default.md内容如下：</code></pre></td></tr></table>
 </div>
 </div>
-<hr>
-
 <p>title: &quot;{{ replace .TranslationBaseName &quot;-&quot; &quot; &quot; | title }}&quot;
 date: {}
 categories:</p>
