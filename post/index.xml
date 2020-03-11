@@ -152,6 +152,8 @@ tree blog  &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，更改你的博客文件目录下的archetypes文件夹里面的default.md的文件，例如更改的default.md内容如下：&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;hr&gt;
+
 &lt;p&gt;title: &amp;quot;{{ replace .TranslationBaseName &amp;quot;-&amp;quot; &amp;quot; &amp;quot; | title }}&amp;quot;
 date: {}
 categories:&lt;/p&gt;
