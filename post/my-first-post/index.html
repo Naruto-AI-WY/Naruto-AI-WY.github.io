@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1584">
+<meta itemprop="wordCount" content="1142">
 
 
 
@@ -256,74 +256,10 @@ tree blog  </code></pre></td></tr></table>
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">## 开始写文章</code></pre></td></tr></table>
 </div>
 </div>
-<p>hugo new post/my-first-post.md</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，更改你的博客文件目录下的archetypes文件夹里面的default.md的文件，例如更改的default.md内容如下：</code></pre></td></tr></table>
-</div>
-</div>
-<hr>
+<p>hugo new post/my-first-post.md
+```
+文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，更改你的博客文件目录下的archetypes文件夹里面的default.md的文件</p>
 
-<p>title: &quot;{{ replace .TranslationBaseName &quot;-&quot; &quot; &quot; | title }}&quot;
-date: {}
-categories:</p>
-
-<ul>
-<li>category</li>
-<li>subcategory
-tags:</li>
-<li>tag1</li>
-<li>tag2
-keywords:</li>
-
-<li><p>tech</p>
-
-<h1 id="每次编辑文档时请删去这些解释的注释">每次编辑文档时请删去这些解释的注释</h1>
-
-<h1 id="缩略图最好采用宽度为750的图片可以使用本地文件或者使用git图床">缩略图，最好采用宽度为750的图片，可以使用本地文件或者使用git图床</h1>
-
-<h1 id="使用本地图库请把图片存在themesstaticimages文件夹下并且用下面的路径引用">使用本地图库，请把图片存在themes/static/images文件夹下，并且用下面的路径引用</h1>
-
-<p>thumbnailImage: /images/cover.jpg</p>
-
-<h1 id="缩略图位置我觉得放在上面好看如果用的小图片作缩略图">缩略图位置，我觉得放在上面好看，如果用的小图片作缩略图</h1>
-
-<h1 id="可以放在left或者right设置此项会取代配置文件中默认在下边的设置">可以放在（left或者right），设置此项会取代配置文件中默认在下边的设置</h1>
-
-<p>thumbnailImagePosition: top</p>
-
-<h1 id="这个下边默认就好了暂时不清楚有什么影响">这个下边默认就好了，暂时不清楚有什么影响</h1>
-
-<p>autoThumbnailImage: yes
-metaAlignment: center</p>
-
-<h1 id="封面图片如果选用本地文件的话和缩略图同样的路径219的图片效果很好看">封面图片，如果选用本地文件的话，和缩略图同样的路径，21：9的图片效果很好看</h1>
-
-<p>coverImage: /images/cover.jpg</p>
-
-<h1 id="封面图片的描述引号中的文字可以自己选">封面图片的描述引号中的文字可以自己选</h1>
-
-<p>coverCaption: &quot;文章cover图片描述&quot;</p>
-
-<h1 id="in表示文章标题显示在封面图片上out表示显示在封面图片的外边也就是文章开头">in表示文章标题显示在封面图片上，out表示显示在封面图片的外边，也就是文章开头</h1>
-
-<p>coverMeta: in</p>
-
-<h1 id="封面图片的覆盖大小直接默认为full吧219的图片这样设置显示效果真的不错">封面图片的覆盖大小，直接默认为full吧，21:9的图片这样设置显示效果真的不错</h1>
-
-<p>coverSize: full</p></li>
-</ul>
-
-<hr>
-
-<p>#缩略显示的梗概，这里把注释删去，写成文章的简介或者梗概，在首页时候可以只显示梗概</p>
-
-<!-- toc -->
-
-<p>```</p>
     </div>
 
     <div class="post-copyright">
