@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1954">
+<meta itemprop="wordCount" content="2092">
 
 
 
@@ -400,6 +400,47 @@ git remote add origin git@github.com:username/username.github.io.git
 #将本地Local Blog仓库关联到github远程仓库</code></pre></td></tr></table>
 </div>
 </div>
+<p>然后删除本地网站目录下的public文件夹</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">rm -rf ./public</code></pre></td></tr></table>
+</div>
+</div>
+<p>创建public子模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public</code></pre></td></tr></table>
+</div>
+</div>
+<p>最后执行hugo命令，生成网站静态内容到public文件夹，然后push到远程github repo仓库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo -t even  
+
+cd public  
+git status  
+git add .  #添加文件到缓冲
+git commit -m &#34;first commit&#34;  
+git push -u origin master </code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="hugo的使用">Hugo的使用</h2>
+
 <h3 id="在markdown文件中添加图片">在Markdown文件中添加图片</h3>
 
 <p>Hugo中使用的图片路径是相对路径，相对于static的路径，图片可以放入blog文件夹下的static/image下面，在markdown中引用是，<strong>![图片说明](/image/1.png)</strong>。</p>
