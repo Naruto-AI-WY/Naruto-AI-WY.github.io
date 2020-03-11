@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 10 Mar 2020 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2020 08:44:33 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tag1</title>
+      <link>https://Naruto-AI-WY.github.io/tags/tag1/</link>
+      <pubDate>Wed, 11 Mar 2020 08:44:33 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/tags/tag1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag2</title>
+      <link>https://Naruto-AI-WY.github.io/tags/tag2/</link>
+      <pubDate>Wed, 11 Mar 2020 08:44:33 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/tags/tag2/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>hugo</title>
