@@ -36,7 +36,7 @@
 
 
 <link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
 
 
 <meta property="og:title" content="Shortcodes" />
@@ -125,7 +125,7 @@ Without title.
 ">
 <meta itemprop="datePublished" content="2016-08-30T16:01:23&#43;08:00" />
 <meta itemprop="dateModified" content="2018-02-01T18:01:23&#43;08:00" />
-<meta itemprop="wordCount" content="284">
+<meta itemprop="wordCount" content="304">
 
 
 
@@ -243,7 +243,7 @@ Without title.
         <div class="post-category">
             <a href="/categories/shortcodes/"> shortcodes </a>
             </div>
-          <span class="more-meta"> 约 284 字 </span>
+          <span class="more-meta"> 约 304 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -251,7 +251,7 @@ Without title.
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
+  <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
     <li><a href="#default">default</a></li>
@@ -410,27 +410,54 @@ biu biu biu.
 <!-- raw HTML omitted -->
 <hr>
 <h2 id="figure-with-class">figure with class</h2>
-<pre><code>{{% figure src=&quot;/path/to/img.gif&quot; title=&quot;default&quot; alt=&quot;img&quot; %}}
-{{% figure class=&quot;center&quot; src=&quot;/path/to/img.gif&quot; title=&quot;center&quot; alt=&quot;img&quot; %}}
-{{% figure class=&quot;right&quot; src=&quot;/path/to/img.gif&quot; title=&quot;right&quot; alt=&quot;img&quot; %}}
-{{% figure class=&quot;left&quot; src=&quot;/path/to/img.gif&quot; title=&quot;left&quot; alt=&quot;img&quot; %}}
-</code></pre><!-- raw HTML omitted -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{{% figure src=&#34;/path/to/img.gif&#34; title=&#34;default&#34; alt=&#34;img&#34; %}}
+{{% figure class=&#34;center&#34; src=&#34;/path/to/img.gif&#34; title=&#34;center&#34; alt=&#34;img&#34; %}}
+{{% figure class=&#34;right&#34; src=&#34;/path/to/img.gif&#34; title=&#34;right&#34; alt=&#34;img&#34; %}}
+{{% figure class=&#34;left&#34; src=&#34;/path/to/img.gif&#34; title=&#34;left&#34; alt=&#34;img&#34; %}}
+</code></pre></td></tr></table>
+</div>
+</div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <hr>
-<pre><code>{{% center %}}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{{% center %}}
 
 ## hybrid in center
-{{% figure src=&quot;/path/to/img.gif&quot; title=&quot;default&quot; alt=&quot;img&quot; %}}
-{{% figure class=&quot;right&quot; src=&quot;/path/to/img.gif&quot; title=&quot;right&quot; alt=&quot;img&quot; %}}
+{{% figure src=&#34;/path/to/img.gif&#34; title=&#34;default&#34; alt=&#34;img&#34; %}}
+{{% figure class=&#34;right&#34; src=&#34;/path/to/img.gif&#34; title=&#34;right&#34; alt=&#34;img&#34; %}}
 
 {{% left %}}
-{{% figure src=&quot;/path/to/img.gif&quot; title=&quot;default in left&quot; alt=&quot;img&quot; %}}
+{{% figure src=&#34;/path/to/img.gif&#34; title=&#34;default in left&#34; alt=&#34;img&#34; %}}
 {{% /left %}}
 
 {{% /center %}}
-</code></pre><!-- raw HTML omitted -->
+</code></pre></td></tr></table>
+</div>
+</div><!-- raw HTML omitted -->
 <h2 id="hybrid-in-center">hybrid in center</h2>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
@@ -462,18 +489,41 @@ biu biu biu.
 <ul>
 <li>Simple</li>
 </ul>
-<pre><code>{{% music &quot;28196554&quot; %}}
-{{% music &quot;28196554&quot; &quot;1&quot; %}}
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{{% music &#34;28196554&#34; %}}
+{{% music &#34;28196554&#34; &#34;1&#34; %}}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Named Params</li>
 </ul>
-<pre><code>{{% music id=&quot;28196554&quot; %}}
-{{% music id=&quot;28196554&quot; auto=&quot;1&quot; %}}
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{{% music id=&#34;28196554&#34; %}}
+{{% music id=&#34;28196554&#34; auto=&#34;1&#34; %}}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Example</li>
 </ul>
-<pre><code>{{% music &quot;28196554&quot; %}}
-</code></pre><p>{{% music &ldquo;28196554&rdquo; %}}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{{% music &#34;28196554&#34; %}}
+</code></pre></td></tr></table>
+</div>
+</div><p>{{% music &ldquo;28196554&rdquo; %}}</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
     </div>
@@ -586,7 +636,7 @@ biu biu biu.
   
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+  
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
