@@ -48,7 +48,7 @@
 <meta itemprop="description" content="第一篇文章">
 <meta itemprop="datePublished" content="2020-03-10T10:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T10:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1010">
+<meta itemprop="wordCount" content="1493">
 
 
 
@@ -279,6 +279,85 @@ tree blog  </code></pre></td></tr></table>
 </div>
 <p>文章顶部是一些 meta 信息，可以更改。也可以使用一些固定模板自动生成 meta 信息，可以使用编辑器更改你的博客文件目录下的archetypes文件夹里面的default.md的文件</p>
 
+<h2 id="配置项目">配置项目</h2>
+
+<p>拷贝themes/even/exampleSite下的config.toml覆盖根目录下的config.toml，设置config.toml中的一些值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">logoTitle = &#34;你的首页标题名&#34;  
+
+# 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值  
+archivePaginate = 5  
+
+# 是否在归档页显示文章的总数  
+showArchiveCount = true  
+
+# 是否使用mathjax（数学公式）  
+mathjax = true      # see https://www.mathjax.org/   
+mathjaxEnableSingleDollar = true   # 是否使用 $...$ 即可進行inline latex渲染  
+mathjaxEnableAutoNumber = false   # 是否使用公式自动编号  
+
+# 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）  
+linkToMarkDown = false    # Only effective when hugo will output .md files.  
+
+# 启用公共CDN，需自行定义  
+[params.publicCDN]        # load these files from public cdn          
+
+# 社交链接                
+[params.social]  </code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="启动博客的本地预览">启动博客的本地预览</h2>
+
+<p>在站点的根目录下使用命令进行本地启动，本地启动的命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server -D</code></pre></td></tr></table>
+</div>
+</div>
+<p>执行成功的话，就可以在浏览器中输入<a href="http://localhost:1313/">http://localhost:1313/</a> 在本地预览博客。</p>
+
+<h2 id="github-配置">GitHub 配置</h2>
+
+<p>在github上新建一个项目，注意项目的名称必须是（<font color=red>你的用户名</font>.github.io)</p>
+
+<h3 id="设置git的user-name和email">设置Git的user name和email</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --global user.name &#34;Your username&#34;  
+git config --global user.email &#34;your email@xx.com&#34;</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
