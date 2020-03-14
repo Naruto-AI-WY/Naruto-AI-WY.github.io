@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="3066">
+<meta itemprop="wordCount" content="3067">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 3066 字 </span>
+          <span class="more-meta"> 约 3067 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         
       </div>
@@ -566,7 +566,7 @@ $ /etc/ssh/ssh_config      # 系统配置文件
 </div>
 </div><p><!-- raw HTML omitted -->~/.ssh/config<!-- raw HTML omitted -->是针对当前用户的配置，仅对一个用户有效。<!-- raw HTML omitted -->/etc/ssh/ssh_config<!-- raw HTML omitted -->是对本机所有用户。根据自己情况选择对应的配置文件修改。</p>
 <p><strong>方案2</strong></p>
-<p>use keychain<br>
+<p>Use keychain<br>
 This was not the intended default behavior, so this has been changed in macOS 10.12.2. To store passphrases in the keychain, set this option in your ssh configuration file:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -576,7 +576,8 @@ This was not the intended default behavior, so this has been changed in macOS 10
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">UseKeychain yes 
 </code></pre></td></tr></table>
 </div>
-</div><p>This option can be set for all hosts, or for a subset of hosts as desired. For instance, you can configure a development machine as such:</p>
+</div><p>This option can be set for all hosts, or for a subset of hosts as desired. For instance, you can configure a development machine as such:
+<strong>~/.ssh/config</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
