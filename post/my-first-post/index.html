@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="3067">
+<meta itemprop="wordCount" content="3538">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 3067 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3538 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
     </header>
@@ -167,6 +167,7 @@
         <li><a href="#git指令报错">git指令报错</a></li>
       </ul>
     </li>
+    <li><a href="#参考资料">参考资料</a></li>
   </ul>
 </nav>
   </div>
@@ -541,13 +542,11 @@ git push origin master
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">Host github.com
   Hostname github.com
   AddKeysToAgent yes
-  UseKeychain yes
   IdentityFile ~/.ssh/id_rsa_blog
 </code></pre></td></tr></table>
 </div>
@@ -578,6 +577,8 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </div>
 </div><p>This option can be set for all hosts, or for a subset of hosts as desired. For instance, you can configure a development machine as such:
 <strong>~/.ssh/config</strong></p>
+<p>This will only store the passphrase in the keychain for that specific key<br>
+(如果你试图为GitHub执行这里操作)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -585,12 +586,38 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Host server.example.com
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Host github.com
     IdentityFile ~/.ssh/id_rsa #填写你的密码文件名
     UseKeychain yes
 </code></pre></td></tr></table>
 </div>
-</div><p>This will only store the passphrase in the keychain for that specific key</p>
+</div><p>如果你想为每个主机启用它，只需添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Host *  
+    UseKeychain yes
+</code></pre></td></tr></table>
+</div>
+</div><p>如果对Git凭证存储还有疑问，可以参考最后的资料。</p>
+<h4 id="git-credential-store的搜索顺序">git-credential-store的搜索顺序</h4>
+<p><strong>~/.git-credentials</strong> 用户特定的凭据文件。</p>
+<p><strong>$XDG_CONFIG_HOME/git/credentials</strong>   第二个用户特定的凭证文件。如果$XDG_CONFIG_HOME没有设置或为空， $HOME/.config/git/credentials将被使用。如果~/.git-credentials具有匹配的凭证，则不会使用存储在此文件中的任何凭证。如果你有时使用不支持它的老版本 Git，不建立这个文件是个好主意。</p>
+<p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
+<p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，~/.git-credentials将被创建并写入。</p>
+<p>擦除证书时，匹配的证书将从所有文件中删除。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
+<a href="https://www.jianshu.com/p/77b0340a02f3">git 缓存密码导致的不能和远程仓库交互</a></p>
+<p><a href="https://www.cnblogs.com/volnet/p/git-credentials.html">GIT凭证存储-简单易懂</a></p>
+<p><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8">Pro Git》7.14 Git-工具-凭证存储</a></p>
+<p><a href="https://git-scm.com/docs/git-credential-store">Git Docs / git-credential-store</a></p>
+<p><a href="https://git-scm.com/docs/git-credential-cache">Git Docs / git-credential-cache</a></p>
+<p><a href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html#//apple_ref/doc/uid/DTS40017589">OpenSSH updates in macOS 10.12.2</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/security/openssh/part2/#1">OpenSSH 密钥管理</a></p>
 
     </div>
 
