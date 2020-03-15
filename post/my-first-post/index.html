@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5117">
+<meta itemprop="wordCount" content="5182">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5117 字 </span>
+          <span class="more-meta"> 约 5182 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
@@ -407,7 +407,7 @@ Git 的选项如下：<br>
 <p><strong><!-- raw HTML omitted -->“store”<!-- raw HTML omitted --></strong> 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 Git 服务器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放在你的 home 目录下。</p>
 </li>
 <li>
-<p>我们使用的是Mac，Git 还有一种 **<!-- raw HTML omitted -->“osxkeychain”**<!-- raw HTML omitted --> 模式，它会将凭证缓存到你系统用户的钥匙串中。 这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 HTTPS 凭证以及 Safari 的自动填写是相同的。</p>
+<p>我使用的是Mac，Git 还有一种 <strong><!-- raw HTML omitted -->“osxkeychain”<!-- raw HTML omitted --></strong> 模式，它会将凭证缓存到你系统用户的钥匙串中。 这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 HTTPS 凭证以及 Safari 的自动填写是相同的。</p>
 </li>
 </ul>
 <p>你可以设置 Git 的配置来选择上述的一种方式</p>
@@ -744,7 +744,7 @@ git push origin master
 </li>
 </ul>
 <p><img src="/img/Permission.jpg" alt="permission"></p>
-<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。它的作用只是把你指定的私钥进行高速缓存，添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，也就是说当你重启之后，ssh-agent 服务也就重置了。</p>
+<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。它的作用只是把你指定的私钥进行高速缓存，添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，相当于credential.helper的值默认为cache，账号密码存储在高速缓存中，所以说当你重启之后，ssh-agent 服务也就重置了，git使用SSH和Https都需要重新输入账号密码。</p>
 <h4 id="解决方案"><strong>解决方案：</strong></h4>
 <p><strong>方案1</strong>
 找到~/.ssh/config文件，如果没有此文件，可以自己创建。文件格式如下：</p>
@@ -817,7 +817,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </div><p>如果对Git凭证存储还有疑问，可以参考最后的资料。</p>
 <h4 id="git-credential-store的搜索顺序">git-credential-store的搜索顺序</h4>
 <p><strong>~/.git-credentials</strong> 用户特定的凭据文件。</p>
-<p><strong>$XDG_CONFIG_HOME/git/credentials</strong>   第二个用户特定的凭证文件。如果 <strong>$XDG_CONFIG_HOME</strong> 没有设置或为空， <strong>$HOME/.config/git/credentials</strong> 将被使用。如果 <strong>~/.git-credentials</strong> 具有匹配的凭证，则不会使用存储在此文件中的任何凭证。如果你有时使用不支持它的老版本 Git，不建立这个文件是个好主意。</p>
+<p><strong>$XDG_CONFIG_HOME/git/credentials</strong>   第二个用户特定的凭证文件。如果 <strong>$XDG_CONFIG_HOME</strong> 没有设置或为空， <strong>$HOME/.config/git/credentials</strong> 将被使用。如果 <strong>~/.git-credentials</strong> 具有匹配的凭证，则不会使用存储在此文件中的任何凭证。如果你有时使用不支持它的老版本 Git，不建立这个文件是个好的选择。</p>
 <p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
 <p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，<strong>~/.git-credentials</strong> 将被创建并写入。</p>
 <p>擦除证书时，匹配的证书将从所有文件中删除。</p>
