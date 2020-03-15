@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="3478">
+<meta itemprop="wordCount" content="3689">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 3478 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3689 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
     </header>
@@ -384,12 +384,90 @@ git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</spa
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="生成密钥">生成密钥</h3>
+<ol>
+<li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C <span class="s2">&#34;your email@xx.com&#34;</span>
+<span class="c1"># Generating a public/private rsa key pair.</span>
+<span class="c1"># Enter the file in which you wish to save they key (i.e., /home/username/.ssh/id_rsa).</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Once the keypair is created, you are prompted to enter the following items.</p>
+<ol start="2">
+<li>Click Enter on your keyboard to continue.</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa_blog  -C <span class="s2">&#34;your email@xx.com&#34;</span>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Enter a passphrase (leave empty for no passphrase).
+</code></pre></td></tr></table>
+</div>
+</div><p>You do not need to enter a passphrase, but     it&rsquo;s highly recommended as it protects your   private key if compromised. If so, someone    would still need your passphrase in order to unlock it.
+3. Click <strong>Enter</strong> on your keyboard to continue</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Enter same passphrase again:
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Click <strong>Enter</strong> on your keyboard to continue.</li>
+<li>When finished, click Enter on your keyboard.
+<em>The following message appears:</em></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Your identification has been saved in /home/username/.ssh/id_rsa
+Your public key has been saved in /home/username/.ssh/id_sra.pub
+
+The key fingerprint is:
+ar:bc:d3:9e:g3:1f:63:6f:6b:32:2e:97:ee:42:e1:be username@server.dreamhost.com
+
+The key’s randomart image is:
+
++--[ RSA 2048]----+
+| ..+**B.o++o     |
+|  . o+==o. o     |
+|    . .oo.=      |
+|      . +E+ .    |
+|        S .      |
+|                 |
+|                 |
+|                 |
+|                 |
++-----------------+
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</h3>
