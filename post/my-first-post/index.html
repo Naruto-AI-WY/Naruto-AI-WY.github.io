@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="4219">
+<meta itemprop="wordCount" content="4723">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 4219 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 4723 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
         
       </div>
     </header>
@@ -155,6 +155,7 @@
       <ul>
         <li><a href="#设置git的user-name和email">设置Git的user name和email</a></li>
         <li><a href="#git-credential凭证存储">Git credential凭证存储</a></li>
+        <li><a href="#查看当前的git配置">查看当前的git配置</a></li>
         <li><a href="#生成密钥">生成密钥</a></li>
         <li><a href="#将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</a></li>
         <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
@@ -394,7 +395,7 @@ git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</spa
 只要你有仓库访问权限即可, 使用 <strong><!-- raw HTML omitted -->credential<!-- raw HTML omitted --></strong> 来进行配置</li>
 </ul>
 <h3 id="git-credential凭证存储">Git credential凭证存储</h3>
-<p>Git 拥有一个凭证系统来处理这个账号和密码的事宜<br>
+<p>Git 拥有一个凭证系统credential.helper来处理这个账号和密码的事宜<br>
 Git 的选项如下：<br>
 默认所有都不缓存。 每一次连接都会询问你的用户名和密码。</p>
 <ul>
@@ -418,7 +419,79 @@ Git 的选项如下：<br>
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ git config --global credential.helper cache
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="生成密钥">生成密钥</h3>
+</div><p>钥匙链存储：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git  config --global  credential.helper  osxkeychain <span class="c1">#钥匙链存储</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="查看当前的git配置">查看当前的git配置</h3>
+<p>如果使用git命令时仍然有报错，就需要检查 当前的所有git config的配置信息。<br>
+首先运行下面的命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --list
+</code></pre></td></tr></table>
+</div>
+</div><p>credential.helper=osxkeychain<br>
+user.name=xxxxx<br>
+<a href="mailto:user.email=xxxxx@xxxx.xx">user.email=xxxxx@xxxx.xx</a><br>
+core.repositoryformatversion=0<br>
+core.filemode=true<br>
+core.bare=false<br>
+core.logallrefupdates=true
+或者只查询credential.helper的值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git config credential.helper <span class="c1">#可用于检测当前的credential.helper的值</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>检测用户名和邮箱和 push 时是不是一样，不一样的话，git push等命令肯定出错。至于为什么不使用配置的用户名呢，在于第一行的 credential.helper的取值，我们需要检测所有git config文件，查看其中定义的credential.helper的值。
+<strong>定位credential.helper</strong>
+一般 credential.helper 会配置在三个地方 local, global, system，分别用以下命令查看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git config --local credential.helper
+git config --global credential.helper
+git config --system credential.helper
+</code></pre></td></tr></table>
+</div>
+</div><p>如果找到了credential.helper=xxxx，删除其值。如果都没有找到credential.helper=xxxx，用如下的命令找出所有 credential.helper 在電腦中的位置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --show-origin --get credential.helper
+</code></pre></td></tr></table>
+</div>
+</div><p>file:/Applications/Xcode.app/Contents/Developer/usr/share/git-core/gitconfig	osxkeychain<br>
+原来 xcode 下有配置了 credential.helper，我们查看一下这个配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cat /Applications/Xcode.app/Contents/Developer/usr/share/git-core/gitconfig
+</code></pre></td></tr></table>
+</div>
+</div><p>[credential]<br>
+helper = osxkeychain</p>
+<h3 id="生成密钥">生成密钥</h3>
 <ol>
 <li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
 </ol>
@@ -441,19 +514,21 @@ Git 的选项如下：<br>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">Enter a passphrase <span class="o">(</span>leave empty <span class="k">for</span> no passphrase<span class="o">)</span>.
-<span class="sb">```</span>bash
-You <span class="k">do</span> not need to enter a passphrase, but it<span class="err">&#39;</span>s highly recommended as it protects your   private key <span class="k">if</span> compromised. If so, someone    would still need your passphrase in order to unlock it. 
-1. Click **Enter** on your keyboard to <span class="k">continue</span>
-<span class="sb">```</span>bash
-Enter same passphrase again:
+</code></pre></td></tr></table>
+</div>
+</div><p>You do not need to enter a passphrase, but it&rsquo;s highly recommended as it protects your   private key if compromised. If so, someone    would still need your passphrase in order to unlock it.</p>
+<ol>
+<li>Click <strong>Enter</strong> on your keyboard to continue</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Enter same passphrase again:
 </code></pre></td></tr></table>
 </div>
 </div><ol start="4">
@@ -731,6 +806,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
 <p><a href="https://git-scm.com/docs/git-credential-cache">Git Docs / git-credential-cache</a></p>
 <p><a href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html#//apple_ref/doc/uid/DTS40017589">OpenSSH updates in macOS 10.12.2</a></p>
 <p><a href="https://www.ibm.com/developerworks/cn/linux/security/openssh/part2/#1">OpenSSH 密钥管理</a></p>
+<p><a href="https://medium.com/@chenclaire/git-setting-on-macos-learning-notes-21c98a8aa700">如何設定 git credentials，git setting on macOS</a></p>
 
     </div>
 
