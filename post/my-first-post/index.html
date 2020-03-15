@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="4725">
+<meta itemprop="wordCount" content="5107">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 4725 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+          <span class="more-meta"> 约 5107 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
     </header>
@@ -420,7 +420,7 @@ Git 的选项如下：<br>
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ git config --global credential.helper cache
 </code></pre></td></tr></table>
 </div>
-</div><p>钥匙链存储：</p>
+</div><p>钥匙链存储方式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -446,8 +446,9 @@ user.name=xxxxx<br>
 core.repositoryformatversion=0<br>
 core.filemode=true<br>
 core.bare=false<br>
-core.logallrefupdates=true
-或者只查询credential.helper的值</p>
+core.logallrefupdates=true</p>
+<p>检测用户名和邮箱和 push 时是不是一样，不一样的话，git push等命令肯定出错。至于为什么不使用配置的用户名呢，在于第一行的 credential.helper的取值，我们需要检测所有git config文件，查看其中定义的credential.helper的值。</p>
+<p>只查询credential.helper的值的命令，可以用来检查当前的credential.helper的值的情况。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -456,7 +457,7 @@ core.logallrefupdates=true
 <pre class="chroma"><code class="language-bash" data-lang="bash">git config credential.helper <span class="c1">#可用于检测当前的credential.helper的值</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>检测用户名和邮箱和 push 时是不是一样，不一样的话，git push等命令肯定出错。至于为什么不使用配置的用户名呢，在于第一行的 credential.helper的取值，我们需要检测所有git config文件，查看其中定义的credential.helper的值。</p>
+</div><p>如果检查到了credential.helper已经被设置了值，则需要找到所以可以设置credential.helper的gitconfig文件，进行删除值。</p>
 <h3 id="定位credentialhelper"><strong>定位credential.helper</strong></h3>
 <p>一般 credential.helper 会配置在三个地方 local, global, system，分别用以下命令查看</p>
 <div class="highlight"><div class="chroma">
@@ -500,7 +501,21 @@ git config --system credential.helper
     helper = osxkeychain
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="生成密钥">生成密钥</h3>
+</div><p>Xcode也有gitconfig的配置文件,如果需要重新配置credential.helper，则需要更改已有的值。</p>
+<ul>
+<li>删除所有gitconfig的credential.helper的值</li>
+<li>根据自己的使用需求，使用cache/store/osxkeychain，具体的区别和定义请见参考资料。命令如下：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">  git config --global credential.helper cache/store/osxkeychain
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>再次执行git push命令时，要求重新输入账号和密码，此时会根据前面配置的credential.helper的值进行存储。  设置成store（明码）和osxkeychain（钥匙链，加密）都会长期存储在硬盘文件上。</strong></p>
+<h3 id="生成密钥">生成密钥</h3>
 <ol>
 <li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
 </ol>
@@ -816,6 +831,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
 <p><a href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html#//apple_ref/doc/uid/DTS40017589">OpenSSH updates in macOS 10.12.2</a></p>
 <p><a href="https://www.ibm.com/developerworks/cn/linux/security/openssh/part2/#1">OpenSSH 密钥管理</a></p>
 <p><a href="https://medium.com/@chenclaire/git-setting-on-macos-learning-notes-21c98a8aa700">如何設定 git credentials，git setting on macOS</a></p>
+<p><a href="https://tricks.one/post/osx-git-credential-helper-location/">OSX(Mac) 系统下 git credential.helper 的位置</a></p>
 
     </div>
 
