@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5500">
+<meta itemprop="wordCount" content="5516">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5500 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 5516 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
         
       </div>
     </header>
@@ -779,15 +779,17 @@ git push origin master
 <p><img src="/img/Permission.jpg" alt="permission"></p>
 <p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存所以说当你重启之后，ssh-agent 服务也就重置了，再次push代码都必须重新ssh-add添加上私钥。</p>
 <h4 id="解决方案"><strong>解决方案：</strong></h4>
-<p>SSH 的配置文件（config file）有两个：</p>
+<p>SSH 的配置文件（config file）有三个：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$ ~/.ssh/config            # 用户配置文件，如果你对文件夹里没有config文件，你可以自己建一个。
 $ /etc/ssh/ssh_config      # 系统配置文件
+$ .git/config              # 当前仓库目录下的配置文件
 </code></pre></td></tr></table>
 </div>
 </div><p><!-- raw HTML omitted -->~/.ssh/config<!-- raw HTML omitted -->是针对当前用户的配置，仅对一个用户有效。<!-- raw HTML omitted -->/etc/ssh/ssh_config<!-- raw HTML omitted -->是对本机所有用户。根据自己情况选择对应的配置文件修改。<br>
