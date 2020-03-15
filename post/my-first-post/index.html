@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5499">
+<meta itemprop="wordCount" content="5500">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5499 字 </span>
+          <span class="more-meta"> 约 5500 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
@@ -779,6 +779,19 @@ git push origin master
 <p><img src="/img/Permission.jpg" alt="permission"></p>
 <p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存所以说当你重启之后，ssh-agent 服务也就重置了，再次push代码都必须重新ssh-add添加上私钥。</p>
 <h4 id="解决方案"><strong>解决方案：</strong></h4>
+<p>SSH 的配置文件（config file）有两个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ ~/.ssh/config            # 用户配置文件，如果你对文件夹里没有config文件，你可以自己建一个。
+$ /etc/ssh/ssh_config      # 系统配置文件
+</code></pre></td></tr></table>
+</div>
+</div><p><!-- raw HTML omitted -->~/.ssh/config<!-- raw HTML omitted -->是针对当前用户的配置，仅对一个用户有效。<!-- raw HTML omitted -->/etc/ssh/ssh_config<!-- raw HTML omitted -->是对本机所有用户。根据自己情况选择对应的配置文件修改。<br>
+<img src="/img/SSH_config.jpg" alt="SSH配置文件"></p>
 <p><strong>方案1</strong>
 找到~/.ssh/config文件，如果没有此文件，可以自己创建。文件格式如下：</p>
 <div class="highlight"><div class="chroma">
@@ -796,19 +809,7 @@ git push origin master
 </code></pre></td></tr></table>
 </div>
 </div><p>~/.ssh/config 就是一个配置文件，描述不同的秘钥对应的设置 —— 包括主机名、用户名、访问策略等等。此配置不局限于 Git，所有底层使用 SSH 的应用和命令都会遵照配置文件config的指示来找到对应的私钥，可以用来管理多组密钥对。 ~/.ssh/config 文件自动将密钥加载到 ssh-agent 中，并根据<!-- raw HTML omitted --><strong>AddKeysToAgent</strong><!-- raw HTML omitted -->和<!-- raw HTML omitted --><strong>UseKeychain</strong><!-- raw HTML omitted -->的值，通过ssh-agent或者Keychain存储密码。
-对这个问题感兴趣可以参考文章：<a href="https://deepzz.com/post/how-to-setup-ssh-config.html">SSH Config 那些你所知道和不知道的事</a>  和 <a href="https://segmentfault.com/q/1010000000835302">是否必须每次添加ssh-add</a>，以及<a href="https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">将 SSH 密钥添加到 ssh-agent</a>(github官方文档)<br>
-SSH 的配置文件（config file）有两个：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ ~/.ssh/config            # 用户配置文件，如果你对文件夹里没有config文件，你可以自己建一个。
-$ /etc/ssh/ssh_config      # 系统配置文件
-</code></pre></td></tr></table>
-</div>
-</div><p><!-- raw HTML omitted -->~/.ssh/config<!-- raw HTML omitted -->是针对当前用户的配置，仅对一个用户有效。<!-- raw HTML omitted -->/etc/ssh/ssh_config<!-- raw HTML omitted -->是对本机所有用户。根据自己情况选择对应的配置文件修改。</p>
+对这个问题感兴趣可以参考文章：<a href="https://deepzz.com/post/how-to-setup-ssh-config.html">SSH Config 那些你所知道和不知道的事</a>  和 <a href="https://segmentfault.com/q/1010000000835302">是否必须每次添加ssh-add</a>，以及<a href="https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">将 SSH 密钥添加到 ssh-agent</a>(github官方文档)</p>
 <p><strong>方案2</strong></p>
 <p>Use keychain使用钥匙链
 This was not the intended default behavior, so this has been changed in macOS 10.12.2. To store passphrases in the keychain, set this option in your ssh configuration file:</p>
@@ -848,8 +849,9 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="参考资料">参考资料</h2>
-<p><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%8D%8F%E8%AE%AE">服务器上的 Git - 协议</a>
-<a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
+<p><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%8D%8F%E8%AE%AE">服务器上的 Git - 协议</a></p>
+<p><a href="https://www.ssh.com/ssh/key">https://www.ssh.com/ssh/key</a></p>
+<p><a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
 <a href="https://www.jianshu.com/p/77b0340a02f3">git 缓存密码导致的不能和远程仓库交互</a></p>
 <p><a href="https://www.cnblogs.com/volnet/p/git-credentials.html">GIT凭证存储-简单易懂</a></p>
 <p><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8">Pro Git》7.14 Git-工具-凭证存储</a></p>
