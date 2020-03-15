@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="3689">
+<meta itemprop="wordCount" content="4219">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 3689 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 4219 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
         
       </div>
     </header>
@@ -154,6 +154,7 @@
     <li><a href="#github-配置">GitHub 配置</a>
       <ul>
         <li><a href="#设置git的user-name和email">设置Git的user name和email</a></li>
+        <li><a href="#git-credential凭证存储">Git credential凭证存储</a></li>
         <li><a href="#生成密钥">生成密钥</a></li>
         <li><a href="#将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</a></li>
         <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
@@ -373,6 +374,7 @@ tree blog
 <h2 id="github-配置">GitHub 配置</h2>
 <p>在github上新建一个项目，注意项目的名称必须是（<!-- raw HTML omitted -->你的用户名<!-- raw HTML omitted -->.github.io)</p>
 <h3 id="设置git的user-name和email">设置Git的user name和email</h3>
+<p>在本机git全局变量上设置账号和email。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -381,6 +383,39 @@ tree blog
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">git config --global user.name <span class="s2">&#34;Your username&#34;</span>  
 git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果使用 https 连接, 通常要求你输入 username &amp; password.
+如果想每次git指令登录不需要 username &amp; password，可以采用采用如下</p>
+<ul>
+<li>采用 SSH 连接方式
+前提当然你得有权限将自己主机 id_rsa.pub 加入到 git 账户的 SSH Keys 中</li>
+<li>采用 HTTPS 连接方式
+只要你有仓库访问权限即可, 使用 <strong><!-- raw HTML omitted -->credential<!-- raw HTML omitted --></strong> 来进行配置</li>
+</ul>
+<h3 id="git-credential凭证存储">Git credential凭证存储</h3>
+<p>Git 拥有一个凭证系统来处理这个账号和密码的事宜<br>
+Git 的选项如下：<br>
+默认所有都不缓存。 每一次连接都会询问你的用户名和密码。</p>
+<ul>
+<li>
+<p><strong><!-- raw HTML omitted -->“cache”<!-- raw HTML omitted --></strong> 模式会将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且在15分钟后从内存中清除。</p>
+</li>
+<li>
+<p><strong><!-- raw HTML omitted -->“store”<!-- raw HTML omitted --></strong> 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 Git 服务器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放在你的 home 目录下。</p>
+</li>
+<li>
+<p>我们使用的是Mac，Git 还有一种 **<!-- raw HTML omitted -->“osxkeychain”**<!-- raw HTML omitted --> 模式，它会将凭证缓存到你系统用户的钥匙串中。 这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 HTTPS 凭证以及 Safari 的自动填写是相同的。</p>
+</li>
+</ul>
+<p>你可以设置 Git 的配置来选择上述的一种方式</p>
+<p>例如全局使用<a href="https://cloud.tencent.com/developer/section/1138683">cache存储方式</a>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ git config --global credential.helper cache
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="生成密钥">生成密钥</h3>
@@ -406,19 +441,19 @@ git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</spa
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Enter a passphrase (leave empty for no passphrase).
-</code></pre></td></tr></table>
-</div>
-</div><p>You do not need to enter a passphrase, but     it&rsquo;s highly recommended as it protects your   private key if compromised. If so, someone    would still need your passphrase in order to unlock it.
-3. Click <strong>Enter</strong> on your keyboard to continue</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Enter same passphrase again:
+<pre class="chroma"><code class="language-bash" data-lang="bash">Enter a passphrase <span class="o">(</span>leave empty <span class="k">for</span> no passphrase<span class="o">)</span>.
+<span class="sb">```</span>bash
+You <span class="k">do</span> not need to enter a passphrase, but it<span class="err">&#39;</span>s highly recommended as it protects your   private key <span class="k">if</span> compromised. If so, someone    would still need your passphrase in order to unlock it. 
+1. Click **Enter** on your keyboard to <span class="k">continue</span>
+<span class="sb">```</span>bash
+Enter same passphrase again:
 </code></pre></td></tr></table>
 </div>
 </div><ol start="4">
@@ -449,7 +484,7 @@ git config --global user.email <span class="s2">&#34;your email@xx.com&#34;</spa
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Your identification has been saved in /home/username/.ssh/id_rsa
+<pre class="chroma"><code class="language-bash" data-lang="bash">Your identification has been saved in /home/username/.ssh/id_rsa
 Your public key has been saved in /home/username/.ssh/id_sra.pub
 
 The key fingerprint is:
@@ -457,16 +492,16 @@ ar:bc:d3:9e:g3:1f:63:6f:6b:32:2e:97:ee:42:e1:be username@server.dreamhost.com
 
 The key’s randomart image is:
 
-+--[ RSA 2048]----+
-| ..+**B.o++o     |
-|  . o+==o. o     |
-|    . .oo.=      |
-|      . +E+ .    |
-|        S .      |
-|                 |
-|                 |
-|                 |
-|                 |
++--<span class="o">[</span> RSA 2048<span class="o">]</span>----+
+<span class="p">|</span> ..+**B.o++o     <span class="p">|</span>
+<span class="p">|</span>  . <span class="nv">o</span><span class="o">+==</span>o. o     <span class="p">|</span>
+<span class="p">|</span>    . .oo.<span class="o">=</span>      <span class="p">|</span>
+<span class="p">|</span>      . +E+ .    <span class="p">|</span>
+<span class="p">|</span>        S .      <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
 +-----------------+
 </code></pre></td></tr></table>
 </div>
@@ -643,7 +678,7 @@ $ /etc/ssh/ssh_config      # 系统配置文件
 </div>
 </div><p><!-- raw HTML omitted -->~/.ssh/config<!-- raw HTML omitted -->是针对当前用户的配置，仅对一个用户有效。<!-- raw HTML omitted -->/etc/ssh/ssh_config<!-- raw HTML omitted -->是对本机所有用户。根据自己情况选择对应的配置文件修改。</p>
 <p><strong>方案2</strong></p>
-<p>Use keychain<br>
+<p>Use keychain使用钥匙链
 This was not the intended default behavior, so this has been changed in macOS 10.12.2. To store passphrases in the keychain, set this option in your ssh configuration file:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
