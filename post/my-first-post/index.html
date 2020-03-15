@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5484">
+<meta itemprop="wordCount" content="5499">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5484 字 </span>
+          <span class="more-meta"> 约 5499 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
@@ -158,7 +158,10 @@
         <li><a href="#git-credential凭证存储">Git credential凭证存储</a></li>
         <li><a href="#查看当前的git配置">查看当前的git配置</a></li>
         <li><a href="#定位gitconfig的credentialhelper">定位gitconfig的credential.helper</a></li>
-        <li><a href="#生成密钥">生成密钥</a></li>
+      </ul>
+    </li>
+    <li><a href="#生成密钥-ssh协议">生成密钥-SSH协议</a>
+      <ul>
         <li><a href="#将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</a></li>
         <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
       </ul>
@@ -545,7 +548,7 @@ git config --system credential.helper
 <p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
 <p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，<strong>~/.git-credentials</strong> 将被创建并写入。</p>
 <p>擦除证书时，匹配的证书将从所有文件中删除。</p>
-<h3 id="生成密钥">生成密钥</h3>
+<h2 id="生成密钥-ssh协议">生成密钥-SSH协议</h2>
 <ol>
 <li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
 </ol>
@@ -845,7 +848,8 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="参考资料">参考资料</h2>
-<p><a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
+<p><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%8D%8F%E8%AE%AE">服务器上的 Git - 协议</a>
+<a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
 <a href="https://www.jianshu.com/p/77b0340a02f3">git 缓存密码导致的不能和远程仓库交互</a></p>
 <p><a href="https://www.cnblogs.com/volnet/p/git-credentials.html">GIT凭证存储-简单易懂</a></p>
 <p><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8">Pro Git》7.14 Git-工具-凭证存储</a></p>
