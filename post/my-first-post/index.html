@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5580">
+<meta itemprop="wordCount" content="5493">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5580 字 </span>
-          <span class="more-meta"> 预计阅读 12 分钟 </span>
+          <span class="more-meta"> 约 5493 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
     </header>
@@ -374,8 +374,31 @@ tree blog
 </div>
 </div><p>执行成功的话，就可以在浏览器中输入http://localhost:1313/ 在本地预览博客。</p>
 <h2 id="github-配置">GitHub 配置</h2>
-<p>在github上新建一个项目，注意项目的名称必须是（<!-- raw HTML omitted -->你的用户名<!-- raw HTML omitted -->.github.io)</p>
-<h3 id="设置git的user-name和email">设置Git的user name和email</h3>
+<p>在github上新建一个项目，注意项目的名称必须是（<!-- raw HTML omitted -->你的用户名<!-- raw HTML omitted -->.github.io)<br>
+下面对Git的配置做一个简单说明：<br>
+Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
+<ol>
+<li>
+<p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果在执行 git config 时带上 &ndash;system 选项，那么它就会读写该文件中的配置变量。 （由于它是系统配置文件，因此你需要管理员或超级用户权限来修改它。）</p>
+</li>
+<li>
+<p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 你可以传递 &ndash;global 选项让 Git 读写此文件，这会对你系统上 所有 的仓库生效。</p>
+</li>
+<li>
+<p>当前使用仓库的 Git 目录中的 config 文件（即 .git/config）：针对该仓库。 你可以传递 &ndash;local 选项让 Git 强制读写此文件，虽然默认情况下用的就是它。。 （当然，你需要进入某个 Git 仓库中才能让该选项生效。）</p>
+</li>
+</ol>
+<p>每一个级别会覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
+<p>你可以通过以下命令查看所有的配置以及它们所在的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --list --show-origin
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置git的user-name和email">设置Git的user name和email</h3>
 <p>在本机git全局变量上设置账号和email。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -750,31 +773,8 @@ git push origin master
 </li>
 </ul>
 <p><img src="/img/Permission.jpg" alt="permission"></p>
-<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存，相当于credential.helper的值默认为cache，私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，密码存储在高速缓存中，所以说当你重启之后，ssh-agent 服务也就重置了，git使用SSH和Https都需要重新用ssh-add添加密码文件。</p>
-<p>下面对Git的配置做一个简单说明：<br>
-Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
-<ol>
-<li>
-<p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果在执行 git config 时带上 &ndash;system 选项，那么它就会读写该文件中的配置变量。 （由于它是系统配置文件，因此你需要管理员或超级用户权限来修改它。）</p>
-</li>
-<li>
-<p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 你可以传递 &ndash;global 选项让 Git 读写此文件，这会对你系统上 所有 的仓库生效。</p>
-</li>
-<li>
-<p>当前使用仓库的 Git 目录中的 config 文件（即 .git/config）：针对该仓库。 你可以传递 &ndash;local 选项让 Git 强制读写此文件，虽然默认情况下用的就是它。。 （当然，你需要进入某个 Git 仓库中才能让该选项生效。）</p>
-</li>
-</ol>
-<p>每一个级别会覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
-<p>你可以通过以下命令查看所有的配置以及它们所在的文件：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --list --show-origin
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="解决方案"><strong>解决方案：</strong></h4>
+<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存所以说当你重启之后，ssh-agent 服务也就重置了，再次push代码都必须重新ssh-add添加上私钥。</p>
+<h4 id="解决方案"><strong>解决方案：</strong></h4>
 <p><strong>方案1</strong>
 找到~/.ssh/config文件，如果没有此文件，可以自己创建。文件格式如下：</p>
 <div class="highlight"><div class="chroma">
