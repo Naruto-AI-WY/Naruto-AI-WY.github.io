@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5605">
+<meta itemprop="wordCount" content="5580">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5605 字 </span>
+          <span class="more-meta"> 约 5580 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
         
       </div>
@@ -515,6 +515,12 @@ git config --system credential.helper
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>再次执行git push命令时，要求重新输入账号和密码，此时会根据前面配置的credential.helper的值进行存储。  设置成store（明码）和osxkeychain（钥匙链，加密）都会长期存储在硬盘文件上。</strong></p>
+<h4 id="git-credential-store的搜索顺序">git-credential-store的搜索顺序</h4>
+<p><strong>~/.git-credentials</strong> 用户特定的凭据文件。</p>
+<p><strong>$XDG_CONFIG_HOME/git/credentials</strong>   第二个用户特定的凭证文件。如果 <strong>$XDG_CONFIG_HOME</strong> 没有设置或为空， <strong>$HOME/.config/git/credentials</strong> 将被使用。如果 <strong>~/.git-credentials</strong> 具有匹配的凭证，则不会使用存储在此文件中的任何凭证。如果你有时使用不支持它的老版本 Git，不建立这个文件是个好的选择。</p>
+<p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
+<p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，<strong>~/.git-credentials</strong> 将被创建并写入。</p>
+<p>擦除证书时，匹配的证书将从所有文件中删除。</p>
 <h3 id="生成密钥">生成密钥</h3>
 <ol>
 <li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
@@ -837,14 +843,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
     UseKeychain yes
 </code></pre></td></tr></table>
 </div>
-</div><p>如果对Git凭证存储还有疑问，可以参考最后的资料。</p>
-<h4 id="git-credential-store的搜索顺序">git-credential-store的搜索顺序</h4>
-<p><strong>~/.git-credentials</strong> 用户特定的凭据文件。</p>
-<p><strong>$XDG_CONFIG_HOME/git/credentials</strong>   第二个用户特定的凭证文件。如果 <strong>$XDG_CONFIG_HOME</strong> 没有设置或为空， <strong>$HOME/.config/git/credentials</strong> 将被使用。如果 <strong>~/.git-credentials</strong> 具有匹配的凭证，则不会使用存储在此文件中的任何凭证。如果你有时使用不支持它的老版本 Git，不建立这个文件是个好的选择。</p>
-<p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
-<p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，<strong>~/.git-credentials</strong> 将被创建并写入。</p>
-<p>擦除证书时，匹配的证书将从所有文件中删除。</p>
-<h2 id="参考资料">参考资料</h2>
+</div><h2 id="参考资料">参考资料</h2>
 <p><a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
 <a href="https://www.jianshu.com/p/77b0340a02f3">git 缓存密码导致的不能和远程仓库交互</a></p>
 <p><a href="https://www.cnblogs.com/volnet/p/git-credentials.html">GIT凭证存储-简单易懂</a></p>
