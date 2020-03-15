@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5182">
+<meta itemprop="wordCount" content="5605">
 
 
 
@@ -129,8 +129,8 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5182 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 5605 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
         
       </div>
     </header>
@@ -472,7 +472,7 @@ git config --global credential.helper
 git config --system credential.helper
 </code></pre></td></tr></table>
 </div>
-</div><p>如果找到了credential.helper=xxxx，删除其值。如果都没有找到credential.helper=xxxx，用如下的命令找出所有 credential.helper 在電腦中的位置：</p>
+</div><p>如果找到了credential.helper=xxxx，删除其值。如果都没有找到credential.helper=xxxx，用如下的命令找出哪一个配置文件最后设置 credential.helper 的值：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -744,8 +744,31 @@ git push origin master
 </li>
 </ul>
 <p><img src="/img/Permission.jpg" alt="permission"></p>
-<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。它的作用只是把你指定的私钥进行高速缓存，添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，相当于credential.helper的值默认为cache，账号密码存储在高速缓存中，所以说当你重启之后，ssh-agent 服务也就重置了，git使用SSH和Https都需要重新输入账号密码。</p>
-<h4 id="解决方案"><strong>解决方案：</strong></h4>
+<p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存，相当于credential.helper的值默认为cache，私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，密码存储在高速缓存中，所以说当你重启之后，ssh-agent 服务也就重置了，git使用SSH和Https都需要重新用ssh-add添加密码文件。</p>
+<p>下面对Git的配置做一个简单说明：<br>
+Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
+<ol>
+<li>
+<p>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果在执行 git config 时带上 &ndash;system 选项，那么它就会读写该文件中的配置变量。 （由于它是系统配置文件，因此你需要管理员或超级用户权限来修改它。）</p>
+</li>
+<li>
+<p>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 你可以传递 &ndash;global 选项让 Git 读写此文件，这会对你系统上 所有 的仓库生效。</p>
+</li>
+<li>
+<p>当前使用仓库的 Git 目录中的 config 文件（即 .git/config）：针对该仓库。 你可以传递 &ndash;local 选项让 Git 强制读写此文件，虽然默认情况下用的就是它。。 （当然，你需要进入某个 Git 仓库中才能让该选项生效。）</p>
+</li>
+</ol>
+<p>每一个级别会覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
+<p>你可以通过以下命令查看所有的配置以及它们所在的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --list --show-origin
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="解决方案"><strong>解决方案：</strong></h4>
 <p><strong>方案1</strong>
 找到~/.ssh/config文件，如果没有此文件，可以自己创建。文件格式如下：</p>
 <div class="highlight"><div class="chroma">
@@ -762,7 +785,7 @@ git push origin master
   IdentityFile ~/.ssh/id_rsa_blog
 </code></pre></td></tr></table>
 </div>
-</div><p>~/.ssh/config 就是一个配置文件，描述不同的秘钥对应的设置 —— 包括主机名、用户名、访问策略等等。此配置不局限于 Git，所有底层使用 SSH 的应用和命令都会遵照配置文件config的指示来找到对应的私钥，可以用来管理多组密钥对。 ~/.ssh/config 文件以自动将密钥加载到 ssh-agent 中并在密钥链中存储密码
+</div><p>~/.ssh/config 就是一个配置文件，描述不同的秘钥对应的设置 —— 包括主机名、用户名、访问策略等等。此配置不局限于 Git，所有底层使用 SSH 的应用和命令都会遵照配置文件config的指示来找到对应的私钥，可以用来管理多组密钥对。 ~/.ssh/config 文件自动将密钥加载到 ssh-agent 中，并根据<!-- raw HTML omitted --><strong>AddKeysToAgent</strong><!-- raw HTML omitted -->和<!-- raw HTML omitted --><strong>UseKeychain</strong><!-- raw HTML omitted -->的值，通过ssh-agent或者Keychain存储密码。
 对这个问题感兴趣可以参考文章：<a href="https://deepzz.com/post/how-to-setup-ssh-config.html">SSH Config 那些你所知道和不知道的事</a>  和 <a href="https://segmentfault.com/q/1010000000835302">是否必须每次添加ssh-add</a>，以及<a href="https://help.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">将 SSH 密钥添加到 ssh-agent</a>(github官方文档)<br>
 SSH 的配置文件（config file）有两个：</p>
 <div class="highlight"><div class="chroma">
@@ -831,7 +854,9 @@ This was not the intended default behavior, so this has been changed in macOS 10
 <p><a href="https://developer.apple.com/library/archive/technotes/tn2449/_index.html#//apple_ref/doc/uid/DTS40017589">OpenSSH updates in macOS 10.12.2</a></p>
 <p><a href="https://www.ibm.com/developerworks/cn/linux/security/openssh/part2/#1">OpenSSH 密钥管理</a></p>
 <p><a href="https://medium.com/@chenclaire/git-setting-on-macos-learning-notes-21c98a8aa700">如何設定 git credentials，git setting on macOS</a></p>
-<p><a href="https://tricks.one/post/osx-git-credential-helper-location/">OSX(Mac) 系统下 git credential.helper 的位置</a></p>
+<p><a href="https://tricks.one/post/osx-git-credential-helper-location/">OSX(Mac) 系统下 git credential.helper 的位置</a>
+<a href="https://liam.page/2017/09/12/rescue-your-life-with-SSH-config-file/">最佳搭档：利用 SSH 及其配置文件节省你的生命</a>
+<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE">初次运行Git前的配置</a></p>
 
     </div>
 
