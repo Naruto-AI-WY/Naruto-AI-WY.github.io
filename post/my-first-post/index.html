@@ -156,6 +156,7 @@
         <li><a href="#设置git的user-name和email">设置Git的user name和email</a></li>
         <li><a href="#git-credential凭证存储">Git credential凭证存储</a></li>
         <li><a href="#查看当前的git配置">查看当前的git配置</a></li>
+        <li><a href="#定位credentialhelper"><strong>定位credential.helper</strong></a></li>
         <li><a href="#生成密钥">生成密钥</a></li>
         <li><a href="#将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</a></li>
         <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
@@ -455,9 +456,9 @@ core.logallrefupdates=true
 <pre class="chroma"><code class="language-bash" data-lang="bash">git config credential.helper <span class="c1">#可用于检测当前的credential.helper的值</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>检测用户名和邮箱和 push 时是不是一样，不一样的话，git push等命令肯定出错。至于为什么不使用配置的用户名呢，在于第一行的 credential.helper的取值，我们需要检测所有git config文件，查看其中定义的credential.helper的值。
-<strong>定位credential.helper</strong>
-一般 credential.helper 会配置在三个地方 local, global, system，分别用以下命令查看</p>
+</div><p>检测用户名和邮箱和 push 时是不是一样，不一样的话，git push等命令肯定出错。至于为什么不使用配置的用户名呢，在于第一行的 credential.helper的取值，我们需要检测所有git config文件，查看其中定义的credential.helper的值。</p>
+<h3 id="定位credentialhelper"><strong>定位credential.helper</strong></h3>
+<p>一般 credential.helper 会配置在三个地方 local, global, system，分别用以下命令查看</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
