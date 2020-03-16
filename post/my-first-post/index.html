@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="6634">
+<meta itemprop="wordCount" content="6633">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 6634 字 </span>
+          <span class="more-meta"> 约 6633 字 </span>
           <span class="more-meta"> 预计阅读 14 分钟 </span>
         
       </div>
@@ -907,7 +907,11 @@ Host coding
     UseKeychain yes
 </code></pre></td></tr></table>
 </div>
-</div><p>当你克隆 coding 上的某个仓库时：</p>
+</div><blockquote>
+<blockquote>
+<p>当你克隆 coding 上的某个仓库时：</p>
+</blockquote>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -924,10 +928,14 @@ $ git clone git@git.coding.net:AI/test.git
 $ git clone coding:AI/test.git
 </code></pre></td></tr></table>
 </div>
-</div><p>现在的命令可以使用<code>coding</code>来代替主机名<code>git.coding.net</code>和用户名<code>git</code>。ssh会查询config文件，根据Host“<code>coding</code>”匹配出Host name“<code>git.coding.net</code>&quot;和User&quot;<code>git</code>&quot;以及IdentityFile&quot;<code>~/.ssh/id_rsa_coding</code>&quot;来登录。</p>
+</div><blockquote>
+<blockquote>
+<p>现在的命令可以使用<code>coding</code>来代替主机名<code>git.coding.net</code>和用户名  <code>git</code>。ssh会查询config文件，根据Host“<code>coding</code>”匹配出Host name“<code>git.coding.net</code>&quot;和User&quot;<code>git</code>&quot;以及IdentityFile&quot;<code>~/.ssh/id_rsa_coding</code>&quot;来登录。</p>
+</blockquote>
+</blockquote>
 <ul>
 <li>同一域名下有两个不同的配置（github.com）<br>
-以 Github 为例，如果你·有两个账户，个人账号以及公司账号，且使用不同的秘钥，那么可以这么定义config：</li>
+以 Github 为例，如果你有两个账户，个人账号以及公司账号，且使用不同的秘钥，那么可以这么定义config：</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -955,7 +963,11 @@ Host github_Company
     UseKeychain yes 
 </code></pre></td></tr></table>
 </div>
-</div><p>这里 Host 后面对应的是 Github 的两个用户名，也就是 github_Personal 和 github_Company，就可以像如下使用：</p>
+</div><blockquote>
+<blockquote>
+<p>这里 Host 后面对应的是 Github 的两个用户名，也就是 github_Personal 和 github_Company，就可以像如下使用：</p>
+</blockquote>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -966,12 +978,20 @@ Host github_Company
 $ git clone github_Company:AI/test.git 
 </code></pre></td></tr></table>
 </div>
-</div><p>根据Host来进行相应的同一域名的不同账号的匹配。</p>
+</div><blockquote>
+<blockquote>
+<p>根据Host来进行相应的同一域名的不同账号的匹配。</p>
+</blockquote>
+</blockquote>
 <ul>
-<li>如果域名是数字 IP
-Host 可以帮助你把对应的 IP 变成好记的名字。比如说我在公司内部配置了 Git Server（基于 gitolite 或 Gitlab 或任何工具），正常的访问地址是：git://xxx.xxx.xxx.xxx:repo.git，如下的配置则可以帮你把它简化成：<br>
-<code>git.naruto:repo.git</code></li>
+<li>如果域名是数字 IP</li>
 </ul>
+<blockquote>
+<blockquote>
+<p>Host 可以帮助你把对应的 IP 变成好记的名字。比如说我在公司内部配置了 Git Server（基于 gitolite 或 Gitlab 或任何工具），正常的访问地址是：git://xxx.xxx.xxx.xxx:repo.git，如下的配置则可以帮你把它简化成：<br>
+<code>git.naruto:repo.git</code></p>
+</blockquote>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
