@@ -48,7 +48,7 @@
 <meta itemprop="description" content="疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭">
 <meta itemprop="datePublished" content="2020-03-11T08:44:33&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-11T08:44:33&#43;08:00" />
-<meta itemprop="wordCount" content="5516">
+<meta itemprop="wordCount" content="5670">
 
 
 
@@ -129,7 +129,7 @@
             <a href="/categories/category/"> category </a>
             <a href="/categories/subcategory/"> subcategory </a>
             </div>
-          <span class="more-meta"> 约 5516 字 </span>
+          <span class="more-meta"> 约 5670 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
         
       </div>
@@ -160,7 +160,7 @@
         <li><a href="#定位gitconfig的credentialhelper">定位gitconfig的credential.helper</a></li>
       </ul>
     </li>
-    <li><a href="#生成密钥-ssh协议">生成密钥-SSH协议</a>
+    <li><a href="#密钥管理-ssh协议">密钥管理-SSH协议</a>
       <ul>
         <li><a href="#将ssh公钥内容拷贝到github">将ssh公钥内容拷贝到Github</a></li>
         <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
@@ -172,6 +172,7 @@
         <li><a href="#在markdown文件中添加图片">在Markdown文件中添加图片</a></li>
         <li><a href="#代码高亮">代码高亮</a></li>
         <li><a href="#git指令报错">git指令报错</a></li>
+        <li><a href="#延伸一下这个问题如何多个-ssh-秘钥并对应不同的应用程序">延伸一下这个问题，如何多个 ssh 秘钥并对应不同的应用程序</a></li>
       </ul>
     </li>
     <li><a href="#参考资料">参考资料</a></li>
@@ -548,7 +549,7 @@ git config --system credential.helper
 <p>对于凭证查找，将按照上面给出的顺序读取文件，发现第一个匹配的凭证优先于在列表下方的文件中找到的凭证。</p>
 <p>凭证存储将默认写入列表中的第一个现有文件。如果这些文件都不存在，<strong>~/.git-credentials</strong> 将被创建并写入。</p>
 <p>擦除证书时，匹配的证书将从所有文件中删除。</p>
-<h2 id="生成密钥-ssh协议">生成密钥-SSH协议</h2>
+<h2 id="密钥管理-ssh协议">密钥管理-SSH协议</h2>
 <ol>
 <li>Generate an RSA private key using ssh-keygen (unless you have already created one)</li>
 </ol>
@@ -778,6 +779,7 @@ git push origin master
 </ul>
 <p><img src="/img/Permission.jpg" alt="permission"></p>
 <p>这是我在使用过程中遇到的问题，安装完后一直没有关闭bash，一直可以正常的使用deploy程序push更改，但是重启了一次电脑后，再次打开bash，再次运行deploy自动上传更改时就报出了这个错误。搜索了相关的文章，了解到ssh-add 这个命令默认是把你指定的私钥进行高速缓存所以说当你重启之后，ssh-agent 服务也就重置了，再次push代码都必须重新ssh-add添加上私钥。</p>
+<p>首先需要根据这篇文章排除一下出现此类报错的原因。<a href="https://help.github.com/en/github/authenticating-to-github/error-permission-denied-publickey">Error: Permission denied (publickey)</a></p>
 <h4 id="解决方案"><strong>解决方案：</strong></h4>
 <p>SSH 的配置文件（config file）有三个：</p>
 <div class="highlight"><div class="chroma">
@@ -826,7 +828,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
 </div><p>This option can be set for all hosts, or for a subset of hosts as desired. For instance, you can configure a development machine as such:
 <strong>~/.ssh/config</strong></p>
 <p>This will only store the passphrase in the keychain for that specific key<br>
-(如果你试图为GitHub执行这里操作)</p>
+(如果只为GitHub主机使用，则执行下面的操作)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -839,7 +841,7 @@ This was not the intended default behavior, so this has been changed in macOS 10
     UseKeychain yes
 </code></pre></td></tr></table>
 </div>
-</div><p>如果你想为每个主机启用它，只需添加：</p>
+</div><p>如果想为每个主机启用它，只需添加：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -850,7 +852,11 @@ This was not the intended default behavior, so this has been changed in macOS 10
     UseKeychain yes
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料">参考资料</h2>
+</div><p>也可以同时设置AddKeysToAgent和UseKeychain为yes。<br>
+使用这两个参数都可以永久记住相应主机对应的私钥。</p>
+<p>也可以参考这篇文章<a href="https://naruto-ai-wy.github.io/post/my-first-post/#%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5-ssh%E5%8D%8F%E8%AE%AE">Generating a new SSH key and adding it to the ssh-agent</a></p>
+<h3 id="延伸一下这个问题如何多个-ssh-秘钥并对应不同的应用程序">延伸一下这个问题，如何多个 ssh 秘钥并对应不同的应用程序</h3>
+<h2 id="参考资料">参考资料</h2>
 <p><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%8D%8F%E8%AE%AE">服务器上的 Git - 协议</a></p>
 <p><a href="https://www.ssh.com/ssh/key">https://www.ssh.com/ssh/key</a></p>
 <p><a href="https://blog.csdn.net/ustccw/article/details/84591578">credential helper 让你的 https 不再需要输入用户名密码</a>
