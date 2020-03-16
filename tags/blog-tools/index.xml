@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog tools on Naruto&#39;s AI blog</title>
+    <link>https://Naruto-AI-WY.github.io/tags/blog-tools/</link>
+    <description>Recent content in Blog tools on Naruto&#39;s AI blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 11 Mar 2020 08:44:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://Naruto-AI-WY.github.io/tags/blog-tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac下使用Hugo&#43;Github托管搭建个人博客</title>
+      <link>https://Naruto-AI-WY.github.io/post/my-first-post/</link>
+      <pubDate>Wed, 11 Mar 2020 08:44:33 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/post/my-first-post/</guid>
+      <description>疫情期间，时间比较多，一直想着写点自己的点滴，也没什么特别的主题，当做是日常记录吧，具体后面写点啥，后面慢慢开脑洞吧。第一篇就留给博客网站搭</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -16,6 +16,13 @@
   </url>
   
   <url>
+    <loc>https://Naruto-AI-WY.github.io/tags/blog-tools/</loc>
+    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://Naruto-AI-WY.github.io/categories/</loc>
     <lastmod>2020-03-11T08:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,13 +31,6 @@
   
   <url>
     <loc>https://Naruto-AI-WY.github.io/categories/category/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/hugo/</loc>
     <lastmod>2020-03-11T08:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -87,13 +87,6 @@
   
   <url>
     <loc>https://Naruto-AI-WY.github.io/categories/tools/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/web/</loc>
     <lastmod>2020-03-11T08:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
