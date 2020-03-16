@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on Naruto&#39;s AI blog</title>
-    <link>https://Naruto-AI-WY.github.io/tags/hugo/</link>
-    <description>Recent content in Hugo on Naruto&#39;s AI blog</description>
+    <title>Web on Naruto&#39;s AI blog</title>
+    <link>https://Naruto-AI-WY.github.io/categories/web/</link>
+    <description>Recent content in Web on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 11 Mar 2020 08:44:33 +0800</lastBuildDate>
     
-	<atom:link href="https://Naruto-AI-WY.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Naruto-AI-WY.github.io/categories/web/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
