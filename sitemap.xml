@@ -30,13 +30,6 @@
   </url>
   
   <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/category/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Naruto-AI-WY.github.io/tags/github%E6%89%98%E7%AE%A1/</loc>
     <lastmod>2020-03-11T08:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -58,35 +51,7 @@
   </url>
   
   <url>
-    <loc>https://Naruto-AI-WY.github.io/post/my-second-post/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://Naruto-AI-WY.github.io/post/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/subcategory/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/tag1/</loc>
-    <lastmod>2020-03-11T08:44:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/tag2/</loc>
     <lastmod>2020-03-11T08:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -122,7 +87,7 @@
   
   <url>
     <loc>https://Naruto-AI-WY.github.io/tags/preview/</loc>
-    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
+    <lastmod>2018-07-10T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -151,34 +116,6 @@
   <url>
     <loc>https://Naruto-AI-WY.github.io/post/hidden-post/</loc>
     <lastmod>2018-03-08T22:01:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/post/english-preview/</loc>
-    <lastmod>2017-08-31T15:43:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/english/</loc>
-    <lastmod>2017-08-31T15:43:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/english/</loc>
-    <lastmod>2017-08-31T15:43:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/tag-2/</loc>
-    <lastmod>2017-08-31T15:43:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -249,34 +186,6 @@
   <url>
     <loc>https://Naruto-AI-WY.github.io/post/js-sequence-diagrams/</loc>
     <lastmod>2015-03-04T21:57:45+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/syntax-highlighting/</loc>
-    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/syntax-highlighting/</loc>
-    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/post/syntax-highlighting/</loc>
-    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://Naruto-AI-WY.github.io/tags/tag-5/</loc>
-    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
