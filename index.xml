@@ -6,10 +6,19 @@
     <description>Recent content on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 Mar 2020 08:44:33 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 21:38:52 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>https://Naruto-AI-WY.github.io/about/</link>
+      <pubDate>Tue, 17 Mar 2020 21:38:52 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/about/</guid>
+      <description>一个在三四线小城市成长，现在上海和青岛来回徘徊的迷途老书童。</description>
+    </item>
     
     <item>
       <title>Mac下使用Hugo&#43;Github托管搭建个人博客</title>
