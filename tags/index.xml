@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 Mar 2020 08:44:33 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Mar 2020 21:14:56 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>EDA</title>
+      <link>https://Naruto-AI-WY.github.io/tags/eda/</link>
+      <pubDate>Tue, 24 Mar 2020 21:14:56 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/tags/eda/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Blog tools</title>
