@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="1304">
+<meta itemprop="wordCount" content="1310">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 1304 字 </span>
+          <span class="more-meta"> 约 1310 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -141,11 +141,11 @@
   <ul>
     <li><a href="#特征预处理">特征预处理</a>
       <ul>
-        <li><a href="#均值标准化z-score-standardization">均值标准化(Z-score standardization)</a></li>
-        <li><a href="#区间缩放法线性函数归一化min-max-scaling">区间缩放法(线性函数归一化(Min-Max scaling))</a></li>
-        <li><a href="#normalizer将同一行数据的不同特征进行规范化">Normalizer，将同一行数据的不同特征进行规范化</a></li>
-        <li><a href="#离散化二值">离散化（二值）</a></li>
-        <li><a href="#one-hot">One-hot</a></li>
+        <li><a href="#1-均值标准化z-score-standardization">1. 均值标准化(Z-score standardization)</a></li>
+        <li><a href="#2-区间缩放法线性函数归一化min-max-scaling">2. 区间缩放法(线性函数归一化(Min-Max scaling))</a></li>
+        <li><a href="#3-normalizer将同一行数据的不同特征进行规范化">3. Normalizer，将同一行数据的不同特征进行规范化</a></li>
+        <li><a href="#4-离散化二值">4. 离散化（二值）</a></li>
+        <li><a href="#5-one-hot">5. One-hot</a></li>
       </ul>
     </li>
   </ul>
@@ -157,7 +157,7 @@
 <p><img src="/img/Task03_Feature_Engineering.png" alt="EDA"></p>
 <h1 id="特征工程">特征工程</h1>
 <h2 id="特征预处理">特征预处理</h2>
-<h3 id="均值标准化z-score-standardization">均值标准化(Z-score standardization)</h3>
+<h3 id="1-均值标准化z-score-standardization">1. 均值标准化(Z-score standardization)</h3>
 <p>使用preproccessing库的StandardScaler类对数据进行标准化的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -223,7 +223,7 @@
 <span class="c1">#       [ 1.22474487,  1.22474487]])  </span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="区间缩放法线性函数归一化min-max-scaling">区间缩放法(线性函数归一化(Min-Max scaling))</h3>
+</div><h3 id="2-区间缩放法线性函数归一化min-max-scaling">2. 区间缩放法(线性函数归一化(Min-Max scaling))</h3>
 <p>IRIS（鸢尾花）数据集
 使用preproccessing库的MinMaxScaler类对数据进行区间缩放的代码如下：</p>
 <div class="highlight"><div class="chroma">
@@ -280,7 +280,7 @@
 <span class="c1">#       [ 1. ,  1. ]])</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="normalizer将同一行数据的不同特征进行规范化">Normalizer，将同一行数据的不同特征进行规范化</h3>
+</div><h3 id="3-normalizer将同一行数据的不同特征进行规范化">3. Normalizer，将同一行数据的不同特征进行规范化</h3>
 <p>使用preproccessing库的Normalizer类对数据进行归一化的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -339,7 +339,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><!-- raw HTML omitted -->StandardScaler就是尺寸缩放问题，即使同一特征下的数值在标准化成为均值为0，方差为1的数据。而Normalizer将同一行数据的不同特征进行规范化，这样就可以让样本数据的不同特征值具有相同的数值影响力。比如说一个特征是身高，1.7m，体重为150斤，那么两个特征之间差距太大，身高这个特征变化根本无法起到决定作用(在体重这个变化特征下)，因为样本身高的数值都是一米多，但是体重这个特征的数值则有可能不同样本差距很大<!-- raw HTML omitted --></p>
-<h3 id="离散化二值">离散化（二值）</h3>
+<h3 id="4-离散化二值">4. 离散化（二值）</h3>
 <p>使用preproccessing库的Binarizer类对数据进行二值化的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -355,7 +355,7 @@
 Binarizer(threshold=3).fit_transform(iris.data)
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="one-hot">One-hot</h3>
+</div><h3 id="5-one-hot">5. One-hot</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
