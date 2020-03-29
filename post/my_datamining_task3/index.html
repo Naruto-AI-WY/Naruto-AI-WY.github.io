@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="5184">
+<meta itemprop="wordCount" content="5185">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 5184 字 </span>
+          <span class="more-meta"> 约 5185 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,7 +147,7 @@
         <li><a href="#4-离散化二值">4. 离散化（二值）</a></li>
         <li><a href="#5-离散化分桶">5. 离散化（分桶）</a></li>
         <li><a href="#6-one-hot">6. One-hot</a></li>
-        <li><a href="#一维聚类离散化">一维聚类离散化</a></li>
+        <li><a href="#7-一维聚类离散化">7. 一维聚类离散化</a></li>
       </ul>
     </li>
     <li><a href="#代码实现">代码实现</a>
@@ -430,7 +430,7 @@
 <span class="n">OneHotEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>  
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="一维聚类离散化">一维聚类离散化</h3>
+</div><h3 id="7-一维聚类离散化">7. 一维聚类离散化</h3>
 <p>先聚类（如k-means），然后对每一类的连续值进行标记<br>
 ①  k-means求聚类中心，并排序，将相邻两项的中点作为边界点，把首末边界点加上，整合成w列表<br>
 ②  cut函数</p>
