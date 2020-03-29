@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="5186">
+<meta itemprop="wordCount" content="5204">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 5186 字 </span>
+          <span class="more-meta"> 约 5204 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -599,15 +599,24 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
 <p><strong>优势：</strong></p>
 </li>
 </ul>
-<ol>
-<li>线性回归模型满足线性性、独立性、方差齐性以及正态性的同时，又不丢失信息，此种变换称之为Box—Cox变换。</li>
-<li>误差与y相关，不服从正态分布，于是给线性回归的最小二乘估计系数的结果带来误差.</li>
-<li>使用Box-Cox变换族一般都可以保证将数据进行成功的正态变换，但在二分变量或较少水平的等级变量的情况下，不能成功进行转换，此时，我们可以考虑使用广义线性模型，如LOGUSTICS模型、Johnson转换等。</li>
-<li>Box-Cox变换后，残差可以更好的满足正态性、独立性等假设前提，降低了伪回归的概率</li>
-</ol>
+<p>    1. 线性回归模型满足线性性、独立性、方差齐性以及正态性的同时，又不丢失信息，此种变换称之为Box—Cox变换。  !
+    2. 误差与y相关，不服从正态分布，于是给线性回归的最小二乘估计系数的结果带来误差.<br>
+    3. 使用Box-Cox变换族一般都可以保证将数据进行成功的正态变换，但在二分变量或较少水平的等级变量的情况下，不能成功进行转换，此时，我们可以考虑使用广义线性模型，如LOGUSTICS模型、Johnson转换等。<br>
+    4. Box-Cox变换后，残差可以更好的满足正态性、独立性等假设前提，降低了伪回归的概率</p>
 <ul>
 <li>长尾截断  截断：可以用pandas dataframe的.clip(low, upper)方法，把特征值的取值限制在一定范围内</li>
 </ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;feature1&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;feature1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">data</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;feature2&#39;</span><span class="p">]</span><span class="o">&lt;-</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;feature2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>异常值处理</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
