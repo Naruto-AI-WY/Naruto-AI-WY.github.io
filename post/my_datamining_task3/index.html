@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="4580">
+<meta itemprop="wordCount" content="5184">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 4580 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+          <span class="more-meta"> 约 5184 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -145,7 +145,9 @@
         <li><a href="#2-区间缩放法线性函数归一化min-max-scaling">2. 区间缩放法(线性函数归一化(Min-Max scaling))</a></li>
         <li><a href="#3-normalizer将同一行数据的不同特征进行规范化">3. Normalizer，将同一行数据的不同特征进行规范化</a></li>
         <li><a href="#4-离散化二值">4. 离散化（二值）</a></li>
-        <li><a href="#5-one-hot">5. One-hot</a></li>
+        <li><a href="#5-离散化分桶">5. 离散化（分桶）</a></li>
+        <li><a href="#6-one-hot">6. One-hot</a></li>
+        <li><a href="#一维聚类离散化">一维聚类离散化</a></li>
       </ul>
     </li>
     <li><a href="#代码实现">代码实现</a>
@@ -365,8 +367,71 @@
 <span class="n">Binarizer</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="5-one-hot">5. One-hot</h3>
+</div><h3 id="5-离散化分桶">5. 离散化（分桶）</h3>
+<p>（1）等宽/非等宽分桶</p>
+<blockquote>
+<blockquote>
+<p>如商品的评论次数、年龄</p>
+</blockquote>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.cut.html">pandas.cut(x, bins, right=True, labels=None, retbins=False, precision=3, include_lowest=False, duplicates='raise&rsquo;</a></li>
+<li>当bins为int型数字时，会生成等宽的bin；当bins=标量序列时，为用户自定义bin的区间</li>
+</ul>
+<p>（2）等频率分桶</p>
+<blockquote>
+<blockquote>
+<p>如果数值变量的取值存在很大间隔时,有些桶里没有数据,可以基于数据的分布进行分桶,将相同数据的记录放进每个区间，先求分位数，再用cut函数</p>
+</blockquote>
+</blockquote>
+<p>① dataframe结构</p>
+<blockquote>
+<blockquote>
+<p>dataframe.describe(percentiles=w)来计算分位数</p>
+</blockquote>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="n">w</span><span class="o">=</span><span class="p">[</span> <span class="n">i</span><span class="o">/</span><span class="n">k</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">w</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span> <span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="n">w</span><span class="p">)</span> <span class="p">[</span> <span class="mi">4</span><span class="p">:</span><span class="mi">4</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#取几个分位数的值作为不等长列表，用于cut函数</span>
+<span class="n">d2</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>② 列表、数组结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="c1">#用np.percentile(data,百分比）来求</span>
+<span class="n">temp</span><span class="o">=</span><span class="p">[</span> <span class="n">i</span><span class="o">/</span><span class="n">k</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">w</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">item</span><span class="p">))</span>
+<span class="n">d3</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参考：</p>
+<ul>
+<li><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.qcut.html#pandas.qcut">pandas.qcut(x, q, labels=None, retbins=False, precision=3, duplicates='raise&rsquo;)</a></li>
+</ul>
+<h3 id="6-one-hot">6. One-hot</h3>
+<blockquote>
+<blockquote>
 <p>使用preproccessing库的OneHotEncoder类对数据进行哑编码的代码如下：</p>
+</blockquote>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -379,6 +444,32 @@
  
 <span class="c1">#哑编码，对IRIS数据集的目标值，返回值为哑编码后的数据</span>
 <span class="n">OneHotEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="一维聚类离散化">一维聚类离散化</h3>
+<p>先聚类（如k-means），然后对每一类的连续值进行标记<br>
+①  k-means求聚类中心，并排序，将相邻两项的中点作为边界点，把首末边界点加上，整合成w列表<br>
+②  cut函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="n">kmodel</span><span class="o">=</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>  <span class="c1">#k为聚成几类</span>
+<span class="n">kmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="mi">1</span><span class="p">)))</span> <span class="c1">#训练模型</span>
+<span class="n">c</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kmodel</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">)</span> <span class="c1">#求聚类中心</span>
+<span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="err">’列索引</span><span class="s1">&#39;) #排序　　</span>
+<span class="n">w</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_mean</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">#用滑动窗口求均值的方法求相邻两项求中点，作为边界点</span>
+<span class="n">w</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="p">]</span>  <span class="c1">#把首末边界点加上</span>
+<span class="n">d3</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="c1">#cut函数</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="代码实现">代码实现</h2>
@@ -529,7 +620,7 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
 <li>Box-Cox变换后，残差可以更好的满足正态性、独立性等假设前提，降低了伪回归的概率</li>
 </ol>
 <ul>
-<li>长尾截断</li>
+<li>长尾截断  截断：可以用pandas dataframe的.clip(low, upper)方法，把特征值的取值限制在一定范围内</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1257,6 +1348,7 @@ SequentialFeatureSelector:</p>
 </div>
 </div><h2 id="参考文献">参考文献：</h2>
 <p><a href="https://www.jianshu.com/p/800377efc422">特征工程方法整理</a></p>
+<p><a href="https://www.cnblogs.com/nxf-rabbit75/p/11141944.html">数据预处理方法</a></p>
 <p><a href="http://breezedeus.github.io/2014/11/19/breezedeus-feature-mining-gbdt.html">利用GBDT模型构造新特征</a></p>
 <p><a href="https://www.jianshu.com/p/1c4ec02dd33f">总结：sklearn机器学习之特征工程</a></p>
 <p><a href="https://writings.sh/post/power-law">幂律分布 - 比例之谜</a></p>
@@ -1264,6 +1356,7 @@ SequentialFeatureSelector:</p>
 <p><a href="https://www.zhihu.com/question/36172806">箱形图为什么能检测异常值，原理是什么</a></p>
 <p><a href="https://www.cnblogs.com/huangshiyu13/p/6217180.html">长尾分布，重尾分布(Heavy-tailed Distribution)</a></p>
 <p><a href="http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/">Sequential Feature Selector</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/31168548">Pandas之数据分箱/分组/聚合/透视表</a></p>
     </div>
 
     
