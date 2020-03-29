@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="1258">
+<meta itemprop="wordCount" content="1482">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 1258 字 </span>
+          <span class="more-meta"> 约 1482 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -428,6 +428,82 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Train_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">
+SaleID	name	regDate	model	brand	bodyType	fuelType	gearbox	power	kilometer	...	v_5	v_6	v_7	v_8	v_9	v_10	v_11	v_12	v_13	v_14
+0	0	736	20040402	30.0	6	1.0	0.0	0.0	60	12.5	...	0.235676	0.101988	0.129549	0.022816	0.097462	-2.881803	2.804097	-2.420821	0.795292	0.914762
+1	1	2262	20030301	40.0	1	2.0	0.0	0.0	0	15.0	...	0.264777	0.121004	0.135731	0.026597	0.020582	-4.900482	2.096338	-1.030483	-1.722674	0.245522
+2	2	14874	20040403	115.0	15	1.0	0.0	0.0	163	12.5	...	0.251410	0.114912	0.165147	0.062173	0.027075	-4.846749	1.803559	1.565330	-0.832687	-0.229963
+3	3	71865	19960908	109.0	10	0.0	0.0	1.0	193	15.0	...	0.274293	0.110300	0.121964	0.033395	0.000000	-4.509599	1.285940	-0.501868	-2.438353	-0.478699
+4	4	111080	20120103	110.0	5	1.0	0.0	0.0	68	5.0	...	0.228036	0.073205	0.091880	0.078819	0.121534	-1.896240	0.910783	0.931110	2.834518	1.923482
+5 rows × 31 columns
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Train_data</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#39;brand&#39;, &#39;bodyType&#39;, &#39;fuelType&#39;,
+       &#39;gearbox&#39;, &#39;power&#39;, &#39;kilometer&#39;, &#39;notRepairedDamage&#39;, &#39;regionCode&#39;,
+       &#39;seller&#39;, &#39;offerType&#39;, &#39;creatDate&#39;, &#39;price&#39;, &#39;v_0&#39;, &#39;v_1&#39;, &#39;v_2&#39;, &#39;v_3&#39;,
+       &#39;v_4&#39;, &#39;v_5&#39;, &#39;v_6&#39;, &#39;v_7&#39;, &#39;v_8&#39;, &#39;v_9&#39;, &#39;v_10&#39;, &#39;v_11&#39;, &#39;v_12&#39;,
+       &#39;v_13&#39;, &#39;v_14&#39;],
+      dtype=&#39;object&#39;)  
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Test_data</span><span class="o">.</span><span class="n">columns</span>  
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">
+Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#39;brand&#39;, &#39;bodyType&#39;, &#39;fuelType&#39;,
+       &#39;gearbox&#39;, &#39;power&#39;, &#39;kilometer&#39;, &#39;notRepairedDamage&#39;, &#39;regionCode&#39;,
+       &#39;seller&#39;, &#39;offerType&#39;, &#39;creatDate&#39;, &#39;v_0&#39;, &#39;v_1&#39;, &#39;v_2&#39;, &#39;v_3&#39;, &#39;v_4&#39;,
+       &#39;v_5&#39;, &#39;v_6&#39;, &#39;v_7&#39;, &#39;v_8&#39;, &#39;v_9&#39;, &#39;v_10&#39;, &#39;v_11&#39;, &#39;v_12&#39;, &#39;v_13&#39;,
+       &#39;v_14&#39;],
+      dtype=&#39;object&#39;)  
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="参考文献">参考文献：</h2>
