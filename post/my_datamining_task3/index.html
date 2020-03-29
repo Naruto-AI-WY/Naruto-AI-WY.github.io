@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="5185">
+<meta itemprop="wordCount" content="5186">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 5185 字 </span>
+          <span class="more-meta"> 约 5186 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -444,9 +444,11 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
 <span class="n">kmodel</span><span class="o">=</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>  <span class="c1">#k为聚成几类</span>
 <span class="n">kmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="mi">1</span><span class="p">)))</span> <span class="c1">#训练模型</span>
 <span class="n">c</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kmodel</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">)</span> <span class="c1">#求聚类中心</span>
