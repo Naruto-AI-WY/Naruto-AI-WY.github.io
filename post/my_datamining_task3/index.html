@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="3476">
+<meta itemprop="wordCount" content="4044">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 3476 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 4044 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -150,7 +150,7 @@
     </li>
     <li><a href="#代码实现">代码实现</a>
       <ul>
-        <li><a href="#删除异常值">删除异常值</a></li>
+        <li><a href="#单个特征-删除异常值">单个特征-删除异常值</a></li>
         <li><a href="#特征构造">特征构造</a></li>
         <li><a href="#特征筛选">特征筛选</a></li>
       </ul>
@@ -164,6 +164,8 @@
       <!-- raw HTML omitted -->
 <p><img src="/img/Task03_Feature_Engineering.jpg" alt="EDA"></p>
 <h1 id="特征工程">特征工程</h1>
+<p>好的特征代表了灵活性、更简单的模型和更好的结果，不相关的特征则会影响模型的泛化性。因此特征选择和特征工程并非是互相排斥的，而是相辅相成的。有效的特征工程能够帮助我们提炼数据的代表。接着问题就来了，什么才是好的代表？</p>
+<p>代表的好坏取决于里面所包含信息的好坏。熵（Entropy，熵值越高，数据中所包含的信息越多），方差（Variance，方差越大，数据中所包含的信息越多），更好的分离映射（Projection for better separation，最高的方差所对应的映射包含更多得信息），特征对类别的关联(feature to class association)，等。所有这些都解释了数据中所包含的信息。</p>
 <h2 id="特征预处理">特征预处理</h2>
 <h3 id="1-均值标准化z-score-standardization">1. 均值标准化(Z-score standardization)</h3>
 <p>使用preproccessing库的StandardScaler类对数据进行标准化的代码如下：<br>
@@ -510,7 +512,12 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
       dtype=&#39;object&#39;)  
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="删除异常值">删除异常值</h3>
+</div><h3 id="单个特征-删除异常值">单个特征-删除异常值</h3>
+<ul>
+<li>通过箱线图（或 3-Sigma）分析删除异常值，去上下限值截断，见下面的代码</li>
+<li>BOX-COX 转换（处理有偏分布） 对偏度大于0.75的数值型特征进行Box-Cox变换（类似于log），转换为近正态分布</li>
+<li>长尾截断</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -560,7 +567,7 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 这里我包装了一个异常值处理的代码，可以随便调用。</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 这里是对单个特征进行异常值处理的代码，可以随便调用。</span>
 <span class="k">def</span> <span class="nf">outliers_proc</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">    用于清洗异常值，默认用 box_plot（scale=3）进行清洗
@@ -574,12 +581,12 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
         <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">        利用箱线图去除异常值
 </span><span class="s2">        :param data_ser: 接收 pandas.Series 数据格式
-</span><span class="s2">        :param box_scale: 箱线图尺度，
+</span><span class="s2">        :param box_scale: 箱线图尺度，为1.5时中度异常的范围；为3时极度异常的范围
 </span><span class="s2">        :return:
 </span><span class="s2">        &#34;&#34;&#34;</span>
         <span class="n">iqr</span> <span class="o">=</span> <span class="n">box_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
-        <span class="n">val_low</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">iqr</span>
-        <span class="n">val_up</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="n">iqr</span>
+        <span class="n">val_low</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">iqr</span> <span class="c1">#最小估计值</span>
+        <span class="n">val_up</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="n">iqr</span> <span class="c1">#最大估计值</span>
         <span class="n">rule_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&lt;</span> <span class="n">val_low</span><span class="p">)</span>
         <span class="n">rule_up</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&gt;</span> <span class="n">val_up</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">rule_low</span><span class="p">,</span> <span class="n">rule_up</span><span class="p">),</span> <span class="p">(</span><span class="n">val_low</span><span class="p">,</span> <span class="n">val_up</span><span class="p">)</span>
@@ -659,6 +666,14 @@ Name: power, dtype: float64
 </div>
 </div><p><img src="/img/xiangxiantu.png" alt="箱线图"></p>
 <h3 id="特征构造">特征构造</h3>
+<p>特征构造的常用方法：</p>
+<ul>
+<li>构造统计量特征，报告计数、求和、比例、标准差等；</li>
+<li>时间特征，包括相对时间和绝对时间，节假日，双休日等；</li>
+<li>地理信息，包括分箱，分布编码等方法；</li>
+<li>非线性变换，包括 log/ 平方/ 根号等；</li>
+<li>特征组合，特征交叉；</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1221,6 +1236,8 @@ Index([&#39;SaleID&#39;, &#39;kilometer&#39;, &#39;name&#39;, &#39;offerType&#39
 <p><a href="https://www.jianshu.com/p/1c4ec02dd33f">总结：sklearn机器学习之特征工程</a></p>
 <p><a href="https://writings.sh/post/power-law">幂律分布 - 比例之谜</a></p>
 <p><a href="http://swarma.blog.caixin.com/archives/179314">解读幂律与无标度网络</a></p>
+<p><a href="https://www.zhihu.com/question/36172806">箱形图为什么能检测异常值，原理是什么</a></p>
+<p><a href="https://www.cnblogs.com/huangshiyu13/p/6217180.html">长尾分布，重尾分布(Heavy-tailed Distribution)</a></p>
     </div>
 
     
