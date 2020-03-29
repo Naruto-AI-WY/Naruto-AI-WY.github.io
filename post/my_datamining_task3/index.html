@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="4285">
+<meta itemprop="wordCount" content="4497">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 4285 字 </span>
+          <span class="more-meta"> 约 4497 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -586,7 +586,7 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
 </span><span class="s2">    用于清洗异常值，默认用 box_plot（scale=3）进行清洗
 </span><span class="s2">    :param data: 接收 pandas 数据格式
 </span><span class="s2">    :param col_name: pandas 列名
-</span><span class="s2">    :param scale: 尺度
+</span><span class="s2">    :param scale: 箱线图尺度，为1.5时中度异常的范围；为3时极度异常的范围
 </span><span class="s2">    :return:
 </span><span class="s2">    &#34;&#34;&#34;</span>
 
@@ -600,14 +600,14 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
         <span class="n">iqr</span> <span class="o">=</span> <span class="n">box_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
         <span class="n">val_low</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">iqr</span> <span class="c1">#最小估计值</span>
         <span class="n">val_up</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="n">iqr</span> <span class="c1">#最大估计值</span>
-        <span class="n">rule_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&lt;</span> <span class="n">val_low</span><span class="p">)</span>
+        <span class="n">rule_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&lt;</span> <span class="n">val_low</span><span class="p">)</span> <span class="c1">#找出data_ser中值小于val_low，并将值设为true/1，如：（index，1）</span>
         <span class="n">rule_up</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&gt;</span> <span class="n">val_up</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">rule_low</span><span class="p">,</span> <span class="n">rule_up</span><span class="p">),</span> <span class="p">(</span><span class="n">val_low</span><span class="p">,</span> <span class="n">val_up</span><span class="p">)</span>
 
     <span class="n">data_n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">data_series</span> <span class="o">=</span> <span class="n">data_n</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span>
     <span class="n">rule</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">box_plot_outliers</span><span class="p">(</span><span class="n">data_series</span><span class="p">,</span> <span class="n">box_scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="c1">#选出所有rule[0] 和 rule[1]的或未1的index。</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Delete number is: {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)))</span>
     <span class="n">data_n</span> <span class="o">=</span> <span class="n">data_n</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
     <span class="n">data_n</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -693,9 +693,13 @@ Name: power, dtype: float64
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 训练集和测试集放在一起，方便构造特征</span>
+<span class="c1"># Train和Test数据集增加一列数据train，以便区分Train和Test数据集。</span>
+<span class="c1"># 使用ignore_index参数，置true，合并的两个表就睡根据列字段对齐，然后合并。最后再重新整理一个新的index。</span>
 <span class="n">Train_data</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">Test_data</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">Train_data</span><span class="p">,</span> <span class="n">Test_data</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
