@@ -368,29 +368,17 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="5-离散化分桶">5. 离散化（分桶）</h3>
-<p>（1）等宽/非等宽分桶</p>
-<blockquote>
-<blockquote>
-<p>如商品的评论次数、年龄</p>
-</blockquote>
-</blockquote>
+<p>（1）等宽/非等宽分桶<br>
+    如商品的评论次数、年龄</p>
 <p>参考：</p>
 <ul>
 <li><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.cut.html">pandas.cut(x, bins, right=True, labels=None, retbins=False, precision=3, include_lowest=False, duplicates='raise&rsquo;</a></li>
 <li>当bins为int型数字时，会生成等宽的bin；当bins=标量序列时，为用户自定义bin的区间</li>
 </ul>
-<p>（2）等频率分桶</p>
-<blockquote>
-<blockquote>
-<p>如果数值变量的取值存在很大间隔时,有些桶里没有数据,可以基于数据的分布进行分桶,将相同数据的记录放进每个区间，先求分位数，再用cut函数</p>
-</blockquote>
-</blockquote>
-<p>① dataframe结构</p>
-<blockquote>
-<blockquote>
-<p>dataframe.describe(percentiles=w)来计算分位数</p>
-</blockquote>
-</blockquote>
+<p>（2）等频率分桶<br>
+    如果数值变量的取值存在很大间隔时,有些桶里没有数据,可以基于数据的分布进行分桶,将相同数据的记录放进每个区间，先求分位数，再用cut函数</p>
+<p>① dataframe结构<br>
+    dataframe.describe(percentiles=w)来计算分位数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -427,11 +415,7 @@
 <li><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.qcut.html#pandas.qcut">pandas.qcut(x, q, labels=None, retbins=False, precision=3, duplicates='raise&rsquo;)</a></li>
 </ul>
 <h3 id="6-one-hot">6. One-hot</h3>
-<blockquote>
-<blockquote>
 <p>使用preproccessing库的OneHotEncoder类对数据进行哑编码的代码如下：</p>
-</blockquote>
-</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
