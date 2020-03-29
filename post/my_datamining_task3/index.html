@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="1482">
+<meta itemprop="wordCount" content="1846">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 1482 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1846 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -148,7 +148,11 @@
         <li><a href="#5-one-hot">5. One-hot</a></li>
       </ul>
     </li>
-    <li><a href="#代码实现">代码实现</a></li>
+    <li><a href="#代码实现">代码实现</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
     <li><a href="#参考文献">参考文献：</a></li>
   </ul>
 </nav>
@@ -439,11 +443,9 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">
-SaleID	name	regDate	model	brand	bodyType	fuelType	gearbox	power	kilometer	...	v_5	v_6	v_7	v_8	v_9	v_10	v_11	v_12	v_13	v_14
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">SaleID	name	regDate	model	brand	bodyType	fuelType	gearbox	power	kilometer	...	v_5	v_6	v_7	v_8	v_9	v_10	v_11	v_12	v_13	v_14
 0	0	736	20040402	30.0	6	1.0	0.0	0.0	60	12.5	...	0.235676	0.101988	0.129549	0.022816	0.097462	-2.881803	2.804097	-2.420821	0.795292	0.914762
 1	1	2262	20030301	40.0	1	2.0	0.0	0.0	0	15.0	...	0.264777	0.121004	0.135731	0.026597	0.020582	-4.900482	2.096338	-1.030483	-1.722674	0.245522
 2	2	14874	20040403	115.0	15	1.0	0.0	0.0	163	12.5	...	0.251410	0.114912	0.165147	0.062173	0.027075	-4.846749	1.803559	1.565330	-0.832687	-0.229963
@@ -506,7 +508,155 @@ Index([&#39;SaleID&#39;, &#39;name&#39;, &#39;regDate&#39;, &#39;model&#39;, &#3
       dtype=&#39;object&#39;)  
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="参考文献">参考文献：</h2>
+</div><h4 id="删除异常值">删除异常值</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 这里我包装了一个异常值处理的代码，可以随便调用。</span>
+<span class="k">def</span> <span class="nf">outliers_proc</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    用于清洗异常值，默认用 box_plot（scale=3）进行清洗
+</span><span class="s2">    :param data: 接收 pandas 数据格式
+</span><span class="s2">    :param col_name: pandas 列名
+</span><span class="s2">    :param scale: 尺度
+</span><span class="s2">    :return:
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="nf">box_plot_outliers</span><span class="p">(</span><span class="n">data_ser</span><span class="p">,</span> <span class="n">box_scale</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        利用箱线图去除异常值
+</span><span class="s2">        :param data_ser: 接收 pandas.Series 数据格式
+</span><span class="s2">        :param box_scale: 箱线图尺度，
+</span><span class="s2">        :return:
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">iqr</span> <span class="o">=</span> <span class="n">box_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+        <span class="n">val_low</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">iqr</span>
+        <span class="n">val_up</span> <span class="o">=</span> <span class="n">data_ser</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="n">iqr</span>
+        <span class="n">rule_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&lt;</span> <span class="n">val_low</span><span class="p">)</span>
+        <span class="n">rule_up</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_ser</span> <span class="o">&gt;</span> <span class="n">val_up</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">rule_low</span><span class="p">,</span> <span class="n">rule_up</span><span class="p">),</span> <span class="p">(</span><span class="n">val_low</span><span class="p">,</span> <span class="n">val_up</span><span class="p">)</span>
+
+    <span class="n">data_n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data_series</span> <span class="o">=</span> <span class="n">data_n</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span>
+    <span class="n">rule</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">box_plot_outliers</span><span class="p">(</span><span class="n">data_series</span><span class="p">,</span> <span class="n">box_scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Delete number is: {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)))</span>
+    <span class="n">data_n</span> <span class="o">=</span> <span class="n">data_n</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">data_n</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Now column number is: {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_n</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">index_low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">outliers</span> <span class="o">=</span> <span class="n">data_series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index_low</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Description of data less than the lower bound is:&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+    <span class="n">index_up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">outliers</span> <span class="o">=</span> <span class="n">data_series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index_up</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Description of data larger than the upper bound is:&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">col_name</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&#34;Set1&#34;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">data_n</span><span class="p">[</span><span class="n">col_name</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data_n</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&#34;Set1&#34;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">data_n</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Delete number is: 963
+Now column number is: 149037
+Description of data less than the lower bound is:
+count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: power, dtype: float64
+Description of data larger than the upper bound is:
+count      963.000000
+mean       846.836968
+std       1929.418081
+min        376.000000
+25%        400.000000
+50%        436.000000
+75%        514.000000
+max      19312.000000
+Name: power, dtype: float64
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/xiangxiantu.png" alt="箱线图"></p>
+<h2 id="参考文献">参考文献：</h2>
 <p><a href="https://www.jianshu.com/p/800377efc422">特征工程方法整理</a></p>
 <p><a href="http://breezedeus.github.io/2014/11/19/breezedeus-feature-mining-gbdt.html">利用GBDT模型构造新特征</a></p>
 <p><a href="https://www.jianshu.com/p/1c4ec02dd33f">总结：sklearn机器学习之特征工程</a></p>
