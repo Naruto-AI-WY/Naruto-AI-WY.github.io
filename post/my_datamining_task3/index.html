@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="5423">
+<meta itemprop="wordCount" content="5876">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 5423 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 5876 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -152,6 +152,7 @@
     </li>
     <li><a href="#代码实现">代码实现</a>
       <ul>
+        <li><a href="#导入数据">导入数据</a></li>
         <li><a href="#单个特征-删除异常值">单个特征-删除异常值</a></li>
         <li><a href="#特征构造-1">特征构造</a></li>
         <li><a href="#特征筛选">特征筛选</a></li>
@@ -465,6 +466,10 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="特征构造">特征构造</h2>
+<p>特征构造意味着从现有的数据中构造额外特征，这些特征通常分布在多张相关的表中。特征构造需要从数据中提取相关信息并将其存入单张表格中，然后被用来训练机器学习模型。这需要我们花大量的时间去研究真实的数据样本，思考问题的潜在形式和数据结构，同时能够更好地应用到预测模型中。</p>
+<p>特征构建需要很强的洞察力和分析能力，要求我们能够从原始数据中找出一些具有物理意义的特征。对于表格数据，特征构建意味着将特征进行混合或组合以得到新的特征，或通过对特征进行分解或切分来构造新的特征；对于文本数据，特征够自己按意味着设计出针对特定问题的文本指标；对于图像数据，这意味着自动过滤，得到相关的结构。</p>
+<p>特征构造是一个非常耗时的过程，因为每个新的特征通常需要几步才能构造，特别是当使用多张表的信息时。我们可以将特征构造的操作分为两类：“转换”和“聚合”。</p>
+<p>以下将介绍聚合特征构造以及简单变换特征构造的方法。</p>
 <h3 id="1-转换特征构造">1. 转换特征构造</h3>
 <p>转换特征构造的常用方法：</p>
 <ul>
@@ -478,7 +483,12 @@
 <li>构造统计量特征，报告计数、求和、比例、标准差等；</li>
 <li>特征组合，特征交叉；</li>
 </ul>
+<blockquote>
+<p>通常基于 id 值（用户id、商品id等）或类别特征的某个类别计算数值特征的一些统计量</p>
+</blockquote>
+<p>可参考：<a href="https://cloud.tencent.com/developer/article/1519994">特征工程系列：聚合特征构造以及转换特征构造</a></p>
 <h2 id="代码实现">代码实现</h2>
+<h3 id="导入数据">导入数据</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
