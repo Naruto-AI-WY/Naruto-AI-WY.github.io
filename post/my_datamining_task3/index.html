@@ -48,7 +48,7 @@
 <meta itemprop="description" content="数据挖掘学习记录">
 <meta itemprop="datePublished" content="2020-03-28T19:04:28&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-28T19:04:28&#43;08:00" />
-<meta itemprop="wordCount" content="5257">
+<meta itemprop="wordCount" content="5423">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"> 数据挖掘 </a>
             </div>
-          <span class="more-meta"> 约 5257 字 </span>
+          <span class="more-meta"> 约 5423 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -144,10 +144,16 @@
         <li><a href="#单个特征预处理">单个特征预处理</a></li>
       </ul>
     </li>
+    <li><a href="#特征构造">特征构造</a>
+      <ul>
+        <li><a href="#1-转换特征构造">1. 转换特征构造</a></li>
+        <li><a href="#2-聚合特征构造">2. 聚合特征构造</a></li>
+      </ul>
+    </li>
     <li><a href="#代码实现">代码实现</a>
       <ul>
         <li><a href="#单个特征-删除异常值">单个特征-删除异常值</a></li>
-        <li><a href="#特征构造">特征构造</a></li>
+        <li><a href="#特征构造-1">特征构造</a></li>
         <li><a href="#特征筛选">特征筛选</a></li>
       </ul>
     </li>
@@ -162,6 +168,11 @@
 <h1 id="特征工程">特征工程</h1>
 <p>好的特征代表了灵活性、更简单的模型和更好的结果，不相关的特征则会影响模型的泛化性。因此特征选择和特征工程并非是互相排斥的，而是相辅相成的。有效的特征工程能够帮助我们提炼数据的代表。接着问题就来了，什么才是好的代表？</p>
 <p>代表的好坏取决于里面所包含信息的好坏。熵（Entropy，熵值越高，数据中所包含的信息越多），方差（Variance，方差越大，数据中所包含的信息越多），更好的分离映射（Projection for better separation，最高的方差所对应的映射包含更多得信息），特征对类别的关联(feature to class association)，等。所有这些都解释了数据中所包含的信息。</p>
+<p>数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已。由此可见，特征工程在机器学习中占有相当重要的地位。在实际应用当中，可以说特征工程是机器学习成功的关键。😄</p>
+<blockquote>
+<p>创造新的特征是一件十分困难的事情，需要丰富的专业知识和大量的时间。机器学习应用的本质基本上就是特征工程。<br>
+——Andrew Ng</p>
+</blockquote>
 <h2 id="特征预处理">特征预处理</h2>
 <h3 id="单个特征预处理">单个特征预处理</h3>
 <h4 id="1-均值标准化z-score-standardization">1. 均值标准化(Z-score standardization)</h4>
@@ -447,13 +458,27 @@
 <span class="n">kmodel</span><span class="o">=</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>  <span class="c1">#k为聚成几类</span>
 <span class="n">kmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="mi">1</span><span class="p">)))</span> <span class="c1">#训练模型</span>
 <span class="n">c</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kmodel</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">)</span> <span class="c1">#求聚类中心</span>
-<span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="err">’列索引</span><span class="s1">&#39;) #排序　　</span>
+<span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="err">’列索引’</span><span class="p">)</span>  <span class="c1">#排序　　</span>
 <span class="n">w</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_mean</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">#用滑动窗口求均值的方法求相邻两项求中点，作为边界点</span>
 <span class="n">w</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="p">]</span>  <span class="c1">#把首末边界点加上</span>
 <span class="n">d3</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="c1">#cut函数</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="代码实现">代码实现</h2>
+</div><h2 id="特征构造">特征构造</h2>
+<h3 id="1-转换特征构造">1. 转换特征构造</h3>
+<p>转换特征构造的常用方法：</p>
+<ul>
+<li>时间特征，包括相对时间和绝对时间，节假日，双休日等；</li>
+<li>地理信息，包括分箱，分布编码等方法；</li>
+<li>非线性变换，包括 log/ 平方/ 根号等；</li>
+<li>数据分桶</li>
+</ul>
+<h3 id="2-聚合特征构造">2. 聚合特征构造</h3>
+<ul>
+<li>构造统计量特征，报告计数、求和、比例、标准差等；</li>
+<li>特征组合，特征交叉；</li>
+</ul>
+<h2 id="代码实现">代码实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -757,15 +782,7 @@ Name: power, dtype: float64
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/xiangxiantu.png" alt="箱线图"></p>
-<h3 id="特征构造">特征构造</h3>
-<p>特征构造的常用方法：</p>
-<ul>
-<li>构造统计量特征，报告计数、求和、比例、标准差等；</li>
-<li>时间特征，包括相对时间和绝对时间，节假日，双休日等；</li>
-<li>地理信息，包括分箱，分布编码等方法；</li>
-<li>非线性变换，包括 log/ 平方/ 根号等；</li>
-<li>特征组合，特征交叉；</li>
-</ul>
+<h3 id="特征构造-1">特征构造</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
