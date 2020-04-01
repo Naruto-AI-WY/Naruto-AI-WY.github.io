@@ -9,14 +9,21 @@
   </url>
   
   <url>
-    <loc>https://Naruto-AI-WY.github.io/categories/</loc>
-    <lastmod>2020-03-28T19:04:28+08:00</lastmod>
+    <loc>https://Naruto-AI-WY.github.io/post/my_datamining_task4/</loc>
+    <lastmod>2020-04-01T19:29:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://Naruto-AI-WY.github.io/post/</loc>
+    <lastmod>2020-04-01T19:29:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://Naruto-AI-WY.github.io/categories/</loc>
     <lastmod>2020-03-28T19:04:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
