@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-06T08:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T08:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="2306">
+<meta itemprop="wordCount" content="2346">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/system/"> SYSTEM </a>
             </div>
-          <span class="more-meta"> 约 2306 字 </span>
+          <span class="more-meta"> 约 2346 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -208,7 +208,8 @@ GUID Partition Table，是EFI标准的一部分，用于替代MBR分区表，相
 <p><img src="/img/GUID_Partition_Table_Scheme.png" alt="GUID_Partition_Table_Scheme"><br>
 <img src="/img/1B_GPT.png" alt=""></p>
 <h3 id="understanding-difference-between-mbr-and-gpt">Understanding Difference between MBR and GPT</h3>
-<p>MBR is a special boot sector at the beginning of a disk, containing information about the OS boot loader and logical disk partition information. MBR is the older method but is still the default selection when installing new disk even in Windows Server 2012 R2 or Windows 10. GPT is another type that uses GUID or globally unique identifier to define its partitions and is the newer standard. The difference between MBR and GPT structure is shown in picture below:
+<p>MBR was introduced with IBM PC DOS 2.0 in March 1983 and it is used till now. However, GPT was developed in the late 1990s as part of what eventually became UEFI, and it becomes popular just in recent years.<br>
+MBR is a special boot sector at the beginning of a disk, containing information about the OS boot loader and logical disk partition information. MBR is the older method but is still the default selection when installing new disk even in Windows Server 2012 R2 or Windows 10. GPT is another type that uses GUID or globally unique identifier to define its partitions and is the newer standard. The difference between MBR and GPT structure is shown in picture below:
 <img src="/img/Difference-between-MBR-and-GPT.png" alt=""><br>
 The different structure above affects the capabilities of the disk. GPT obviously offers more advantage than its predecessor. Below are the explanation:</p>
 <p><strong>1. Number of the partitions supported</strong><br>
@@ -231,6 +232,7 @@ It’s easy to call GPT far more superior than MBR. However, older OS like Windo
 <p>（5）尽管目前分区类型不超过百数（十数也没有吧。），GPT仍提供了16字节的GUID来标识分区类型，使其更不容易产生冲突。</p>
 <p>（6）每个分区都可以拥有一个特别的名字，最长72字节，足够写一首七律了。满足你的各种奇葩起名需求。</p>
 <p>完美支持UEFI，毕竟它就是UEFI规范的衍生品。在将来全行业UEFI的情境下，GPT必将更快淘汰MBR。</p>
+<p><img src="/img/Boottimeline.png" alt=""></p>
     </div>
 
     
