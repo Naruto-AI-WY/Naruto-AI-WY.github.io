@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-06T08:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T08:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="1816">
+<meta itemprop="wordCount" content="2306">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/system/"> SYSTEM </a>
             </div>
-          <span class="more-meta"> 约 1816 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2306 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -143,7 +143,7 @@
       <ul>
         <li><a href="#固件接口标准">固件接口标准</a></li>
         <li><a href="#分区表">分区表</a></li>
-        <li><a href="#difference-between-mbr-and-glp">Difference between MBR and GLP</a></li>
+        <li><a href="#understanding-difference-between-mbr-and-gpt">Understanding Difference between MBR and GPT</a></li>
       </ul>
     </li>
   </ul>
@@ -207,16 +207,22 @@ GUID Partition Table，是EFI标准的一部分，用于替代MBR分区表，相
 </ul>
 <p><img src="/img/GUID_Partition_Table_Scheme.png" alt="GUID_Partition_Table_Scheme"><br>
 <img src="/img/1B_GPT.png" alt=""></p>
-<h3 id="difference-between-mbr-and-glp">Difference between MBR and GLP</h3>
-<ul>
-<li>
-<p>MBR consists of 3 parts, including master boot code, a partition table for the disk, and disk signature. A partition table can hold maximum number of 4 entries for primary partitions in Windows.</p>
-</li>
-<li>
-<p>However, a GUID Partition Table is composed of a Protective MBR which is used in a way that prevents MBR-based disk utilities from misrecognizing and possibly overwriting GPT disks, a primary GUID partition table header which records its own size and location and the size and location of the secondary GPT header, a primary GUID Partition Entry Array, a backup GUID Partition Entry Array, and a backup GUID Partition Table Header. A GUID partition table could contain up to 128 partition entries in Windows.<br>
-<img src="/img/Difference-between-MBR-and-GPT.png" alt=""></p>
-</li>
-</ul>
+<h3 id="understanding-difference-between-mbr-and-gpt">Understanding Difference between MBR and GPT</h3>
+<p>MBR is a special boot sector at the beginning of a disk, containing information about the OS boot loader and logical disk partition information. MBR is the older method but is still the default selection when installing new disk even in Windows Server 2012 R2 or Windows 10. GPT is another type that uses GUID or globally unique identifier to define its partitions and is the newer standard. The difference between MBR and GPT structure is shown in picture below:
+<img src="/img/Difference-between-MBR-and-GPT.png" alt=""><br>
+The different structure above affects the capabilities of the disk. GPT obviously offers more advantage than its predecessor. Below are the explanation:</p>
+<p><strong>1. Number of the partitions supported</strong><br>
+MBR contains a 64 bytes partition table which makes it support up to four primary partitions because each one will need 16 bytes. Should any additional partition is needed, administrator must convert the fourth primary partition to an extended partition then create sub-partitions (logical drives) in it, with maximum total of 128 sub-partitions.</p>
+<p>On the other hand, GPT supports up to 128 partitions with each one in 128 bytes due to its 16,384 bytes partition table. With GPT, administrator can create much more partitions without having to use extended partition.</p>
+<p><strong>2. Partition size supported</strong><br>
+In MBR, the maximum supported disk size is 2TB. On MBR disk, the partition size is stored in length of 4 bytes (32 bit). This means the maximum value in hexadecimal is FFFFFFFF or equal to 4,294,967,295 sectors. Currently, each sector is limited to 512 bytes, which means the maximum size is 2,199,023,255,040 bytes or equal to 2TB. In other word, if a disk has size more than 2TB, the remaining size will not be usable or in Windows machine it will show up as “unallocated”.</p>
+<p>In GPT, unlike MBR, the partition size is stored in length of 8 bytes (64 bit). Therefore in theory, the maximum supported size for 512 bytes sector is 9,444,732,965,739,290,427,392 bytes or equivalent to 9.4 ZB. However, in practice, the maximum size depends on the OS limitation as well.</p>
+<p><strong>3. Redundancy</strong><br>
+As seen in the structure, MBR stores the boot and partition data in one place at the beginning of the partition. If this data is missing or corrupted, then the whole OS is basically down as the boot loader is broken. That’s why we probably familiar with the term “repairing the MBR” and lots of tutorial has been posted in the internet to cover about it.</p>
+<p>Here’s the main difference between GPT and MBR that makes GPT completely surpass MBR. As seen in the structure, GPT stores multiple copies of the boot and partition data across the disk. These copies can be used to recover the broken data. Moreover, GPT also has a cyclic redundancy check (CRC) that periodically check the integrity of the data.</p>
+<p><strong>Conclusion on MBR vs GPT</strong><br>
+It’s easy to call GPT far more superior than MBR. However, older OS like Windows XP will not able to operate with GPT disks. They may only be able to see the protective MBR layer of the GPT disk. On the other hand, only the 64-bit editions of newer OS like Windows 7 and above or Windows Server 2003 and above that support booting on UEFI based system, but either the 64-bit or 32-bit editions can use GPT partition to store data.</p>
+<p>Knowing the difference between MBR and GPT, administrator may consider to always use GPT anytime it is possible.</p>
 <p>相较于MBR，GPT具有以下优点：</p>
 <p>（1）得益于LBA提升至64位，以及分区表中每项128位设定，GPT可管理的空间近乎无限大，假设一个扇区大小仍为512字节，可表示扇区数为，算下来，可管理的硬盘容量=18EB(1EB=1024PB=1,048,576TB)，2T在它面前完全不在话下。按目前的硬盘技术来看，确实近乎无限，不过，以后的事谁知道呢。</p>
 <p>（2）分区数量几乎没有限制，由于可在表头中设置分区数量的大小，如果愿意，设置个分区也可以（有人愿意管理这么多分区吗），不过，目前windows仅支持最大128个分区。</p>
