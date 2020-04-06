@@ -6,10 +6,19 @@
     <description>Recent content in 数据挖掘 on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 28 Mar 2020 19:04:28 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2020 08:25:39 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Computer_setup_Windows7</title>
+      <link>https://Naruto-AI-WY.github.io/post/computer_setup/</link>
+      <pubDate>Mon, 06 Apr 2020 08:25:39 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/post/computer_setup/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>数据挖掘-建模和调参</title>
