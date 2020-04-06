@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-06T08:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T08:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="2346">
+<meta itemprop="wordCount" content="2792">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/system/"> SYSTEM </a>
             </div>
-          <span class="more-meta"> 约 2346 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2792 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -232,7 +232,35 @@ It’s easy to call GPT far more superior than MBR. However, older OS like Windo
 <p>（5）尽管目前分区类型不超过百数（十数也没有吧。），GPT仍提供了16字节的GUID来标识分区类型，使其更不容易产生冲突。</p>
 <p>（6）每个分区都可以拥有一个特别的名字，最长72字节，足够写一首七律了。满足你的各种奇葩起名需求。</p>
 <p>完美支持UEFI，毕竟它就是UEFI规范的衍生品。在将来全行业UEFI的情境下，GPT必将更快淘汰MBR。</p>
-<p><img src="/img/Boottimeline.png" alt=""></p>
+<p><img src="/img/Boottimeline.png" alt=""><br>
+<strong>1. Security (SEC)</strong><br>
+The Security (SEC) phase is the first phase in the PI Architecture and is responsible for the following:
+• Handling all platform restart events
+• Creating a temporary memory store
+• Serving as the root of trust in the system
+• Passing handoff information to the PEI Foundation
+The security section may contain modules with code written in assembly. Therefore, some EDK II module development environment (MDE) modules may contain assembly code. Where this occurs, both Windows and GCC versions of assembly code are provided in different files.</p>
+<p><strong>2. Pre-EFI Initialization (PEI)</strong><br>
+The Pre-EFI Initialization (PEI) phase described in the PI Architecture specifications is invoked quite early in the boot flow. Specifically, after some preliminary processing in the Security (SEC) phase, any machine restart event will invoke the PEI phase. The PEI phase initially operates with the platform in a nascent state, leveraging only on-processor resources, such as the processor cache as a call stack, to dispatch Pre-EFI Initialization Modules (PEIMs). These PEIMs are responsible for the following:
+• Initializing some permanent memory complement
+• Describing the memory in Hand-Off Blocks (HOBs)
+• Describing the firmware volume locations in HOBs
+• Passing control into the Driver Execution Environment (DXE) phase</p>
+<p><strong>3. Drive Execution Environment (DXE)</strong><br>
+Prior to the DXE phase, the Pre-EFI Initialization (PEI) phase is responsible for initializing permanent memory in the platform so that the DXE phase can be loaded and executed. The state of the system at the end of the PEI phase is passed to the DXE phase through a list of position independent data structures called Hand-Off Blocks (HOBs). HOBs are described in detail in the Platform Initialization Specification.
+There are several components in the DXE phase:
+• DXE Foundation
+• DXE Dispatcher
+• A set of DXE Drivers</p>
+<p><strong>4. Boot Device Selection (BDS)</strong><br>
+The Boot Device Selection (BDS) phase is implemented as part of the BDS Architectural Protocol. The DXE Foundation will hand control to the BDS Architectural Protocol after all of the DXE drivers whose dependencies have been satisfied have been loaded and executed by the DXE Dispatcher. The BDS phase is responsible for the following:
+• Initializing console devices
+• Loading device drivers
+• Attempting to load and execute boot selections</p>
+<p><strong>5. Transient System Load (TLS) and Runtime (RT)</strong><br>
+The Transient System Load (TLS) primarily the OS vendor provided boot loader, along with the Runtime Services (RT) phases may access persistent UEFI drivers and applications. Drivers in this category include PCI Option ROMs.</p>
+<p><strong>6. After Life (AL)</strong><br>
+The After Life (AL) phase consists of persistent UEFI drivers used for storing the state of the system during the OS orderly shutdown, sleep, hibernate or restart processes.</p>
     </div>
 
     
