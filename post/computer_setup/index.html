@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-06T08:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T08:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="1289">
+<meta itemprop="wordCount" content="1816">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/system/"> SYSTEM </a>
             </div>
-          <span class="more-meta"> 约 1289 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1816 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -208,9 +208,23 @@ GUID Partition Table，是EFI标准的一部分，用于替代MBR分区表，相
 <p><img src="/img/GUID_Partition_Table_Scheme.png" alt="GUID_Partition_Table_Scheme"><br>
 <img src="/img/1B_GPT.png" alt=""></p>
 <h3 id="difference-between-mbr-and-glp">Difference between MBR and GLP</h3>
+<ul>
+<li>
 <p>MBR consists of 3 parts, including master boot code, a partition table for the disk, and disk signature. A partition table can hold maximum number of 4 entries for primary partitions in Windows.</p>
+</li>
+<li>
 <p>However, a GUID Partition Table is composed of a Protective MBR which is used in a way that prevents MBR-based disk utilities from misrecognizing and possibly overwriting GPT disks, a primary GUID partition table header which records its own size and location and the size and location of the secondary GPT header, a primary GUID Partition Entry Array, a backup GUID Partition Entry Array, and a backup GUID Partition Table Header. A GUID partition table could contain up to 128 partition entries in Windows.<br>
 <img src="/img/Difference-between-MBR-and-GPT.png" alt=""></p>
+</li>
+</ul>
+<p>相较于MBR，GPT具有以下优点：</p>
+<p>（1）得益于LBA提升至64位，以及分区表中每项128位设定，GPT可管理的空间近乎无限大，假设一个扇区大小仍为512字节，可表示扇区数为，算下来，可管理的硬盘容量=18EB(1EB=1024PB=1,048,576TB)，2T在它面前完全不在话下。按目前的硬盘技术来看，确实近乎无限，不过，以后的事谁知道呢。</p>
+<p>（2）分区数量几乎没有限制，由于可在表头中设置分区数量的大小，如果愿意，设置个分区也可以（有人愿意管理这么多分区吗），不过，目前windows仅支持最大128个分区。</p>
+<p>（3）自带保险，由于在磁盘的首尾部分各带一个GPT表头，任何一个受到破坏后都可以通过另一份恢复，极大地提高了磁盘的抗性（两个一起坏的请出门买彩票）。</p>
+<p>（4）循环冗余检验值针对关键数据结构而计算，提高了数据崩溃的检测几率。</p>
+<p>（5）尽管目前分区类型不超过百数（十数也没有吧。），GPT仍提供了16字节的GUID来标识分区类型，使其更不容易产生冲突。</p>
+<p>（6）每个分区都可以拥有一个特别的名字，最长72字节，足够写一首七律了。满足你的各种奇葩起名需求。</p>
+<p>完美支持UEFI，毕竟它就是UEFI规范的衍生品。在将来全行业UEFI的情境下，GPT必将更快淘汰MBR。</p>
     </div>
 
     
