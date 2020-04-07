@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-06T08:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T08:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="2792">
+<meta itemprop="wordCount" content="2874">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/system/"> SYSTEM </a>
             </div>
-          <span class="more-meta"> 约 2792 字 </span>
+          <span class="more-meta"> 约 2874 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -209,9 +209,9 @@ GUID Partition Table，是EFI标准的一部分，用于替代MBR分区表，相
 <img src="/img/1B_GPT.png" alt=""></p>
 <h3 id="understanding-difference-between-mbr-and-gpt">Understanding Difference between MBR and GPT</h3>
 <p>MBR was introduced with IBM PC DOS 2.0 in March 1983 and it is used till now. However, GPT was developed in the late 1990s as part of what eventually became UEFI, and it becomes popular just in recent years.<br>
-MBR is a special boot sector at the beginning of a disk, containing information about the OS boot loader and logical disk partition information. MBR is the older method but is still the default selection when installing new disk even in Windows Server 2012 R2 or Windows 10. GPT is another type that uses GUID or globally unique identifier to define its partitions and is the newer standard. The difference between MBR and GPT structure is shown in picture below:
-<img src="/img/Difference-between-MBR-and-GPT.png" alt=""><br>
-The different structure above affects the capabilities of the disk. GPT obviously offers more advantage than its predecessor. Below are the explanation:</p>
+MBR is a special boot sector at the beginning of a disk, containing information about the OS boot loader and logical disk partition information. MBR is the older method but is still the default selection when installing new disk even in Windows Server 2012 R2 or Windows 10. GPT is another type that uses GUID or globally unique identifier to define its partitions and is the newer standard. The difference between MBR and GPT structure is shown in picture below:</p>
+<p><img src="/img/Difference-between-MBR-and-GPT.png" alt=""></p>
+<p>The different structure above affects the capabilities of the disk. GPT obviously offers more advantage than its predecessor. Below are the explanation:</p>
 <p><strong>1. Number of the partitions supported</strong><br>
 MBR contains a 64 bytes partition table which makes it support up to four primary partitions because each one will need 16 bytes. Should any additional partition is needed, administrator must convert the fourth primary partition to an extended partition then create sub-partitions (logical drives) in it, with maximum total of 128 sub-partitions.</p>
 <p>On the other hand, GPT supports up to 128 partitions with each one in 128 bytes due to its 16,384 bytes partition table. With GPT, administrator can create much more partitions without having to use extended partition.</p>
@@ -261,6 +261,12 @@ The Boot Device Selection (BDS) phase is implemented as part of the BDS Architec
 The Transient System Load (TLS) primarily the OS vendor provided boot loader, along with the Runtime Services (RT) phases may access persistent UEFI drivers and applications. Drivers in this category include PCI Option ROMs.</p>
 <p><strong>6. After Life (AL)</strong><br>
 The After Life (AL) phase consists of persistent UEFI drivers used for storing the state of the system during the OS orderly shutdown, sleep, hibernate or restart processes.</p>
+<p><a href="https://blog.csdn.net/gjq_1988/article/details/50593564">UEFI系统的启动过程</a></p>
+<p>注：今天给Dell的台式机装了Windows 7英文版64位操作系统。</p>
+<ol>
+<li>解决USB3.0驱动程序注入到windows 7启动盘中：<br>
+<a href="https://www.intel.com/content/www/us/en/support/articles/000022400/server-products/server-boards.html">How to Install USB 3.0 Drivers into Windows* 7</a></li>
+</ol>
     </div>
 
     
