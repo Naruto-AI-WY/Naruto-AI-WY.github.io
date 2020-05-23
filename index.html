@@ -119,7 +119,7 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-23 </span>
       
-        <span class="more-meta"> 约 1514 字 </span>
+        <span class="more-meta"> 约 1530 字 </span>
         <span class="more-meta"> 预计阅读 4 分钟 </span>
     </div>
   </header>
@@ -128,7 +128,7 @@
     <div class="post-summary">
       <h2 id="图像读取">图像读取</h2>
 <p>在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。</p>
-<h3 id="pillow">Pillow</h3>
+<h3 id="1pillow">（1）Pillow</h3>
 <p>Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -182,7 +182,7 @@
 </div>
 </div><p><img src="/img/cat3.png" alt="CV3"></p>
 <p>Pillow的官方文档：https://pillow.readthedocs.io/en/stable/</p>
-<h3 id="opencv">OpenCV</h3>
+<h3 id="2opencv">（2）OpenCV</h3>
 <p>OpenCV是一个跨平台的计算机视觉库，最早由Intel开源得来。OpenCV发展的非常早，拥有众多的计算机视觉、数字图像处理和机器视觉等功能。OpenCV在功能上比Pillow更加强大很多，学习成本也高很多。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -252,15 +252,15 @@ OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib</p>
 <h3 id="常见的数据扩增方法">常见的数据扩增方法</h3>
 <p>在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。</p>
 <p>以torchvision为例，常见的数据扩增方法包括：</p>
-<p>transforms.CenterCrop 对图片中心进行裁剪
-transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换
-transforms.FiveCrop 对图像四个角和中心进行裁剪得到五分图像
-transforms.Grayscale 对图像进行灰度变换
-transforms.Pad 使用固定值进行像素填充
-transforms.RandomAffine 随机仿射变换
-transforms.RandomCrop 随机区域裁剪
-transforms.RandomHorizontalFlip 随机水平翻转
-transforms.RandomRotation 随机旋转
+<p>transforms.CenterCrop 对图片中心进行裁剪<br>
+transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换<br>
+transforms.FiveCrop 对图像四个角和中心进行裁剪得到五分图像<br>
+transforms.Grayscale 对图像进行灰度变换<br>
+transforms.Pad 使用固定值进行像素填充<br>
+transforms.RandomAffine 随机仿射变换<br>
+transforms.RandomCrop 随机区域裁剪<br>
+transforms.RandomHorizontalFlip 随机水平翻转<br>
+transforms.RandomRotation 随机旋转<br>
 transforms.RandomVerticalFlip 随机垂直翻转</p>
 <p><img src="/img/enlarge.png" alt="CV3"></p>
 <h3 id="常用的数据扩增库">常用的数据扩增库</h3>

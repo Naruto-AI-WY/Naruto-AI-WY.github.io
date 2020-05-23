@@ -19,7 +19,7 @@
       <guid>https://Naruto-AI-WY.github.io/post/datawhale_cv2/</guid>
       <description>&lt;h2 id=&#34;图像读取&#34;&gt;图像读取&lt;/h2&gt;
 &lt;p&gt;在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。&lt;/p&gt;
-&lt;h3 id=&#34;pillow&#34;&gt;Pillow&lt;/h3&gt;
+&lt;h3 id=&#34;1pillow&#34;&gt;（1）Pillow&lt;/h3&gt;
 &lt;p&gt;Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -73,7 +73,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/cat3.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Pillow的官方文档：https://pillow.readthedocs.io/en/stable/&lt;/p&gt;
-&lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
+&lt;h3 id=&#34;2opencv&#34;&gt;（2）OpenCV&lt;/h3&gt;
 &lt;p&gt;OpenCV是一个跨平台的计算机视觉库，最早由Intel开源得来。OpenCV发展的非常早，拥有众多的计算机视觉、数字图像处理和机器视觉等功能。OpenCV在功能上比Pillow更加强大很多，学习成本也高很多。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -143,15 +143,15 @@ OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib&lt;/p&gt;
 &lt;h3 id=&#34;常见的数据扩增方法&#34;&gt;常见的数据扩增方法&lt;/h3&gt;
 &lt;p&gt;在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。&lt;/p&gt;
 &lt;p&gt;以torchvision为例，常见的数据扩增方法包括：&lt;/p&gt;
-&lt;p&gt;transforms.CenterCrop 对图片中心进行裁剪
-transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换
-transforms.FiveCrop 对图像四个角和中心进行裁剪得到五分图像
-transforms.Grayscale 对图像进行灰度变换
-transforms.Pad 使用固定值进行像素填充
-transforms.RandomAffine 随机仿射变换
-transforms.RandomCrop 随机区域裁剪
-transforms.RandomHorizontalFlip 随机水平翻转
-transforms.RandomRotation 随机旋转
+&lt;p&gt;transforms.CenterCrop 对图片中心进行裁剪&lt;br&gt;
+transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换&lt;br&gt;
+transforms.FiveCrop 对图像四个角和中心进行裁剪得到五分图像&lt;br&gt;
+transforms.Grayscale 对图像进行灰度变换&lt;br&gt;
+transforms.Pad 使用固定值进行像素填充&lt;br&gt;
+transforms.RandomAffine 随机仿射变换&lt;br&gt;
+transforms.RandomCrop 随机区域裁剪&lt;br&gt;
+transforms.RandomHorizontalFlip 随机水平翻转&lt;br&gt;
+transforms.RandomRotation 随机旋转&lt;br&gt;
 transforms.RandomVerticalFlip 随机垂直翻转&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/enlarge.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;常用的数据扩增库&#34;&gt;常用的数据扩增库&lt;/h3&gt;
