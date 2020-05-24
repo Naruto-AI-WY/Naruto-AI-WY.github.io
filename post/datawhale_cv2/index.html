@@ -37,16 +37,13 @@ transforms.RandomCrop 随机区域裁剪
 transforms.RandomHorizontalFlip 随机水平翻转
 transforms.RandomRotation 随机旋转
 transforms.RandomVerticalFlip 随机垂直翻转
-常用的数据扩增库   torchvision
+常用的数据扩增库  torchvision
 https://github.com/pytorch/vision
-pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；
-  imgaug
+pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等； imgaug
 https://github.com/aleju/imgaug
-imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；
-  albumentations
+imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快； albumentations
 https://albumentations.readthedocs.io
-是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-  Pytorch读取数据 pytorch读取训练集是非常便捷的，只需要使用到2个类：
+是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。  Pytorch读取数据 pytorch读取训练集是非常便捷的，只需要使用到2个类：
 （1）torch.utils.data.Dataset
 （2）torch.utils.data.DataLoader
  Dataset：对数据集的封装，提供索引方式的对数据样本进行读取 DataLoder：对Dataset进行封装，提供批量读取的迭代读取。DataLoader能够为我们自动生成一个多线程的迭代器，只要传入几个参数进行就可以了，第一个参数就是上面定义的数据集，后面几个参数就是batch size的大小，是否打乱数据，读取数据的线程数目等等，这样一来，我们就建立了一个多线程的I/O。  可参考下面的文章
@@ -56,7 +53,8 @@ torch.Size([10, 3, 64, 128]), torch.Size([10, 6])
 前者为图像文件，为batchsize * chanel * height * width次序；后者为字符标签。
 torchvision.ToTensor() 源码如下：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  class ToTensor(object): &amp;#34;&amp;#34;&amp;#34;Convert a ``PIL Image`` or ``numpy.ndarray`` to tensor. Converts a PIL Image or numpy.ndarray (H x W x C) in the range [0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0]. &amp;#34;&amp;#34;&amp;#34; def __call__(self, pic): &amp;#34;&amp;#34;&amp;#34; Args: pic (PIL Image or numpy.ndarray): Image to be converted to tensor. Returns: Tensor: Converted image. &amp;#34;&amp;#34;&amp;#34; return F.to_tensor(pic) def __repr__(self): return self.__class__.__name__ &#43; &amp;#39;()&amp;#39;   ToTensor具体操作：
- 转换维度：img = torch.from_numpy (pic.transpose ((2, 0, 1))) 转变数据类型 ：float/int divide 255: img.float().div(255)  Baseline结果 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  Epoch: 0, Train loss: 3.503765054543813 Val loss: 3.48130961894989 Val Acc 0.356 Epoch: 1, Train loss: 2.2491484214464825 Val loss: 3.0459648995399475 Val Acc 0.4333 Epoch: 2, Train loss: 1.8961329097747803 Val loss: 2.837818443775177 Val Acc 0.476 Epoch: 3, Train loss: 1.6731903288364411 Val loss: 2.7689380412101747 Val Acc 0.4909 Epoch: 4, Train loss: 1.5381509892145793 Val loss: 2.758125602722168 Val Acc 0.4978 Epoch: 5, Train loss: 1.4285292768081028 Val loss: 2.600436863899231 Val Acc 0.5247 Epoch: 6, Train loss: 1.3249877935647965 Val loss: 2.595946876049042 Val Acc 0.5155 Epoch: 7, Train loss: 1.2398218791087467 Val loss: 2.5257772111892702 Val Acc 0.5396 Epoch: 8, Train loss: 1.1702964349587759 Val loss: 2.5723482842445375 Val Acc 0.5343 Epoch: 9, Train loss: 1.102836936334769 Val loss: 2.5777434706687927 Val Acc 0.5385   " /><meta name="keywords" content="Deep Learning, Medical Field, Artificial Intelligence" />
+ 转换维度：img = torch.from_numpy (pic.transpose ((2, 0, 1))) 转变数据类型 ：float/int divide 255: img.float().div(255)  Baseline结果 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  Epoch: 0, Train loss: 3.503765054543813 Val loss: 3.48130961894989 Val Acc 0.356 Epoch: 1, Train loss: 2.2491484214464825 Val loss: 3.0459648995399475 Val Acc 0.4333 Epoch: 2, Train loss: 1.8961329097747803 Val loss: 2.837818443775177 Val Acc 0.476 Epoch: 3, Train loss: 1.6731903288364411 Val loss: 2.7689380412101747 Val Acc 0.4909 Epoch: 4, Train loss: 1.5381509892145793 Val loss: 2.758125602722168 Val Acc 0.4978 Epoch: 5, Train loss: 1.4285292768081028 Val loss: 2.600436863899231 Val Acc 0.5247 Epoch: 6, Train loss: 1.3249877935647965 Val loss: 2.595946876049042 Val Acc 0.5155 Epoch: 7, Train loss: 1.2398218791087467 Val loss: 2.5257772111892702 Val Acc 0.5396 Epoch: 8, Train loss: 1.1702964349587759 Val loss: 2.5723482842445375 Val Acc 0.5343 Epoch: 9, Train loss: 1.102836936334769 Val loss: 2.5777434706687927 Val Acc 0.5385   github地址
+" /><meta name="keywords" content="Deep Learning, Medical Field, Artificial Intelligence" />
 
 
 
@@ -219,21 +217,15 @@ transforms.RandomVerticalFlip 随机垂直翻转
 
 常用的数据扩增库
 
-
 torchvision
 https://github.com/pytorch/vision
 pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；
-
-
 imgaug
 https://github.com/aleju/imgaug
 imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；
-
-
 albumentations
 https://albumentations.readthedocs.io
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-
 
 Pytorch读取数据
 pytorch读取训练集是非常便捷的，只需要使用到2个类：
@@ -579,7 +571,7 @@ Epoch: 9, Train loss: 1.102836936334769      Val loss: 2.57774347066
 Val Acc 0.5385
 
 
-" />
+github地址" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://Naruto-AI-WY.github.io/post/datawhale_cv2/" />
 <meta property="article:published_time" content="2020-05-23T21:34:11+08:00" />
@@ -725,21 +717,15 @@ transforms.RandomVerticalFlip 随机垂直翻转
 
 常用的数据扩增库
 
-
 torchvision
 https://github.com/pytorch/vision
 pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；
-
-
 imgaug
 https://github.com/aleju/imgaug
 imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；
-
-
 albumentations
 https://albumentations.readthedocs.io
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-
 
 Pytorch读取数据
 pytorch读取训练集是非常便捷的，只需要使用到2个类：
@@ -1085,10 +1071,10 @@ Epoch: 9, Train loss: 1.102836936334769      Val loss: 2.57774347066
 Val Acc 0.5385
 
 
-">
+github地址">
 <meta itemprop="datePublished" content="2020-05-23T21:34:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-23T21:34:11&#43;08:00" />
-<meta itemprop="wordCount" content="2740">
+<meta itemprop="wordCount" content="2748">
 
 
 
@@ -1234,21 +1220,15 @@ transforms.RandomVerticalFlip 随机垂直翻转
 
 常用的数据扩增库
 
-
 torchvision
 https://github.com/pytorch/vision
 pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；
-
-
 imgaug
 https://github.com/aleju/imgaug
 imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；
-
-
 albumentations
 https://albumentations.readthedocs.io
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-
 
 Pytorch读取数据
 pytorch读取训练集是非常便捷的，只需要使用到2个类：
@@ -1594,7 +1574,7 @@ Epoch: 9, Train loss: 1.102836936334769      Val loss: 2.57774347066
 Val Acc 0.5385
 
 
-"/>
+github地址"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -1666,7 +1646,7 @@ Val Acc 0.5385
       <div class="post-meta">
         <span class="post-time"> 2020-05-23 </span>
         
-          <span class="more-meta"> 约 2740 字 </span>
+          <span class="more-meta"> 约 2748 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -1799,8 +1779,8 @@ OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib</p>
 <p>在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。</p>
 <p><img src="/img/cat_enlarge.png" alt="CV3"></p>
 <h3 id="常见的数据扩增方法">常见的数据扩增方法</h3>
-<p>在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。</p>
-<p>以torchvision为例，常见的数据扩增方法包括：
+<p>在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。<br>
+以torchvision为例，常见的数据扩增方法包括：
 transforms.CenterCrop 对图片中心进行裁剪<br>
 transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换<br>
 transforms.FiveCrop 对图像四个角和中心进行裁剪得到五分图像<br>
@@ -1814,21 +1794,15 @@ transforms.RandomVerticalFlip 随机垂直翻转</p>
 <p><img src="/img/enlarge.png" alt="CV3"></p>
 <h3 id="常用的数据扩增库">常用的数据扩增库</h3>
 <ul>
-<li>
-<p>torchvision<br>
+<li>torchvision<br>
 <a href="https://github.com/pytorch/vision">https://github.com/pytorch/vision</a><br>
-pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；</p>
-</li>
-<li>
-<p>imgaug<br>
+pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；</li>
+<li>imgaug<br>
 <a href="https://github.com/aleju/imgaug">https://github.com/aleju/imgaug</a><br>
-imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；</p>
-</li>
-<li>
-<p>albumentations<br>
+imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；</li>
+<li>albumentations<br>
 <a href="https://albumentations.readthedocs.io">https://albumentations.readthedocs.io</a><br>
-是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。</p>
-</li>
+是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。</li>
 </ul>
 <h2 id="pytorch读取数据">Pytorch读取数据</h2>
 <p>pytorch读取训练集是非常便捷的，只需要使用到2个类：<br>
@@ -2174,7 +2148,8 @@ torch.Size([10, 3, 64, 128]), torch.Size([10, 6])<br>
 <span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5385</span>
 </code></pre></td></tr></table>
 </div>
-</div><!-- raw HTML omitted -->
+</div><p><a href="https://github.com/datawhalechina/team-learning/blob/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/Datawhale%20%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8CV%20-%20Task%2002%20%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%89%A9%E5%A2%9E.md">github地址</a></p>
+<!-- raw HTML omitted -->
     </div>
 
     
