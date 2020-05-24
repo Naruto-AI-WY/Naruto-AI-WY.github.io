@@ -119,8 +119,8 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-23 </span>
       
-        <span class="more-meta"> 约 2364 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span class="more-meta"> 约 2534 字 </span>
+        <span class="more-meta"> 预计阅读 6 分钟 </span>
     </div>
   </header>
   
@@ -355,7 +355,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="kn">as</span> <span class="nn">transforms</span>
 
 <span class="k">class</span> <span class="nc">SVHNDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># 实现初始化方法，在初始化的时候将数据载入</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># 重写Dataset的初始化方法，在初始化的时候将数据载入</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_path</span> <span class="o">=</span> <span class="n">img_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_label</span> <span class="o">=</span> <span class="n">img_label</span> 
         <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -503,7 +503,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">)</span>
 
 <span class="n">train_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../input/train/*.png&#39;</span><span class="p">)</span> <span class="c1">#返回所有匹配的文件路径列表</span>
-<span class="n">train_path</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1">#list.sort(cmp=None, key=None, reverse=False)，升序排列</span>
+<span class="n">train_path</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1">#list.sort(cmp=None, key=None, reverse=False)，升序排列，跟train_json的文件排列一直起来。</span>
 <span class="n">train_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../input/train.json&#39;</span><span class="p">))</span>
 <span class="n">train_label</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_json</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train_json</span><span class="p">]</span>
 
@@ -576,6 +576,54 @@ torch.Size([10, 3, 64, 128]), torch.Size([10, 6])<br>
 <li>转变数据类型 ：float/int</li>
 <li>divide 255: img.float().div(255)</li>
 </ul>
+<h3 id="baseline结果">Baseline结果</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Epoch</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">3.503765054543813</span>      <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">3.48130961894989</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.356</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.2491484214464825</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">3.0459648995399475</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.4333</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.8961329097747803</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.837818443775177</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.476</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.6731903288364411</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.7689380412101747</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.4909</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.5381509892145793</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.758125602722168</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.4978</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.4285292768081028</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.600436863899231</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5247</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.3249877935647965</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.595946876049042</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5155</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.2398218791087467</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.5257772111892702</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5396</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.1702964349587759</span>     <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.5723482842445375</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5343</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="n">Train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.102836936334769</span>      <span class="n">Val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">2.5777434706687927</span>
+<span class="n">Val</span> <span class="n">Acc</span> <span class="mf">0.5385</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
     <div class="read-more">
       <a href="/post/datawhale_cv2/" class="read-more-link">阅读更多</a>
