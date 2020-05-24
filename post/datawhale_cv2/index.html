@@ -34,13 +34,16 @@ transforms.RandomCrop 随机区域裁剪
 transforms.RandomHorizontalFlip 随机水平翻转
 transforms.RandomRotation 随机旋转
 transforms.RandomVerticalFlip 随机垂直翻转
-常用的数据扩增库   torchvision https://github.com/pytorch/vision
+常用的数据扩增库   torchvision
+https://github.com/pytorch/vision
 pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；
-  imgaug https://github.com/aleju/imgaug
+  imgaug
+https://github.com/aleju/imgaug
 imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；
-  albumentations https://albumentations.readthedocs.io
+  albumentations
+https://albumentations.readthedocs.io
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-  Pytorch读取数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) lbl = list(lbl) &#43; (5 - len(lbl)) * [10] return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) train_path.sort() train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] data = SVHNDataset(train_path, train_label, # Compose方法将几种变换组合起来 transforms.Compose([ # 缩放到固定尺寸 transforms.Resize((64, 128)), # 随机颜色变换 transforms.ColorJitter(0.2, 0.2, 0.2), # 加入随机旋转 transforms.RandomRotation(5), # 将图片转换为pytorch 的tesntor # transforms.ToTensor(), # 对图像像素进行归一化 # transforms.Normalize([0.485,0.456,0.406],[0.229,0.224,0.225]) ]))    Dataset：对数据集的封装，提供索引方式的对数据样本进行读取 DataLoder：对Dataset进行封装，提供批量读取的迭代读取  PyTorch实现自由的数据读取
+  Pytorch读取数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) lbl = list(lbl) &#43; (5 - len(lbl)) * [10] return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) train_path.sort() train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] data = SVHNDataset(train_path, train_label, # Compose方法将几种变换组合起来 transforms.Compose([ # 缩放到固定尺寸 transforms.Resize((64, 128)), # 随机颜色变换 transforms.ColorJitter(0.2, 0.2, 0.2), # 加入随机旋转 transforms.RandomRotation(5), # 将图片转换为pytorch 的tesntor # transforms.ToTensor(), # 对图像像素进行归一化 # transforms.Normalize([0.485,0.456,0.406],[0.229,0.224,0.225]) ]))    Dataset：对数据集的封装，提供索引方式的对数据样本进行读取 DataLoder：对Dataset进行封装，提供批量读取的迭代读取  详细可阅读下面的文章 PyTorch实现自由的数据读取
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) #  lbl = list(lbl) &#43; (5 - len(lbl)) * [10] # 将数字转成定长度（为5）的数字，其中空的地方补充为【10】，也就是0. return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) #返回所有匹配的文件路径列表 train_path.sort() #list.sort(cmp=None, key=None, reverse=False)，升序排列 train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] train_loader = torch.utils.data.DataLoader( SVHNDataset(train_path, train_label, transforms.Compose([ transforms.Resize((64, 128)), transforms.ColorJitter(0.3, 0.3, 0.2), transforms.RandomRotation(5), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) ])), batch_size=10, # 每批样本个数 shuffle=False, # 是否打乱顺序 num_workers=10, # 读取的线程个数 ) for data in train_loader: break   " /><meta name="keywords" content="Deep Learning, Medical Field, Artificial Intelligence" />
 
 
@@ -344,6 +347,7 @@ data = SVHNDataset(train_path, train_label,
 Dataset：对数据集的封装，提供索引方式的对数据样本进行读取
 DataLoder：对Dataset进行封装，提供批量读取的迭代读取
 
+详细可阅读下面的文章
 PyTorch实现自由的数据读取
 
 
@@ -747,6 +751,7 @@ data = SVHNDataset(train_path, train_label,
 Dataset：对数据集的封装，提供索引方式的对数据样本进行读取
 DataLoder：对Dataset进行封装，提供批量读取的迭代读取
 
+详细可阅读下面的文章
 PyTorch实现自由的数据读取
 
 
@@ -867,7 +872,7 @@ for data in train_loader:
 ">
 <meta itemprop="datePublished" content="2020-05-23T21:34:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-23T21:34:11&#43;08:00" />
-<meta itemprop="wordCount" content="1859">
+<meta itemprop="wordCount" content="1869">
 
 
 
@@ -1153,6 +1158,7 @@ data = SVHNDataset(train_path, train_label,
 Dataset：对数据集的封装，提供索引方式的对数据样本进行读取
 DataLoder：对Dataset进行封装，提供批量读取的迭代读取
 
+详细可阅读下面的文章
 PyTorch实现自由的数据读取
 
 
@@ -1342,7 +1348,7 @@ for data in train_loader:
       <div class="post-meta">
         <span class="post-time"> 2020-05-23 </span>
         
-          <span class="more-meta"> 约 1859 字 </span>
+          <span class="more-meta"> 约 1869 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -1490,17 +1496,17 @@ transforms.RandomVerticalFlip 随机垂直翻转</p>
 <h3 id="常用的数据扩增库">常用的数据扩增库</h3>
 <ul>
 <li>
-<p>torchvision
+<p>torchvision<br>
 <a href="https://github.com/pytorch/vision">https://github.com/pytorch/vision</a><br>
 pytorch官方提供的数据扩增库，提供了基本的数据数据扩增方法，可以无缝与torch进行集成；但数据扩增方法种类较少，且速度中等；</p>
 </li>
 <li>
-<p>imgaug
+<p>imgaug<br>
 <a href="https://github.com/aleju/imgaug">https://github.com/aleju/imgaug</a><br>
 imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方法，且组合起来非常方便，速度较快；</p>
 </li>
 <li>
-<p>albumentations
+<p>albumentations<br>
 <a href="https://albumentations.readthedocs.io">https://albumentations.readthedocs.io</a><br>
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。</p>
 </li>
@@ -1630,7 +1636,8 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <li>Dataset：对数据集的封装，提供索引方式的对数据样本进行读取</li>
 <li>DataLoder：对Dataset进行封装，提供批量读取的迭代读取</li>
 </ul>
-<p><a href="https://zhuanlan.zhihu.com/p/30385675">PyTorch实现自由的数据读取</a></p>
+<p>详细可阅读下面的文章
+<a href="https://zhuanlan.zhihu.com/p/30385675">PyTorch实现自由的数据读取</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
