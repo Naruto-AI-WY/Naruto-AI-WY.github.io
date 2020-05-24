@@ -119,15 +119,16 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-23 </span>
       
-        <span class="more-meta"> 约 1869 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 2122 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
       <h2 id="图像读取">图像读取</h2>
-<p>在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。</p>
+<p>在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。<br>
+<a href="https://www.cnblogs.com/ocean1100/p/9494640.html">PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）</a></p>
 <h3 id="1pillow">（1）Pillow</h3>
 <p>Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。</p>
 <div class="highlight"><div class="chroma">
@@ -241,9 +242,9 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/cat4.png" alt="CV3"></p>
-<p>OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。
-OpenCV官网：https://opencv.org/
-OpenCV Github：https://github.com/opencv/opencv
+<p>OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。<br>
+OpenCV官网：https://opencv.org/<br>
+OpenCV Github：https://github.com/opencv/opencv<br>
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib</p>
 <h2 id="数据扩增方法">数据扩增方法</h2>
 <h3 id="数据扩增介绍">数据扩增介绍</h3>
@@ -354,7 +355,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="kn">as</span> <span class="nn">transforms</span>
 
 <span class="k">class</span> <span class="nc">SVHNDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># 实现初始化方法，在初始化的时候将数据载入</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_path</span> <span class="o">=</span> <span class="n">img_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_label</span> <span class="o">=</span> <span class="n">img_label</span> 
         <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -362,7 +363,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="bp">None</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span> <span class="c1"># 返回一行数据</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">[</span><span class="n">index</span><span class="p">])</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -374,7 +375,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
         
         <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lbl</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c1">#返回长度，数据总数</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">)</span>
 
 <span class="n">train_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../input/train/*.png&#39;</span><span class="p">)</span>
@@ -394,7 +395,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
               <span class="c1"># 加入随机旋转</span>
               <span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
 
-              <span class="c1"># 将图片转换为pytorch 的tesntor</span>
+              <span class="c1"># 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor</span>
               <span class="c1"># transforms.ToTensor(),</span>
 
               <span class="c1"># 对图像像素进行归一化</span>
@@ -406,7 +407,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <li>Dataset：对数据集的封装，提供索引方式的对数据样本进行读取</li>
 <li>DataLoder：对Dataset进行封装，提供批量读取的迭代读取</li>
 </ul>
-<p>详细可阅读下面的文章
+<p>详细可阅读下面的文章<br>
 <a href="https://zhuanlan.zhihu.com/p/30385675">PyTorch实现自由的数据读取</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

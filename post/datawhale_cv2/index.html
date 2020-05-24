@@ -17,10 +17,14 @@
 
 
 <meta name="author" content="Naruto" /><meta name="description" content="图像读取 在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。
+PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）
 （1）Pillow Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。
 1 2 3 4 5  from PIL import Image # 导入Pillow库 # 读取图片 im =Image.open(cat.jpg&amp;#39;)   1 2 3 4 5  from PIL import Image, ImageFilter im = Image.open(&amp;#39;cat.jpg&amp;#39;) # 应用模糊滤镜: im2 = im.filter(ImageFilter.BLUR) im2.save(&amp;#39;blur.jpg&amp;#39;, &amp;#39;jpeg&amp;#39;)   1 2 3 4 5  from PIL import Image # 打开一个jpg图像文件，注意是当前路径: im = Image.open(&amp;#39;cat.jpg&amp;#39;) im.thumbnail((w//2, h//2)) im.save(&amp;#39;thumbnail.jpg&amp;#39;, &amp;#39;jpeg&amp;#39;)   Pillow的官方文档：https://pillow.readthedocs.io/en/stable/
 （2）OpenCV OpenCV是一个跨平台的计算机视觉库，最早由Intel开源得来。OpenCV发展的非常早，拥有众多的计算机视觉、数字图像处理和机器视觉等功能。OpenCV在功能上比Pillow更加强大很多，学习成本也高很多。
-1 2 3 4 5  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) # Opencv默认颜色通道顺序是BRG，转换一下 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   1 2 3 4 5  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为灰度图   1 2 3 4 5 6 7 8  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) img =cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为灰度图 # Canny边缘检测 edges = cv2.Canny(img, 30, 70) cv2.imwrite(&amp;#39;canny.jpg&amp;#39;, edges)   OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。 OpenCV官网：https://opencv.org/ OpenCV Github：https://github.com/opencv/opencv OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
+1 2 3 4 5  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) # Opencv默认颜色通道顺序是BRG，转换一下 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   1 2 3 4 5  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为灰度图   1 2 3 4 5 6 7 8  import cv2 # 导入Opencv库 img = cv2.imread(&amp;#39;cat.jpg&amp;#39;) img =cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为灰度图 # Canny边缘检测 edges = cv2.Canny(img, 30, 70) cv2.imwrite(&amp;#39;canny.jpg&amp;#39;, edges)   OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。
+OpenCV官网：https://opencv.org/
+OpenCV Github：https://github.com/opencv/opencv
+OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
 数据扩增方法 数据扩增介绍 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
 常见的数据扩增方法 在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。
 以torchvision为例，常见的数据扩增方法包括：
@@ -43,7 +47,8 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
   albumentations
 https://albumentations.readthedocs.io
 是常用的第三方数据扩增库，提供了多样的数据扩增方法，对图像分类、语义分割、物体检测和关键点检测都支持，速度较快。
-  Pytorch读取数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) lbl = list(lbl) &#43; (5 - len(lbl)) * [10] return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) train_path.sort() train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] data = SVHNDataset(train_path, train_label, # Compose方法将几种变换组合起来 transforms.Compose([ # 缩放到固定尺寸 transforms.Resize((64, 128)), # 随机颜色变换 transforms.ColorJitter(0.2, 0.2, 0.2), # 加入随机旋转 transforms.RandomRotation(5), # 将图片转换为pytorch 的tesntor # transforms.ToTensor(), # 对图像像素进行归一化 # transforms.Normalize([0.485,0.456,0.406],[0.229,0.224,0.225]) ]))    Dataset：对数据集的封装，提供索引方式的对数据样本进行读取 DataLoder：对Dataset进行封装，提供批量读取的迭代读取  详细可阅读下面的文章 PyTorch实现自由的数据读取
+  Pytorch读取数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): # 实现初始化方法，在初始化的时候将数据载入 self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): # 返回一行数据 img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) lbl = list(lbl) &#43; (5 - len(lbl)) * [10] return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): #返回长度，数据总数 return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) train_path.sort() train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] data = SVHNDataset(train_path, train_label, # Compose方法将几种变换组合起来 transforms.Compose([ # 缩放到固定尺寸 transforms.Resize((64, 128)), # 随机颜色变换 transforms.ColorJitter(0.2, 0.2, 0.2), # 加入随机旋转 transforms.RandomRotation(5), # 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor # transforms.ToTensor(), # 对图像像素进行归一化 # transforms.Normalize([0.485,0.456,0.406],[0.229,0.224,0.225]) ]))    Dataset：对数据集的封装，提供索引方式的对数据样本进行读取 DataLoder：对Dataset进行封装，提供批量读取的迭代读取  详细可阅读下面的文章
+PyTorch实现自由的数据读取
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55  import os, sys, glob, shutil, json import cv2 from PIL import Image import numpy as np import torch from torch.utils.data.dataset import Dataset import torchvision.transforms as transforms class SVHNDataset(Dataset): def __init__(self, img_path, img_label, transform=None): self.img_path = img_path self.img_label = img_label if transform is not None: self.transform = transform else: self.transform = None def __getitem__(self, index): img = Image.open(self.img_path[index]).convert(&amp;#39;RGB&amp;#39;) if self.transform is not None: img = self.transform(img) # 原始SVHN中类别10为数字0 lbl = np.array(self.img_label[index], dtype=np.int) #  lbl = list(lbl) &#43; (5 - len(lbl)) * [10] # 将数字转成定长度（为5）的数字，其中空的地方补充为【10】，也就是0. return img, torch.from_numpy(np.array(lbl[:5])) def __len__(self): return len(self.img_path) train_path = glob.glob(&amp;#39;../input/train/*.png&amp;#39;) #返回所有匹配的文件路径列表 train_path.sort() #list.sort(cmp=None, key=None, reverse=False)，升序排列 train_json = json.load(open(&amp;#39;../input/train.json&amp;#39;)) train_label = [train_json[x][&amp;#39;label&amp;#39;] for x in train_json] train_loader = torch.utils.data.DataLoader( SVHNDataset(train_path, train_label, transforms.Compose([ transforms.Resize((64, 128)), transforms.ColorJitter(0.3, 0.3, 0.2), transforms.RandomRotation(5), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) ])), batch_size=10, # 每批样本个数 shuffle=False, # 是否打乱顺序 num_workers=10, # 读取的线程个数 ) for data in train_loader: break   " /><meta name="keywords" content="Deep Learning, Medical Field, Artificial Intelligence" />
 
 
@@ -69,6 +74,7 @@ https://albumentations.readthedocs.io
 <meta property="og:title" content="数据读取与数据扩增" />
 <meta property="og:description" content="图像读取
 在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。
+PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）
 （1）Pillow
 Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。
 
@@ -295,7 +301,7 @@ from torch.utils.data.dataset import Dataset
 import torchvision.transforms as transforms
 
 class SVHNDataset(Dataset):
-    def __init__(self, img_path, img_label, transform=None):
+    def __init__(self, img_path, img_label, transform=None):  # 实现初始化方法，在初始化的时候将数据载入
         self.img_path = img_path
         self.img_label = img_label 
         if transform is not None:
@@ -303,7 +309,7 @@ class SVHNDataset(Dataset):
         else:
             self.transform = None
 
-    def __getitem__(self, index):
+    def __getitem__(self, index): # 返回一行数据
         img = Image.open(self.img_path[index]).convert(&#39;RGB&#39;)
 
         if self.transform is not None:
@@ -315,7 +321,7 @@ class SVHNDataset(Dataset):
         
         return img, torch.from_numpy(np.array(lbl[:5]))
 
-    def __len__(self):
+    def __len__(self):     #返回长度，数据总数
         return len(self.img_path)
 
 train_path = glob.glob(&#39;../input/train/*.png&#39;)
@@ -335,7 +341,7 @@ data = SVHNDataset(train_path, train_label,
               # 加入随机旋转
               transforms.RandomRotation(5),
 
-              # 将图片转换为pytorch 的tesntor
+              # 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor
               # transforms.ToTensor(),
 
               # 对图像像素进行归一化
@@ -473,6 +479,7 @@ for data in train_loader:
 <meta itemprop="name" content="数据读取与数据扩增">
 <meta itemprop="description" content="图像读取
 在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。
+PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）
 （1）Pillow
 Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。
 
@@ -699,7 +706,7 @@ from torch.utils.data.dataset import Dataset
 import torchvision.transforms as transforms
 
 class SVHNDataset(Dataset):
-    def __init__(self, img_path, img_label, transform=None):
+    def __init__(self, img_path, img_label, transform=None):  # 实现初始化方法，在初始化的时候将数据载入
         self.img_path = img_path
         self.img_label = img_label 
         if transform is not None:
@@ -707,7 +714,7 @@ class SVHNDataset(Dataset):
         else:
             self.transform = None
 
-    def __getitem__(self, index):
+    def __getitem__(self, index): # 返回一行数据
         img = Image.open(self.img_path[index]).convert(&#39;RGB&#39;)
 
         if self.transform is not None:
@@ -719,7 +726,7 @@ class SVHNDataset(Dataset):
         
         return img, torch.from_numpy(np.array(lbl[:5]))
 
-    def __len__(self):
+    def __len__(self):     #返回长度，数据总数
         return len(self.img_path)
 
 train_path = glob.glob(&#39;../input/train/*.png&#39;)
@@ -739,7 +746,7 @@ data = SVHNDataset(train_path, train_label,
               # 加入随机旋转
               transforms.RandomRotation(5),
 
-              # 将图片转换为pytorch 的tesntor
+              # 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor
               # transforms.ToTensor(),
 
               # 对图像像素进行归一化
@@ -872,7 +879,7 @@ for data in train_loader:
 ">
 <meta itemprop="datePublished" content="2020-05-23T21:34:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-23T21:34:11&#43;08:00" />
-<meta itemprop="wordCount" content="1869">
+<meta itemprop="wordCount" content="2122">
 
 
 
@@ -880,6 +887,7 @@ for data in train_loader:
 <meta name="twitter:title" content="数据读取与数据扩增"/>
 <meta name="twitter:description" content="图像读取
 在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。
+PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）
 （1）Pillow
 Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。
 
@@ -1106,7 +1114,7 @@ from torch.utils.data.dataset import Dataset
 import torchvision.transforms as transforms
 
 class SVHNDataset(Dataset):
-    def __init__(self, img_path, img_label, transform=None):
+    def __init__(self, img_path, img_label, transform=None):  # 实现初始化方法，在初始化的时候将数据载入
         self.img_path = img_path
         self.img_label = img_label 
         if transform is not None:
@@ -1114,7 +1122,7 @@ class SVHNDataset(Dataset):
         else:
             self.transform = None
 
-    def __getitem__(self, index):
+    def __getitem__(self, index): # 返回一行数据
         img = Image.open(self.img_path[index]).convert(&#39;RGB&#39;)
 
         if self.transform is not None:
@@ -1126,7 +1134,7 @@ class SVHNDataset(Dataset):
         
         return img, torch.from_numpy(np.array(lbl[:5]))
 
-    def __len__(self):
+    def __len__(self):     #返回长度，数据总数
         return len(self.img_path)
 
 train_path = glob.glob(&#39;../input/train/*.png&#39;)
@@ -1146,7 +1154,7 @@ data = SVHNDataset(train_path, train_label,
               # 加入随机旋转
               transforms.RandomRotation(5),
 
-              # 将图片转换为pytorch 的tesntor
+              # 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor
               # transforms.ToTensor(),
 
               # 对图像像素进行归一化
@@ -1348,8 +1356,8 @@ for data in train_loader:
       <div class="post-meta">
         <span class="post-time"> 2020-05-23 </span>
         
-          <span class="more-meta"> 约 1869 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2122 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -1357,7 +1365,8 @@ for data in train_loader:
     
     <div class="post-content">
       <h2 id="图像读取">图像读取</h2>
-<p>在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。</p>
+<p>在Python中有很多库可以完成数据读取的操作，比较常见的有Pillow和OpenCV。<br>
+<a href="https://www.cnblogs.com/ocean1100/p/9494640.html">PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）</a></p>
 <h3 id="1pillow">（1）Pillow</h3>
 <p>Pillow是Python图像处理函式库(PIL）的一个分支。Pillow提供了常见的图像读取和处理的操作，而且可以与ipython notebook无缝集成，是应用比较广泛的库。</p>
 <div class="highlight"><div class="chroma">
@@ -1471,9 +1480,9 @@ for data in train_loader:
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/cat4.png" alt="CV3"></p>
-<p>OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。
-OpenCV官网：https://opencv.org/
-OpenCV Github：https://github.com/opencv/opencv
+<p>OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到的只要与图像相关的操作。此外OpenCV还内置了很多的图像特征处理算法，如关键点检测、边缘检测和直线检测等。<br>
+OpenCV官网：https://opencv.org/<br>
+OpenCV Github：https://github.com/opencv/opencv<br>
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib</p>
 <h2 id="数据扩增方法">数据扩增方法</h2>
 <h3 id="数据扩增介绍">数据扩增介绍</h3>
@@ -1584,7 +1593,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="kn">as</span> <span class="nn">transforms</span>
 
 <span class="k">class</span> <span class="nc">SVHNDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_label</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># 实现初始化方法，在初始化的时候将数据载入</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_path</span> <span class="o">=</span> <span class="n">img_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img_label</span> <span class="o">=</span> <span class="n">img_label</span> 
         <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -1592,7 +1601,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="bp">None</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span> <span class="c1"># 返回一行数据</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">[</span><span class="n">index</span><span class="p">])</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -1604,7 +1613,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
         
         <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lbl</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c1">#返回长度，数据总数</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">)</span>
 
 <span class="n">train_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../input/train/*.png&#39;</span><span class="p">)</span>
@@ -1624,7 +1633,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
               <span class="c1"># 加入随机旋转</span>
               <span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
 
-              <span class="c1"># 将图片转换为pytorch 的tesntor</span>
+              <span class="c1"># 将图片转换为pytorch 的tenstor，（C,H,W）的转换、PyTorch在做一般的深度学习图像处理任务时，先使用dataset类和dataloader类读入图片，在读入的时候需要做transform变换，其中transform一般都需要ToTensor()操作，将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor</span>
               <span class="c1"># transforms.ToTensor(),</span>
 
               <span class="c1"># 对图像像素进行归一化</span>
@@ -1636,7 +1645,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
 <li>Dataset：对数据集的封装，提供索引方式的对数据样本进行读取</li>
 <li>DataLoder：对Dataset进行封装，提供批量读取的迭代读取</li>
 </ul>
-<p>详细可阅读下面的文章
+<p>详细可阅读下面的文章<br>
 <a href="https://zhuanlan.zhihu.com/p/30385675">PyTorch实现自由的数据读取</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
