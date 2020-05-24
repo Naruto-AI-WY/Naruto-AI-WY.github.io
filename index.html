@@ -119,7 +119,7 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-23 </span>
       
-        <span class="more-meta"> 约 2122 字 </span>
+        <span class="more-meta"> 约 2364 字 </span>
         <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
@@ -525,7 +525,57 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
     <span class="k">break</span>
 </code></pre></td></tr></table>
 </div>
+</div><p>在加入DataLoder后，数据按照批次获取，每批次调用Dataset读取单个样本进行拼接。此时data的格式为：<br>
+torch.Size([10, 3, 64, 128]), torch.Size([10, 6])<br>
+前者为图像文件，为batchsize * chanel * height * width次序；后者为字符标签。</p>
+<h3 id="torchvisiontotensor">torchvision.ToTensor()</h3>
+<p>源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">ToTensor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Convert a ``PIL Image`` or ``numpy.ndarray`` to tensor.
+</span><span class="s2">    Converts a PIL Image or numpy.ndarray (H x W x C) in the range
+</span><span class="s2">    [0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0].
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pic</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Args:
+</span><span class="s2">            pic (PIL Image or numpy.ndarray): Image to be converted to tensor.
+</span><span class="s2">        Returns:
+</span><span class="s2">            Tensor: Converted image.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">to_tensor</span><span class="p">(</span><span class="n">pic</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">&#39;()&#39;</span>
+</code></pre></td></tr></table>
 </div>
+</div><p>ToTensor具体操作：</p>
+<ul>
+<li>转换维度：img = torch.from_numpy (pic.transpose ((2, 0, 1)))</li>
+<li>转变数据类型 ：float/int</li>
+<li>divide 255: img.float().div(255)</li>
+</ul>
     </div>
     <div class="read-more">
       <a href="/post/datawhale_cv2/" class="read-more-link">阅读更多</a>
