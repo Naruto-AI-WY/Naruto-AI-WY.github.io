@@ -119,7 +119,7 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-23 </span>
       
-        <span class="more-meta"> 约 2746 字 </span>
+        <span class="more-meta"> 约 2807 字 </span>
         <span class="more-meta"> 预计阅读 6 分钟 </span>
     </div>
   </header>
@@ -510,7 +510,7 @@ imgaug是常用的第三方数据扩增库，提供了多样的数据扩增方�
                        <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">)),</span>
                        <span class="n">transforms</span><span class="o">.</span><span class="n">ColorJitter</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
                        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
-                       <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+                       <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>      <span class="c1"># 将dataset类中__getitem__()方法内读入的PIL或CV的图像数据转换为torch.FloatTensor</span>
                        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">([</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span>
             <span class="p">])),</span> 
     <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># 每批样本个数</span>
