@@ -25,7 +25,7 @@ PyTorch载入图片后ToTensor解读（含PIL和OpenCV读取图片对比）
 OpenCV官网：https://opencv.org/
 OpenCV Github：https://github.com/opencv/opencv
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
-数据扩增方法 数据扩增介绍 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
+数据扩增 数据扩增介绍 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
 常见的数据扩增方法 在常见的数据扩增方法中，一般会从图像颜色、尺寸、形态、空间和像素等角度进行变换。当然不同的数据扩增方法可以自由进行组合，得到更加丰富的数据扩增方法。
 以torchvision为例，常见的数据扩增方法包括： transforms.CenterCrop 对图片中心进行裁剪
 transforms.ColorJitter 对图像颜色的对比度、饱和度和零度进行变换
@@ -197,7 +197,7 @@ OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到�
 OpenCV官网：https://opencv.org/
 OpenCV Github：https://github.com/opencv/opencv
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
-数据扩增方法
+数据扩增
 数据扩增介绍
 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
 
@@ -697,7 +697,7 @@ OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到�
 OpenCV官网：https://opencv.org/
 OpenCV Github：https://github.com/opencv/opencv
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
-数据扩增方法
+数据扩增
 数据扩增介绍
 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
 
@@ -1074,7 +1074,7 @@ Val Acc 0.5385
 github地址">
 <meta itemprop="datePublished" content="2020-05-23T21:34:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-23T21:34:11&#43;08:00" />
-<meta itemprop="wordCount" content="2748">
+<meta itemprop="wordCount" content="2746">
 
 
 
@@ -1200,7 +1200,7 @@ OpenCV包含了众多的图像处理的功能，OpenCV包含了你能想得到�
 OpenCV官网：https://opencv.org/
 OpenCV Github：https://github.com/opencv/opencv
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib
-数据扩增方法
+数据扩增
 数据扩增介绍
 在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。
 
@@ -1646,7 +1646,7 @@ github地址"/>
       <div class="post-meta">
         <span class="post-time"> 2020-05-23 </span>
         
-          <span class="more-meta"> 约 2748 字 </span>
+          <span class="more-meta"> 约 2746 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -1663,7 +1663,7 @@ github地址"/>
         <li><a href="#2opencv">（2）OpenCV</a></li>
       </ul>
     </li>
-    <li><a href="#数据扩增方法">数据扩增方法</a>
+    <li><a href="#数据扩增">数据扩增</a>
       <ul>
         <li><a href="#数据扩增介绍">数据扩增介绍</a></li>
         <li><a href="#常见的数据扩增方法">常见的数据扩增方法</a></li>
@@ -1673,9 +1673,9 @@ github地址"/>
     <li><a href="#pytorch读取数据">Pytorch读取数据</a>
       <ul>
         <li><a href="#torchvisiontotensor">torchvision.ToTensor()</a></li>
-        <li><a href="#baseline结果">Baseline结果</a></li>
       </ul>
     </li>
+    <li><a href="#baseline结果">Baseline结果</a></li>
   </ul>
 </nav>
   </div>
@@ -1801,7 +1801,7 @@ github地址"/>
 OpenCV官网：https://opencv.org/<br>
 OpenCV Github：https://github.com/opencv/opencv<br>
 OpenCV 扩展算法库：https://github.com/opencv/opencv_contrib</p>
-<h2 id="数据扩增方法">数据扩增方法</h2>
+<h2 id="数据扩增">数据扩增</h2>
 <h3 id="数据扩增介绍">数据扩增介绍</h3>
 <p>在深度学习中数据扩增方法非常重要，数据扩增可以增加训练集的样本，同时也可以有效缓解模型过拟合的情况，也可以给模型带来的更强的泛化能力。</p>
 <p><img src="/img/cat_enlarge.png" alt="CV3"></p>
@@ -2128,7 +2128,7 @@ torch.Size([10, 3, 64, 128]), torch.Size([10, 6])<br>
 <li>转变数据类型 ：float/int</li>
 <li>divide 255: img.float().div(255)</li>
 </ul>
-<h3 id="baseline结果">Baseline结果</h3>
+<h2 id="baseline结果">Baseline结果</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
