@@ -119,7 +119,7 @@
     <div class="post-meta">
       <span class="post-time"> 2020-05-26 </span>
       
-        <span class="more-meta"> 约 1751 字 </span>
+        <span class="more-meta"> 约 1897 字 </span>
         <span class="more-meta"> 预计阅读 4 分钟 </span>
     </div>
   </header>
@@ -332,7 +332,7 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
         <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>        <span class="c1"># 反向传播，计算梯度值</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>       <span class="c1"># 更新权值参数</span>
         
-        <span class="n">loss_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        <span class="n">loss_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>   <span class="c1">#  loss.item()：从tensor张量中获得 python number</span>
         <span class="n">c0_plot</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">c0</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">*</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">c0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         
     <span class="k">print</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
@@ -374,9 +374,9 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SVHN_Model1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
                 
-        <span class="n">model_conv</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 使用预训练模型</span>
+        <span class="n">model_conv</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>              <span class="c1"># 使用预训练模型</span>
         <span class="n">model_conv</span><span class="o">.</span><span class="n">avgpool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">model_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">model_conv</span><span class="o">.</span><span class="n">children</span><span class="p">())[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">model_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">model_conv</span><span class="o">.</span><span class="n">children</span><span class="p">())[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 继承nn.module的model_conv它包含一个叫做children()的函数，这个函数可以用来提取出model每一层的网络结构。-1:除去model_conv的最后一层结果。</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cnn</span> <span class="o">=</span> <span class="n">model_conv</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
@@ -397,7 +397,7 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
         <span class="k">return</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span>
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><p><a href="https://blog.csdn.net/whut_ldz/article/details/78845947">pytorch中的pre-train函数模型引用及修改</a></p>
     </div>
     <div class="read-more">
       <a href="/post/datawhale_cv3/" class="read-more-link">阅读更多</a>
