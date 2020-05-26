@@ -6,10 +6,24 @@
     <description>Recent content in Posts on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 23 May 2020 21:34:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2020 17:23:00 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Datawhale_零基础入门CV赛事-字符识别模型</title>
+      <link>https://Naruto-AI-WY.github.io/post/datawhale_cv3/</link>
+      <pubDate>Tue, 26 May 2020 17:23:00 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/post/datawhale_cv3/</guid>
+      <description>&lt;h2 id=&#34;字符识别模型&#34;&gt;字符识别模型&lt;/h2&gt;
+&lt;p&gt;卷积神经网络（Convolutional Neural Network, CNN）&lt;/p&gt;
+&lt;h3 id=&#34;cnn介绍&#34;&gt;CNN介绍&lt;/h3&gt;
+&lt;p&gt;卷积神经网络（简称CNN）是一类特殊的人工神经网络，是深度学习中重要的一个分支。CNN在很多领域都表现优异，精度和速度比传统计算学习算法高很多。特别是在计算机视觉领域，CNN是解决图像分类、图像检索、物体检测和语义分割的主流模型。&lt;br&gt;
+CNN每一层由众多的卷积核组成，每个卷积核对输入的像素进行卷积操作，得到下一次的输入。随着网络层的增加卷积核会逐渐扩大感受野，并缩减图像的尺寸。&lt;br&gt;
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/CNN.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>零基础入门CV赛事-数据读取与数据扩增</title>
