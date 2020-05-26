@@ -43,7 +43,29 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;li&gt;ResNet-50 (2015)
 &lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Resnet50.png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;pytorch构建cnn模型&#34;&gt;Pytorch构建CNN模型&lt;/h3&gt;</description>
+&lt;h3 id=&#34;pytorch构建cnn模型&#34;&gt;Pytorch构建CNN模型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;准备数据&lt;/li&gt;
+&lt;li&gt;定义网络结构model&lt;/li&gt;
+&lt;li&gt;定义损失函数&lt;/li&gt;
+&lt;li&gt;定义优化算法 optimizer&lt;/li&gt;
+&lt;li&gt;训练
+&lt;ul&gt;
+&lt;li&gt;准备好tensor形式的输入数据和标签(可选)&lt;/li&gt;
+&lt;li&gt;前向传播计算网络输出output和计算损失函数loss&lt;/li&gt;
+&lt;li&gt;反向传播更新参数(以下三句话一句也不能少：)
+&lt;ul&gt;
+&lt;li&gt;1、将上次迭代计算的梯度值清0， optimizer.zero_grad()&lt;/li&gt;
+&lt;li&gt;2、反向传播，计算梯度值，loss.backward()&lt;/li&gt;
+&lt;li&gt;3、更新权值参数，optimizer.step()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保存训练集上的loss和验证集上的loss以及准确率以及打印训练信息(可选)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;图示训练过程中loss和accuracy的变化情况(可选)&lt;/li&gt;
+&lt;li&gt;在测试集上测试&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
