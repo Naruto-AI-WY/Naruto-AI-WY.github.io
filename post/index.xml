@@ -51,13 +51,14 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/VGG.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Inception-v1 (2014)
-原论文：
+&lt;li&gt;Inception-v1 (2014)&lt;br&gt;
+原论文：&lt;br&gt;
 &lt;a href=&#34;https://arxiv.org/pdf/1409.4842v1.pdf&#34;&gt;Going deeper with convolutions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Incep-net.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;ResNet-50 (2015)
+&lt;li&gt;ResNet-50 (2015)&lt;br&gt;
+原论文：&lt;br&gt;
 &lt;a href=&#34;https://arxiv.org/pdf/1512.03385.pdf&#34;&gt;Deep Residual Learning for Image Recognition&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Resnet50.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
