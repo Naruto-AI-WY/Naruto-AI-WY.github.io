@@ -26,8 +26,9 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 CNN发展 随着网络结构的发展，研究人员最初发现网络模型结构越深、网络参数越多模型的精度更优。比较典型的是AlexNet、VGG、InceptionV3和ResNet的发展脉络。
  LeNet-5(1998) 原论文：
 Gradient-based Learning applied to documents recognition   AlexNet(2012)
-原论文： ImageNet Classification with Deep Convolutional Neural Networks    VGG-16(2014)
-  Inception-v1 (2014)   ResNet-50 (2015)   Pytorch构建CNN模型  准备数据 定义网络结构model 定义损失函数 定义优化算法 optimizer 训练  准备好tensor形式的输入数据和标签(可选) 前向传播计算网络输出output和计算损失函数loss 反向传播更新参数(以下三句话一句也不能少：)  1、将上次迭代计算的梯度值清0， optimizer.zero_grad() 2、反向传播，计算梯度值，loss.backward() 3、更新权值参数，optimizer.step()   保存训练集上的loss和验证集上的loss以及准确率以及打印训练信息(可选)。   图示训练过程中loss和accuracy的变化情况(可选) 在测试集上测试  在Pytorch中构建CNN模型非常简单，只需要定义好模型的参数和正向传播即可，Pytorch会根据正向传播自动计算反向传播。
+原论文： ImageNet Classification with Deep Convolutional Neural Networks   VGG-16(2014)
+原论文： 《Very Deep Convolutional Networks for Large-Scale Image Recognition》
+homepage：Visual Geometry Group Home Page   Inception-v1 (2014) 原论文： Going deeper with convolutions   ResNet-50 (2015) Deep Residual Learning for Image Recognition  Pytorch构建CNN模型  准备数据 定义网络结构model 定义损失函数 定义优化算法 optimizer 训练  准备好tensor形式的输入数据和标签(可选) 前向传播计算网络输出output和计算损失函数loss 反向传播更新参数(以下三句话一句也不能少：)  1、将上次迭代计算的梯度值清0， optimizer.zero_grad() 2、反向传播，计算梯度值，loss.backward() 3、更新权值参数，optimizer.step()   保存训练集上的loss和验证集上的loss以及准确率以及打印训练信息(可选)。   图示训练过程中loss和accuracy的变化情况(可选) 在测试集上测试  在Pytorch中构建CNN模型非常简单，只需要定义好模型的参数和正向传播即可，Pytorch会根据正向传播自动计算反向传播。
 我们会构建一个非常简单的CNN，然后进行训练。这个CNN模型包括两个卷积层，最后并联6个全连接层进行分类。
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49  import torch torch.manual_seed(0) torch.backends.cudnn.deterministic = False torch.backends.cudnn.benchmark = True import torchvision.models as models import torchvision.transforms as transforms import torchvision.datasets as datasets import torch.nn as nn import torch.nn.functional as F import torch.optim as optim from torch.autograd import Variable from torch.utils.data.dataset import Dataset # 定义模型 class SVHN_Model1(nn.Module): def __init__(self): super(SVHN_Model1, self).__init__() # CNN提取特征模块 self.cnn = nn.Sequential( # 第1个卷积层 nn.Conv2d(3, 16, kernel_size=(3, 3), stride=(2, 2)), nn.ReLU(), nn.MaxPool2d(2), # 第2个卷积层 nn.Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2)), nn.ReLU(), nn.MaxPool2d(2), ) # 并联6个全连接层。 self.fc1 = nn.Linear(32*3*7, 11) # Linear regression model self.fc2 = nn.Linear(32*3*7, 11) self.fc3 = nn.Linear(32*3*7, 11) self.fc4 = nn.Linear(32*3*7, 11) self.fc5 = nn.Linear(32*3*7, 11) self.fc6 = nn.Linear(32*3*7, 11) def forward(self, img): # 前向传播，计算输出output和计算损失函数loss feat = self.cnn(img) feat = feat.view(feat.shape[0], -1) # resize矩阵 c1 = self.fc1(feat) c2 = self.fc2(feat) c3 = self.fc3(feat) c4 = self.fc4(feat) c5 = self.fc5(feat) c6 = self.fc6(feat) return c1, c2, c3, c4, c5, c6 model = SVHN_Model1()   Pytorch 中 nn.Linear 函数解读
 接下来是训练代码：
@@ -84,17 +85,21 @@ ImageNet Classification with Deep Convolutional Neural Networks
 
 
 
-
 VGG-16(2014)
+原论文：
+《Very Deep Convolutional Networks for Large-Scale Image Recognition》
+homepage：Visual Geometry Group Home Page
 
 
 
 Inception-v1 (2014)
+原论文：
+Going deeper with convolutions
 
 
 
 ResNet-50 (2015)
-
+Deep Residual Learning for Image Recognition
 
 
 Pytorch构建CNN模型
@@ -376,17 +381,21 @@ ImageNet Classification with Deep Convolutional Neural Networks
 
 
 
-
 VGG-16(2014)
+原论文：
+《Very Deep Convolutional Networks for Large-Scale Image Recognition》
+homepage：Visual Geometry Group Home Page
 
 
 
 Inception-v1 (2014)
+原论文：
+Going deeper with convolutions
 
 
 
 ResNet-50 (2015)
-
+Deep Residual Learning for Image Recognition
 
 
 Pytorch构建CNN模型
@@ -638,7 +647,7 @@ class SVHN_Model2(nn.Module):
 pytorch中的pre-train函数模型引用及修改">
 <meta itemprop="datePublished" content="2020-05-26T17:23:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-26T17:23:00&#43;08:00" />
-<meta itemprop="wordCount" content="1925">
+<meta itemprop="wordCount" content="1985">
 
 
 
@@ -671,17 +680,21 @@ ImageNet Classification with Deep Convolutional Neural Networks
 
 
 
-
 VGG-16(2014)
+原论文：
+《Very Deep Convolutional Networks for Large-Scale Image Recognition》
+homepage：Visual Geometry Group Home Page
 
 
 
 Inception-v1 (2014)
+原论文：
+Going deeper with convolutions
 
 
 
 ResNet-50 (2015)
-
+Deep Residual Learning for Image Recognition
 
 
 Pytorch构建CNN模型
@@ -1002,7 +1015,7 @@ pytorch中的pre-train函数模型引用及修改"/>
       <div class="post-meta">
         <span class="post-time"> 2020-05-26 </span>
         
-          <span class="more-meta"> 约 1925 字 </span>
+          <span class="more-meta"> 约 1985 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -1037,19 +1050,23 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 </ul>
 <p><img src="/img/Alex-net.png" alt="CV3"></p>
 <ul>
-<li>
-<p>VGG-16(2014)<br>
-<img src="/img/VGG.png" alt="CV3"></p>
-</li>
-<li>
-<p>Inception-v1 (2014)
-<img src="/img/Incep-net.png" alt="CV3"></p>
-</li>
-<li>
-<p>ResNet-50 (2015)
-<img src="/img/Resnet50.png" alt="CV3"></p>
-</li>
+<li>VGG-16(2014)<br>
+原论文：
+<a href="https://arxiv.org/pdf/1409.1556.pdf">《Very Deep Convolutional Networks for Large-Scale Image Recognition》</a><br>
+<a href="http://www.robots.ox.ac.uk/~vgg/research/very_deep/">homepage：Visual Geometry Group Home Page</a></li>
 </ul>
+<p><img src="/img/VGG.png" alt="CV3"></p>
+<ul>
+<li>Inception-v1 (2014)
+原论文：
+<a href="https://arxiv.org/pdf/1409.4842v1.pdf">Going deeper with convolutions</a></li>
+</ul>
+<p><img src="/img/Incep-net.png" alt="CV3"></p>
+<ul>
+<li>ResNet-50 (2015)
+<a href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a></li>
+</ul>
+<p><img src="/img/Resnet50.png" alt="CV3"></p>
 <h3 id="pytorch构建cnn模型">Pytorch构建CNN模型</h3>
 <ul>
 <li>准备数据</li>
