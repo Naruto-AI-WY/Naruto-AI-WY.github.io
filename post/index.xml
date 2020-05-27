@@ -33,15 +33,29 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Model.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;LeNet-5(1998)
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/LeNet-5(1998).png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
+原论文：&lt;br&gt;
+&lt;a href=&#34;http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf&#34;&gt;Gradient-based Learning applied to documents recognition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/LeNet-5(1998).png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;AlexNet(2012)&lt;br&gt;
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Alex-net.png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
-&lt;li&gt;VGG-16(2014)&lt;br&gt;
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/VGG.png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
-&lt;li&gt;Inception-v1 (2014)
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Incep-net.png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
-&lt;li&gt;ResNet-50 (2015)
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Resnet50.png&#34; alt=&#34;CV3&#34;&gt;&lt;/li&gt;
+原论文：
+&lt;a href=&#34;https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf&#34;&gt;ImageNet Classification with Deep Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Alex-net.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;VGG-16(2014)&lt;br&gt;
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/VGG.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inception-v1 (2014)
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Incep-net.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ResNet-50 (2015)
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Resnet50.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;pytorch构建cnn模型&#34;&gt;Pytorch构建CNN模型&lt;/h3&gt;
 &lt;ul&gt;
@@ -172,7 +186,7 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;span class=&#34;n&#34;&gt;model&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SVHN_Model1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;http://digtime.cn/articles/159/pytorch-zhong-nn-linear-han-shu-jie-du&#34;&gt;Pytorch 中 nn.Linear 函数解读&lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;http://digtime.cn/articles/159/pytorch-zhong-nn-linear-han-shu-jie-du&#34;&gt;Pytorch 中 nn.Linear 函数解读&lt;/a&gt;&lt;br&gt;
 接下来是训练代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
