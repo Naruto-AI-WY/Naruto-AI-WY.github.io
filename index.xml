@@ -41,7 +41,7 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;p&gt;随着网络结构的发展，研究人员最初发现网络模型结构越深、网络参数越多模型的精度更优。比较典型的是AlexNet、VGG、InceptionV3和ResNet的发展脉络。&lt;br&gt;
 &lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Model.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;LeNet-5(1998)
+&lt;li&gt;LeNet-5(1998)&lt;br&gt;
 原论文：&lt;a href=&#34;http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf&#34;&gt;Gradient-based Learning applied to documents recognition&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/LeNet-5(1998).png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
