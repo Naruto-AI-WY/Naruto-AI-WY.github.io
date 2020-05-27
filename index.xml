@@ -56,7 +56,7 @@ CNN是一种层次模型，输入的是原始的像素数据。CNN通过卷积�
 &lt;li&gt;VGG-16(2014)&lt;br&gt;
 原论文：
 &lt;a href=&#34;https://arxiv.org/pdf/1409.1556.pdf&#34;&gt;《Very Deep Convolutional Networks for Large-Scale Image Recognition》&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;http://www.robots.ox.ac.uk/~vgg/research/very_deep/&#34;&gt;homepage：Visual Geometry Group Home Page&lt;/a&gt;&lt;/li&gt;
+homepage：&lt;a href=&#34;http://www.robots.ox.ac.uk/~vgg/research/very_deep/&#34;&gt;Visual Geometry Group Home Page&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/VGG.png&#34; alt=&#34;CV3&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
