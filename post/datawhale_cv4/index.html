@@ -28,10 +28,11 @@
 因为训练集和验证集是分开的，所以模型在验证集上面的精度在一定程度上可以反映模型的泛化能力。在划分验证集的时候，需要注意验证集的分布应该与测试集尽量保持一致，不然模型在验证集上的精度就失去了指导意义。
 既然验证集这么重要，那么如何划分本地验证集呢。在一些比赛中，赛题方会给定验证集；如果赛题方没有给定验证集，那么参赛选手就需要从训练集中拆分一部分得到验证集。验证集的划分有如下几种方式：  留出法（Hold-Out） 直接将训练集划分成两部分，新的训练集和验证集。这种划分方式的优点是最为直接简单；缺点是只得到了一份验证集，有可能导致模型在验证集上过拟合。留出法应用场景是数据量比较大的情况。 交叉验证法（Cross Validation，CV）
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。 自助采样法（BootStrap）
-在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。 通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。
+在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。  通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。
 在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。
 当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。
-这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。  模型训练与验证  构造训练集和验证集； 每轮进行训练和验证，并根据最优验证集精度保存模型。  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28  train_loader = torch.utils.data.DataLoader( train_dataset, batch_size=10, shuffle=True, num_workers=10, ) val_loader = torch.utils.data.DataLoader( val_dataset, batch_size=10, shuffle=False, num_workers=10, ) model = SVHN_Model1() criterion = nn.CrossEntropyLoss (size_average=False) optimizer = torch.optim.Adam(model.parameters(), 0.001) best_loss = 1000.0 for epoch in range(20): print(&amp;#39;Epoch: &amp;#39;, epoch) train(train_loader, model, criterion, optimizer, epoch) val_loss = validate(val_loader, model, criterion) # 记录下验证集精度 if val_loss &amp;lt; best_loss: best_loss = val_loss torch.save(model.state_dict(), &amp;#39;./model.pt&amp;#39;)   其中每个Epoch的训练代码如下：
+这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。
+模型训练与验证  构造训练集和验证集； 每轮进行训练和验证，并根据最优验证集精度保存模型。  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28  train_loader = torch.utils.data.DataLoader( train_dataset, batch_size=10, shuffle=True, num_workers=10, ) val_loader = torch.utils.data.DataLoader( val_dataset, batch_size=10, shuffle=False, num_workers=10, ) model = SVHN_Model1() criterion = nn.CrossEntropyLoss (size_average=False) # 交叉熵的方式计算loss损失值 optimizer = torch.optim.Adam(model.parameters(), 0.001) best_loss = 1000.0 for epoch in range(20): print(&amp;#39;Epoch: &amp;#39;, epoch) train(train_loader, model, criterion, optimizer, epoch) val_loss = validate(val_loader, model, criterion) # 记录下验证集精度 if val_loss &amp;lt; best_loss: best_loss = val_loss torch.save(model.state_dict(), &amp;#39;./model.pt&amp;#39;)   其中每个Epoch的训练代码如下：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  def train(train_loader, model, criterion, optimizer, epoch): # 切换模型为训练模式 model.train() for i, (input, target) in enumerate(train_loader): # 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。 c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 optimizer.zero_grad() loss.backward() optimizer.step()   其中每个Epoch的验证代码如下：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def validate(val_loader, model, criterion): # 切换模型为预测模型 model.eval() val_loss = [] # 不记录模型梯度信息 with torch.no_grad(): for i, (input, target) in enumerate(val_loader): # 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。 c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 val_loss.append(loss.item()) return np.mean(val_loss)   模型保存与加载 在Pytorch中模型的保存和加载非常简单，比较常见的做法是保存和加载模型参数：
 1  torch.save(model_object.state_dict(), &amp;#39;model.pt&amp;#39;)   1  model.load_state_dict(torch.load(&amp;#39; model.pt&amp;#39;))   模型调参流程 深度学习原理少但实践性非常强，基本上很多的模型的验证只能通过训练来完成。同时深度学习有众多的网络结构和超参数，因此需要反复尝试。训练深度学习模型需要GPU的硬件支持，也需要较多的训练时间，如何有效的训练深度学习模型逐渐成为了一门学问。
@@ -93,11 +94,11 @@
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。
 自助采样法（BootStrap）
 在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。
+
 通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。
 在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。
 当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。
 这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。
-
 模型训练与验证
 
 构造训练集和验证集；
@@ -150,7 +151,7 @@ val_loader = torch.utils.data.DataLoader(
 )
 
 model = SVHN_Model1()
-criterion = nn.CrossEntropyLoss (size_average=False)
+criterion = nn.CrossEntropyLoss (size_average=False) # 交叉熵的方式计算loss损失值
 optimizer = torch.optim.Adam(model.parameters(), 0.001)
 best_loss = 1000.0
 for epoch in range(20):
@@ -311,11 +312,11 @@ http://karpathy.github.io/2019/04/25/recipe/
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。
 自助采样法（BootStrap）
 在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。
+
 通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。
 在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。
 当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。
 这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。
-
 模型训练与验证
 
 构造训练集和验证集；
@@ -368,7 +369,7 @@ val_loader = torch.utils.data.DataLoader(
 )
 
 model = SVHN_Model1()
-criterion = nn.CrossEntropyLoss (size_average=False)
+criterion = nn.CrossEntropyLoss (size_average=False) # 交叉熵的方式计算loss损失值
 optimizer = torch.optim.Adam(model.parameters(), 0.001)
 best_loss = 1000.0
 for epoch in range(20):
@@ -497,7 +498,7 @@ http://karpathy.github.io/2019/04/25/recipe/
 3.在增加模型复杂度的同时增加数据扩增方法，直至验证集精度不变。">
 <meta itemprop="datePublished" content="2020-05-28T13:01:17&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-28T13:01:17&#43;08:00" />
-<meta itemprop="wordCount" content="2916">
+<meta itemprop="wordCount" content="2932">
 
 
 
@@ -532,11 +533,11 @@ http://karpathy.github.io/2019/04/25/recipe/
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。
 自助采样法（BootStrap）
 在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。
+
 通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。
 在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。
 当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。
 这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。
-
 模型训练与验证
 
 构造训练集和验证集；
@@ -589,7 +590,7 @@ val_loader = torch.utils.data.DataLoader(
 )
 
 model = SVHN_Model1()
-criterion = nn.CrossEntropyLoss (size_average=False)
+criterion = nn.CrossEntropyLoss (size_average=False) # 交叉熵的方式计算loss损失值
 optimizer = torch.optim.Adam(model.parameters(), 0.001)
 best_loss = 1000.0
 for epoch in range(20):
@@ -786,8 +787,10 @@ http://karpathy.github.io/2019/04/25/recipe/
 
       <div class="post-meta">
         <span class="post-time"> 2020-05-28 </span>
-        
-          <span class="more-meta"> 约 2916 字 </span>
+        <div class="post-category">
+            <a href="/categories/computer-vision/"> computer vision </a>
+            </div>
+          <span class="more-meta"> 约 2932 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -823,12 +826,12 @@ http://karpathy.github.io/2019/04/25/recipe/
 <li>交叉验证法（Cross Validation，CV）<br>
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。</li>
 <li>自助采样法（BootStrap）<br>
-在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。
-通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。<br>
-在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。<br>
-当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。<br>
-这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。</li>
+在统计学中，自助法（Bootstrap Method，Bootstrapping，或自助抽样法）是一种从给定训练集中有放回的均匀抽样，也就是说，每当选中一个样本，它等可能地被再次选中并被再次添加到训练集中。机器学习中可通过交叉验证评估模型效果，当我们的数据量特别小的时候，我们可以采用自助法。比如我们有m个样本（m较小），每次在这m个样本中随机采集一个样本，放入训练集，采样完后把样本放回。这样重复采集m次，我们得到m个样本组成的训练集。m次采样过程中，有的样本可能会被重复采样，有的样本从来没有被采用过，可将这些没有被采样过的样本作为验证集，进行模型验证。由于我们的训练集有重复数据，这会改变数据的分布，因而训练结果会有估计偏差，因此，此种方法不是很常用，除非数据量真的很少。</li>
 </ul>
+<p>通过有放回的采样方式得到新的训练集和验证集，每次的训练集和验证集都是有区别的。这种划分方式一般适用于数据量较小的情况。<br>
+在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。</p>
+<p>当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。</p>
+<p>这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。</p>
 <h3 id="模型训练与验证-1">模型训练与验证</h3>
 <ul>
 <li>构造训练集和验证集；</li>
@@ -881,7 +884,7 @@ http://karpathy.github.io/2019/04/25/recipe/
 <span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">SVHN_Model1</span><span class="p">()</span>
-<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span> <span class="p">(</span><span class="n">size_average</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span> <span class="p">(</span><span class="n">size_average</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1"># 交叉熵的方式计算loss损失值</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">0.001</span><span class="p">)</span>
 <span class="n">best_loss</span> <span class="o">=</span> <span class="mf">1000.0</span>
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
