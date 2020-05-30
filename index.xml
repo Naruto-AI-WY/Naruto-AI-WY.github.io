@@ -58,7 +58,7 @@
 &lt;li&gt;
 &lt;p&gt;交叉验证法（Cross Validation，CV）&lt;br&gt;
 将训练集划分成K份，将其中的K-1份作为训练集，剩余的1份作为验证集，循环K训练。这种划分方式是所有的训练集都是验证集，最终模型验证精度是K份平均得到。这种方式的优点是验证集精度比较可靠，训练K次可以得到K个有多样性差异的模型；CV验证的缺点是需要训练K次，不适合数据量很大的情况。&lt;/p&gt;
-&lt;p&gt;具体步骤如下：&lt;/p&gt;
+&lt;p&gt;K-fold Cross Validation具体步骤如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;将数据集分为训练集和测试集，将测试集放在一边。&lt;/li&gt;
 &lt;li&gt;将训练集分为k份。&lt;/li&gt;
