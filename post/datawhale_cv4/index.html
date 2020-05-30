@@ -32,8 +32,8 @@
 在本次赛题中已经划分为验证集，因此选手可以直接使用训练集进行训练，并使用验证集进行验证精度（当然你也可以合并训练集和验证集，自行划分验证集）。
 当然这些划分方法是从数据划分方式的角度来讲的，在现有的数据比赛中一般采用的划分方法是留出法和交叉验证法。如果数据量比较大，留出法还是比较合适的。当然任何的验证集的划分得到的验证集都是要保证训练集-验证集-测试集的分布是一致的，所以如果不管划分何种的划分方式都是需要注意的。
 这里的分布一般指的是与标签相关的统计分布，比如在分类任务中“分布”指的是标签的类别分布，训练集-验证集-测试集的类别分布情况应该大体一致；如果标签是带有时序信息，则验证集和测试集的时间间隔应该保持一致。  模型训练与验证  构造训练集和验证集； 每轮进行训练和验证，并根据最优验证集精度保存模型。  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28  train_loader = torch.utils.data.DataLoader( train_dataset, batch_size=10, shuffle=True, num_workers=10, ) val_loader = torch.utils.data.DataLoader( val_dataset, batch_size=10, shuffle=False, num_workers=10, ) model = SVHN_Model1() criterion = nn.CrossEntropyLoss (size_average=False) optimizer = torch.optim.Adam(model.parameters(), 0.001) best_loss = 1000.0 for epoch in range(20): print(&amp;#39;Epoch: &amp;#39;, epoch) train(train_loader, model, criterion, optimizer, epoch) val_loss = validate(val_loader, model, criterion) # 记录下验证集精度 if val_loss &amp;lt; best_loss: best_loss = val_loss torch.save(model.state_dict(), &amp;#39;./model.pt&amp;#39;)   其中每个Epoch的训练代码如下：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  def train(train_loader, model, criterion, optimizer, epoch): # 切换模型为训练模式 model.train() for i, (input, target) in enumerate(train_loader): c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 optimizer.zero_grad() loss.backward() optimizer.step()   其中每个Epoch的验证代码如下：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def validate(val_loader, model, criterion): # 切换模型为预测模型 model.eval() val_loss = [] # 不记录模型梯度信息 with torch.no_grad(): for i, (input, target) in enumerate(val_loader): c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 val_loss.append(loss.item()) return np.mean(val_loss)   模型保存与加载 在Pytorch中模型的保存和加载非常简单，比较常见的做法是保存和加载模型参数：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  def train(train_loader, model, criterion, optimizer, epoch): # 切换模型为训练模式 model.train() for i, (input, target) in enumerate(train_loader): # 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。 c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 optimizer.zero_grad() loss.backward() optimizer.step()   其中每个Epoch的验证代码如下：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def validate(val_loader, model, criterion): # 切换模型为预测模型 model.eval() val_loss = [] # 不记录模型梯度信息 with torch.no_grad(): for i, (input, target) in enumerate(val_loader): # 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。 c0, c1, c2, c3, c4, c5 = model(data[0]) loss = criterion(c0, data[1][:, 0]) &#43; \ criterion(c1, data[1][:, 1]) &#43; \ criterion(c2, data[1][:, 2]) &#43; \ criterion(c3, data[1][:, 3]) &#43; \ criterion(c4, data[1][:, 4]) &#43; \ criterion(c5, data[1][:, 5]) loss /= 6 val_loss.append(loss.item()) return np.mean(val_loss)   模型保存与加载 在Pytorch中模型的保存和加载非常简单，比较常见的做法是保存和加载模型参数：
 1  torch.save(model_object.state_dict(), &amp;#39;model.pt&amp;#39;)   1  model.load_state_dict(torch.load(&amp;#39; model.pt&amp;#39;))   模型调参流程 深度学习原理少但实践性非常强，基本上很多的模型的验证只能通过训练来完成。同时深度学习有众多的网络结构和超参数，因此需要反复尝试。训练深度学习模型需要GPU的硬件支持，也需要较多的训练时间，如何有效的训练深度学习模型逐渐成为了一门学问。
 深度学习有众多的训练技巧，比较推荐的阅读链接有：
  http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html http://karpathy.github.io/2019/04/25/recipe/  本节挑选了常见的一些技巧来讲解，并针对本次赛题进行具体分析。与传统的机器学习模型不同，深度学习模型的精度与模型的复杂度、数据量、正则化、数据扩增等因素直接相关。所以当深度学习模型处于不同的阶段（欠拟合、过拟合和完美拟合）的情况下，大家可以知道可以什么角度来继续优化模型。
@@ -190,8 +190,8 @@ def train(train_loader, model, criterion, optimizer, epoch):
     # 切换模型为训练模式
     model.train()
 
-    for i, (input, target) in enumerate(train_loader):
-        c0, c1, c2, c3, c4, c5 = model(data[0])
+    for i, (input, target) in enumerate(train_loader):  # 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
+        c0, c1, c2, c3, c4, c5 = model(data[0])   
         loss = criterion(c0, data[1][:, 0]) &#43; \
                 criterion(c1, data[1][:, 1]) &#43; \
                 criterion(c2, data[1][:, 2]) &#43; \
@@ -234,7 +234,7 @@ def validate(val_loader, model, criterion):
 
     # 不记录模型梯度信息
     with torch.no_grad():
-        for i, (input, target) in enumerate(val_loader):
+        for i, (input, target) in enumerate(val_loader): # 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
             c0, c1, c2, c3, c4, c5 = model(data[0])
             loss = criterion(c0, data[1][:, 0]) &#43; \
                     criterion(c1, data[1][:, 1]) &#43; \
@@ -408,8 +408,8 @@ def train(train_loader, model, criterion, optimizer, epoch):
     # 切换模型为训练模式
     model.train()
 
-    for i, (input, target) in enumerate(train_loader):
-        c0, c1, c2, c3, c4, c5 = model(data[0])
+    for i, (input, target) in enumerate(train_loader):  # 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
+        c0, c1, c2, c3, c4, c5 = model(data[0])   
         loss = criterion(c0, data[1][:, 0]) &#43; \
                 criterion(c1, data[1][:, 1]) &#43; \
                 criterion(c2, data[1][:, 2]) &#43; \
@@ -452,7 +452,7 @@ def validate(val_loader, model, criterion):
 
     # 不记录模型梯度信息
     with torch.no_grad():
-        for i, (input, target) in enumerate(val_loader):
+        for i, (input, target) in enumerate(val_loader): # 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
             c0, c1, c2, c3, c4, c5 = model(data[0])
             loss = criterion(c0, data[1][:, 0]) &#43; \
                     criterion(c1, data[1][:, 1]) &#43; \
@@ -497,7 +497,7 @@ http://karpathy.github.io/2019/04/25/recipe/
 3.在增加模型复杂度的同时增加数据扩增方法，直至验证集精度不变。">
 <meta itemprop="datePublished" content="2020-05-28T13:01:17&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-28T13:01:17&#43;08:00" />
-<meta itemprop="wordCount" content="2822">
+<meta itemprop="wordCount" content="2916">
 
 
 
@@ -629,8 +629,8 @@ def train(train_loader, model, criterion, optimizer, epoch):
     # 切换模型为训练模式
     model.train()
 
-    for i, (input, target) in enumerate(train_loader):
-        c0, c1, c2, c3, c4, c5 = model(data[0])
+    for i, (input, target) in enumerate(train_loader):  # 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
+        c0, c1, c2, c3, c4, c5 = model(data[0])   
         loss = criterion(c0, data[1][:, 0]) &#43; \
                 criterion(c1, data[1][:, 1]) &#43; \
                 criterion(c2, data[1][:, 2]) &#43; \
@@ -673,7 +673,7 @@ def validate(val_loader, model, criterion):
 
     # 不记录模型梯度信息
     with torch.no_grad():
-        for i, (input, target) in enumerate(val_loader):
+        for i, (input, target) in enumerate(val_loader): # 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。
             c0, c1, c2, c3, c4, c5 = model(data[0])
             loss = criterion(c0, data[1][:, 0]) &#43; \
                     criterion(c1, data[1][:, 1]) &#43; \
@@ -787,7 +787,7 @@ http://karpathy.github.io/2019/04/25/recipe/
       <div class="post-meta">
         <span class="post-time"> 2020-05-28 </span>
         
-          <span class="more-meta"> 约 2822 字 </span>
+          <span class="more-meta"> 约 2916 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -921,8 +921,8 @@ http://karpathy.github.io/2019/04/25/recipe/
     <span class="c1"># 切换模型为训练模式</span>
     <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
-        <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>  <span class="c1"># 训练集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。</span>
+        <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>   
         <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> \
                 <span class="n">criterion</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> \
                 <span class="n">criterion</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> \
@@ -965,7 +965,7 @@ http://karpathy.github.io/2019/04/25/recipe/
 
     <span class="c1"># 不记录模型梯度信息</span>
     <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">val_loader</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">val_loader</span><span class="p">):</span> <span class="c1"># 验证集每次释放batch size=10个数据进行处理，知道处理完所有数据。即所谓的分批处理。</span>
             <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">c4</span><span class="p">,</span> <span class="n">c5</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> \
                     <span class="n">criterion</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> \
