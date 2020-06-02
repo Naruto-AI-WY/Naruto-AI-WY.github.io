@@ -31,7 +31,7 @@
 &lt;p&gt;在深度学习中本身还有一些集成学习思路的做法，值得借鉴学习：&lt;/p&gt;
 &lt;h3 id=&#34;dropout&#34;&gt;Dropout&lt;/h3&gt;
 &lt;p&gt;Dropout可以作为训练深度神经网络的一种技巧。在每个训练批次中，通过随机让一部分的节点停止工作。但是在预测的过程中让所有的节点都起作用。&lt;br&gt;
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Dropout.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;</description>
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Droopout.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
