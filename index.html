@@ -115,6 +115,43 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/datawhale_cv5/">Datawhale 零基础入门CV赛事-模型集成</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-02 </span>
+      <div class="post-category">
+          <a href="/categories/computer-vision/"> computer vision </a>
+          </div>
+        <span class="more-meta"> 约 353 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h2 id="集成学习方法">集成学习方法</h2>
+<p>在机器学习中的集成学习可以在一定程度上提高预测精度，常见的集成学习方法有Stacking、Bagging和Boosting，同时这些集成学习方法与具体验证集划分联系紧密。</p>
+<p>由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。</p>
+<p>下面假设构建了10折交叉验证，训练得到10个CNN模型。<br>
+<img src="/img/crossvalidation.png" alt="CV5"><br>
+那么在10个CNN模型可以使用如下方式进行集成：</p>
+<ul>
+<li>对预测的结果的概率值进行平均，然后解码为具体字符；</li>
+<li>对预测的字符进行投票，得到最终字符。</li>
+</ul>
+<h2 id="深度学习中的集成学习">深度学习中的集成学习</h2>
+<p>在深度学习中本身还有一些集成学习思路的做法，值得借鉴学习：</p>
+<h3 id="dropout">Dropout</h3>
+<p>Dropout可以作为训练深度神经网络的一种技巧。在每个训练批次中，通过随机让一部分的节点停止工作。但是在预测的过程中让所有的节点都起作用。<br>
+<img src="/img/Dropout.png" alt="CV5"></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/datawhale_cv5/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/datawhale_cv4/">Datawhale_零基础入门CV赛事-模型训练与验证</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-05-28 </span>
@@ -1291,94 +1328,6 @@ torch.Size([10, 3, 64, 128]), torch.Size([10, 6])<br>
     </div>
     <div class="read-more">
       <a href="/post/datawhale_cv/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/datawhale-%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8cv%E8%B5%9B%E4%BA%8B-task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/">Datawhale_cv</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-05-20 </span>
-      
-        <span class="more-meta"> 约 291 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="datawhale-零基础入门cv赛事-task1-赛题理解">Datawhale 零基础入门CV赛事-Task1 赛题理解</h1>
-<h2 id="赛题数据">赛题数据</h2>
-<p>赛题以街道字符为为赛题数据，数据集报名后可见并可下载，该数据来自收集的SVHN街道字符，并进行了匿名采样处理。
-<img src="/img/cv_sample.png" alt="CV1"></p>
-<h2 id="数据标签">数据标签</h2>
-<p>字符的坐标具体如下所示：
-<img src="/img/coordinate.png" alt="CV2">
-在比赛数据（训练集和验证集）中，同一张图片中可能包括一个或者多个字符，因此在比赛数据的JSON标注中，会有两个字符的边框信息：
-<img src="/img/JSON_mark.png" alt="CV3"></p>
-<h2 id="读取数据">读取数据</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
-<span class="n">train_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../input/train.json&#39;</span><span class="p">))</span>
-
-<span class="c1"># 数据标注处理</span>
-<span class="k">def</span> <span class="nf">parse_json</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-   <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-       <span class="n">d</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">],</span>  <span class="n">d</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
-   <span class="p">])</span>
-   <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-   <span class="k">return</span> <span class="n">arr</span>
-
-<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../input/train/000000.png&#39;</span><span class="p">)</span>
-<span class="n">arr</span> <span class="o">=</span> <span class="n">parse_json</span><span class="p">(</span><span class="n">train_json</span><span class="p">[</span><span class="s1">&#39;000000.png&#39;</span><span class="p">])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-
-<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-   <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
-   <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]:</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">+</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="p">]:</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span><span class="o">+</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="n">idx</span><span class="p">]])</span>
-   <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="n">idx</span><span class="p">])</span>
-   <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="解题思路">解题思路</h2>
-<h3 id="简单入门思路定长字符识别">简单入门思路：定长字符识别</h3>
-<h3 id="专业字符识别思路不定长字符识别">专业字符识别思路：不定长字符识别</h3>
-<h3 id="专业分类思路检测再识别">专业分类思路：检测再识别</h3>
-    </div>
-    <div class="read-more">
-      <a href="/post/datawhale-%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8cv%E8%B5%9B%E4%BA%8B-task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

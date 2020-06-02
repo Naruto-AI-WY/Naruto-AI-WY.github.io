@@ -6,10 +6,33 @@
     <description>Recent content in CV on Naruto&#39;s AI blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 28 May 2020 13:01:17 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2020 19:48:12 +0800</lastBuildDate>
     
 	<atom:link href="https://Naruto-AI-WY.github.io/tags/cv/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Datawhale 零基础入门CV赛事-模型集成</title>
+      <link>https://Naruto-AI-WY.github.io/post/datawhale_cv5/</link>
+      <pubDate>Tue, 02 Jun 2020 19:48:12 +0800</pubDate>
+      
+      <guid>https://Naruto-AI-WY.github.io/post/datawhale_cv5/</guid>
+      <description>&lt;h2 id=&#34;集成学习方法&#34;&gt;集成学习方法&lt;/h2&gt;
+&lt;p&gt;在机器学习中的集成学习可以在一定程度上提高预测精度，常见的集成学习方法有Stacking、Bagging和Boosting，同时这些集成学习方法与具体验证集划分联系紧密。&lt;/p&gt;
+&lt;p&gt;由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。&lt;/p&gt;
+&lt;p&gt;下面假设构建了10折交叉验证，训练得到10个CNN模型。&lt;br&gt;
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/crossvalidation.png&#34; alt=&#34;CV5&#34;&gt;&lt;br&gt;
+那么在10个CNN模型可以使用如下方式进行集成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对预测的结果的概率值进行平均，然后解码为具体字符；&lt;/li&gt;
+&lt;li&gt;对预测的字符进行投票，得到最终字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;深度学习中的集成学习&#34;&gt;深度学习中的集成学习&lt;/h2&gt;
+&lt;p&gt;在深度学习中本身还有一些集成学习思路的做法，值得借鉴学习：&lt;/p&gt;
+&lt;h3 id=&#34;dropout&#34;&gt;Dropout&lt;/h3&gt;
+&lt;p&gt;Dropout可以作为训练深度神经网络的一种技巧。在每个训练批次中，通过随机让一部分的节点停止工作。但是在预测的过程中让所有的节点都起作用。&lt;br&gt;
+&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Dropout.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Datawhale_零基础入门CV赛事-模型训练与验证</title>
