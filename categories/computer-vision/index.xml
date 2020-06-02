@@ -161,10 +161,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;snapshot&#34;&gt;Snapshot&lt;/h3&gt;
 &lt;p&gt;假设我们训练了10个CNN则可以将多个模型的预测结果进行平均。但是如果只训练了一个CNN模型，如何做模型集成呢？&lt;/p&gt;
-&lt;p&gt;在论文Snapshot Ensembles中，作者提出使用cyclical learning rate进行训练模型，并保存精度比较好的一些checkopint，最后将多个checkpoint进行模型集成。&lt;br&gt;
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Snapshot.png&#34; alt=&#34;CV5&#34;&gt;&lt;br&gt;
-由于在cyclical learning rate中学习率的变化有周期性变大和减少的行为，因此CNN模型很有可能在跳出局部最优进入另一个局部最优。在Snapshot论文中作者通过使用表明，此种方法可以在一定程度上提高模型精度，但需要更长的训练时间。&lt;br&gt;
-&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/%E5%AF%B9%E6%AF%94.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在论文Snapshot Ensembles中，作者提出使用cyclical learning rate进行训练模型，并保存精度比较好的一些checkopint，最后将多个checkpoint进行模型集成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/Snapshot.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;
+&lt;p&gt;由于在cyclical learning rate中学习率的变化有周期性变大和减少的行为，因此CNN模型很有可能在跳出局部最优进入另一个局部最优。在Snapshot论文中作者通过使用表明，此种方法可以在一定程度上提高模型精度，但需要更长的训练时间。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Naruto-AI-WY.github.io/img/%E5%AF%B9%E6%AF%94.png&#34; alt=&#34;CV5&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;结果后处理&#34;&gt;结果后处理&lt;/h2&gt;
 &lt;p&gt;在不同的任务中可能会有不同的解决方案，不同思路的模型不仅可以互相借鉴，同时也可以修正最终的预测结果。&lt;/p&gt;
 &lt;p&gt;在本次赛题中，可以从以下几个思路对预测结果进行后处理：&lt;/p&gt;
