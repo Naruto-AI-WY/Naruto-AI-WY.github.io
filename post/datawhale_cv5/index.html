@@ -731,7 +731,7 @@ Snapshot
 <h3 id="stacking">Stacking</h3>
 <p>Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。<br>
 基础层次通常由不同的学习算法组成，因此 stacking 集成通常是异构的。下面的算法概括了 stacking 算法的逻辑：</p>
-<p><img src="/img/stacking.jpeg" alt="CV5"></p>
+<p><img src="/img/stacking.png" alt="CV5"></p>
 <p>由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。</p>
 <p>下面假设构建了10折交叉验证，训练得到10个CNN模型。<br>
 <img src="/img/crossvalidation.png" alt="CV5"><br>
