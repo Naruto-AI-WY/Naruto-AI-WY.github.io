@@ -121,8 +121,8 @@
       <div class="post-category">
           <a href="/categories/computer-vision/"> computer vision </a>
           </div>
-        <span class="more-meta"> 约 1254 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span class="more-meta"> 约 2299 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
   
@@ -130,6 +130,29 @@
     <div class="post-summary">
       <h2 id="集成学习方法">集成学习方法</h2>
 <p>在机器学习中的集成学习可以在一定程度上提高预测精度，常见的集成学习方法有Stacking、Bagging和Boosting，同时这些集成学习方法与具体验证集划分联系紧密。</p>
+<h3 id="bagging">Bagging</h3>
+<p>Bagging是bootstrap aggregating的简写。bootstrap也称为自助法，它是一种有放回的抽样方法，目的为了得到统计量的分布以及置信区间。具体步骤如下：</p>
+<ul>
+<li>采用重抽样方法（有放回抽样）从原始样本中抽取一定数量的样本</li>
+<li>根据抽出的样本计算想要得到的统计量T</li>
+<li>重复上述N次（一般大于1000），得到N个统计量T</li>
+<li>根据这N个统计量，即可计算出统计量的置信区间</li>
+</ul>
+<p>在Bagging方法中，利用bootstrap方法从整体数据集中采取有放回抽样得到N个数据集，在每个数据集上学习出一个模型，最后的预测结果利用N个模型的输出得到，具体地：分类问题采用N个模型预测投票的方式，回归问题采用N个模型预测平均的方式。</p>
+<p>例如随机森林（Random Forest）就属于Bagging。随机森林简单地来说就是用随机的方式建立一个森林，森林由很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。</p>
+<p>在我们学习每一棵决策树的时候就需要用到Bootstrap方法。在随机森林中，有两个随机采样的过程：对输入数据的行（数据的数量）与列（数据的特征）都进行采样。对于行采样，采用有放回的方式，若有N个数据，则采样出N个数据（可能有重复），这样在训练的时候每一棵树都不是全部的样本，相对而言不容易出现overfitting；接着进行列采样从M个feature中选择出m个（m&laquo;M）。最近进行决策树的学习。</p>
+<p>预测的时候，随机森林中的每一棵树的都对输入进行预测，最后进行投票，哪个类别多，输入样本就属于哪个类别。这就相当于前面说的，每一个分类器（每一棵树）都比较弱，但组合到一起（投票）就比较强了。</p>
+<p><img src="/img/bagging.jpeg" alt="CV5"></p>
+<h3 id="boosting">Boosting</h3>
+<ul>
+<li>提升方法（Boosting）是一种可以用来减小监督学习中偏差的机器学习算法。主要也是学习一系列弱分类器，并将其组合为一个强分类器。Boosting中有代表性的是AdaBoost（Adaptive boosting）</li>
+<li>算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。</li>
+</ul>
+<p><img src="/img/boosting.jpeg" alt="CV5"></p>
+<h3 id="stacking">Stacking</h3>
+<p>Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。<br>
+基础层次通常由不同的学习算法组成，因此 stacking 集成通常是异构的。下面的算法概括了 stacking 算法的逻辑：</p>
+<p><img src="/img/stacking.jpeg" alt="CV5"></p>
 <p>由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。</p>
 <p>下面假设构建了10折交叉验证，训练得到10个CNN模型。<br>
 <img src="/img/crossvalidation.png" alt="CV5"><br>
@@ -272,7 +295,8 @@
 </div>
 </div><h3 id="snapshot">Snapshot</h3>
 <p>假设我们训练了10个CNN则可以将多个模型的预测结果进行平均。但是如果只训练了一个CNN模型，如何做模型集成呢？</p>
-<p>在论文Snapshot Ensembles中，作者提出使用cyclical learning rate进行训练模型，并保存精度比较好的一些checkopint，最后将多个checkpoint进行模型集成。</p>
+<p>在论文Snapshot Ensembles中，作者提出使用cyclical learning rate进行训练模型，并保存精度比较好的一些checkopint，最后将多个checkpoint进行模型集成。<br>
+原论文：<a href="https://openreview.net/pdf?id=BJYwwY9ll">《SNAPSHOT ENSEMBLES: TRAIN 1, GET M FOR FREE》</a></p>
 <p><img src="/img/Snapshot.png" alt="CV5"></p>
 <p>由于在cyclical learning rate中学习率的变化有周期性变大和减少的行为，因此CNN模型很有可能在跳出局部最优进入另一个局部最优。在Snapshot论文中作者通过使用表明，此种方法可以在一定程度上提高模型精度，但需要更长的训练时间。</p>
 <p><img src="/img/%E5%AF%B9%E6%AF%94.png" alt="CV5"></p>
