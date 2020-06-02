@@ -772,7 +772,7 @@ Snapshot
 </div><h3 id="snapshot">Snapshot</h3>
 <p>假设我们训练了10个CNN则可以将多个模型的预测结果进行平均。但是如果只训练了一个CNN模型，如何做模型集成呢？</p>
 <p>在论文Snapshot Ensembles中，作者提出使用cyclical learning rate进行训练模型，并保存精度比较好的一些checkopint，最后将多个checkpoint进行模型集成。<br>
-<img src="/img/snapshot.png" alt="CV5"><br>
+<img src="/img/Snapshot.png" alt="CV5"><br>
 由于在cyclical learning rate中学习率的变化有周期性变大和减少的行为，因此CNN模型很有可能在跳出局部最优进入另一个局部最优。在Snapshot论文中作者通过使用表明，此种方法可以在一定程度上提高模型精度，但需要更长的训练时间。<br>
 <img src="/img/%E5%AF%B9%E6%AF%94.png" alt="CV5"></p>
 <h2 id="结果后处理">结果后处理</h2>
