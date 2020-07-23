@@ -22,7 +22,7 @@ Bagging Bagging是bootstrap aggregating的简写。bootstrap也称为自助法�
 例如随机森林（Random Forest）就属于Bagging。随机森林简单地来说就是用随机的方式建立一个森林，森林由很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。
 在我们学习每一棵决策树的时候就需要用到Bootstrap方法。在随机森林中，有两个随机采样的过程：对输入数据的行（数据的数量）与列（数据的特征）都进行采样。对于行采样，采用有放回的方式，若有N个数据，则采样出N个数据（可能有重复），这样在训练的时候每一棵树都不是全部的样本，相对而言不容易出现overfitting；接着进行列采样从M个feature中选择出m个（m&amp;laquo;M）。最近进行决策树的学习。
 预测的时候，随机森林中的每一棵树的都对输入进行预测，最后进行投票，哪个类别多，输入样本就属于哪个类别。这就相当于前面说的，每一个分类器（每一棵树）都比较弱，但组合到一起（投票）就比较强了。
-Boosting  提升方法（Boosting）是一种可以用来减小监督学习中偏差的机器学习算法。主要也是学习一系列弱分类器，并将其组合为一个强分类器。Boosting中有代表性的是AdaBoost（Adaptive boosting） 算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。  Stacking Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。
+Boosting  提升方法（Boosting）是一种可以用来减小监督学习中偏差的机器学习算法。主要也是学习一系列弱分类器，并将其组合为一个强分类器。Boosting中有代表性的是AdaBoost（Adaptive boosting） 算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。   xdgboost  Stacking Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。
 基础层次通常由不同的学习算法组成，因此 stacking 集成通常是异构的。下面的算法概括了 stacking 算法的逻辑：
 由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许，则建议选取留出法，如果需要追求精度可以使用交叉验证的方法。
 下面假设构建了10折交叉验证，训练得到10个CNN模型。
@@ -81,6 +81,9 @@ Boosting
 提升方法（Boosting）是一种可以用来减小监督学习中偏差的机器学习算法。主要也是学习一系列弱分类器，并将其组合为一个强分类器。Boosting中有代表性的是AdaBoost（Adaptive boosting）
 算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。
 
+
+
+xdgboost
 
 Stacking
 Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。
@@ -271,6 +274,9 @@ Boosting
 算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。
 
 
+
+xdgboost
+
 Stacking
 Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。
 基础层次通常由不同的学习算法组成，因此 stacking 集成通常是异构的。下面的算法概括了 stacking 算法的逻辑：
@@ -436,7 +442,7 @@ Snapshot
 ">
 <meta itemprop="datePublished" content="2020-06-02T19:48:12&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-02T19:48:12&#43;08:00" />
-<meta itemprop="wordCount" content="2301">
+<meta itemprop="wordCount" content="2302">
 
 
 
@@ -462,6 +468,9 @@ Boosting
 提升方法（Boosting）是一种可以用来减小监督学习中偏差的机器学习算法。主要也是学习一系列弱分类器，并将其组合为一个强分类器。Boosting中有代表性的是AdaBoost（Adaptive boosting）
 算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。
 
+
+
+xdgboost
 
 Stacking
 Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。
@@ -699,7 +708,7 @@ Snapshot
         <div class="post-category">
             <a href="/categories/computer-vision/"> computer vision </a>
             </div>
-          <span class="more-meta"> 约 2301 字 </span>
+          <span class="more-meta"> 约 2302 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -728,6 +737,9 @@ Snapshot
 <li>算法：刚开始训练时对每一个训练例赋相等的权重，然后用该算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重，也就是让学习算法在每次学习以后更注意学错的样本，从而得到多个预测函数。</li>
 </ul>
 <p><img src="/img/boosting.jpeg" alt="CV5"></p>
+<ul>
+<li>xdgboost</li>
+</ul>
 <h3 id="stacking">Stacking</h3>
 <p>Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。<br>
 基础层次通常由不同的学习算法组成，因此 stacking 集成通常是异构的。下面的算法概括了 stacking 算法的逻辑：</p>
